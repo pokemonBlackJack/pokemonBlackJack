@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from "axios";
 
 class App extends Component {
@@ -15,14 +14,13 @@ class App extends Component {
 
 	  //Calling deck of cards API to get a deck key, and then generate random cards.
 
-	  axios({
-  		method:'GET',
-  		url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
- 		dataResponse: 'json', 
-		parameter: {
+  axios({
+    method:'GET',
+    url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
+    dataResponse: 'json', 
+  parameter: {
 			deck_count: 6
-		}
-
+  }
 
 	}).then( (data) => {
 		console.log(data.data.deck_id)  
