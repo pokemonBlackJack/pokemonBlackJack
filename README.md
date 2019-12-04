@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pokémon Blackjack
 
-## Available Scripts
+## Project Scope
 
-In the project directory, you can run:
+### Project description:
+The latest and greatest Pokémon battle has arrived! This app should be a Blackjack style
+card game between two Pokémon characters. Using the PokéAPI and the Deck of Cards
+API, have two two randomly generated characters play a game of black jack and the winner
+evolves!
 
-### `yarn start`
+### Requirements:
+ -[ ] Uses the PokéAPI and the Deck of Cards API
+ -[ ] User operates both characters (ie. clicks buttons to generate next card, stay, etc)
+ -[ ] Ensure both characters are able to evolve, you may need to be specific about this in your query
+ -[ ] Game should be keyboard operable
+ -[ ] Display a visual indicator of who won, and what evolution they experienced
+ -[ ] Proper error handling. For example:
+    -[ ] Common error responses should be handled
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Stretch goals:
+ -[ ] Dealer mode where operator is the dealer playing against 2 Pokémon
+ -[ ] Animation for winning pokemon
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Deliverables:
+ -[ ] Project files up on GitHub
+ -[ ] Project up on GitHub pages or your own URL
+ -[ ] All requirements completed BEFORE any stretch goals have been attempted
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project 6 (agency-style group React application)
 
-### `yarn build`
+### Requirements:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ -[ ] Uses React, and no jQuery
+ -[ ] Uses flexbox or grid where appropriate
+ -[ ] Uses Axios and/or Firebase
+ -[ ] Every group member has at least one significant commit on GitHub
+ -[ ] React 'knows' about all DOM changes (bind your inputs! don't use vanilla JS to manipulate the DOM! .setState() is always used to alter state!)
+ -[ ] App is dynamic based on user interaction (e.g. drop down menu, search field)
+ -[ ] It is clear to the user what the app does
+ -[ ] App and interactions are accessible
+ -[ ] Errors are handled effectively
+ -[ ] Site is live on student's own URL or GitHub Pages
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Best Practices:
+ -[ ] Extraneous code is removed (including console.log)
+ -[ ] Semantic HTML elements are used properly
+ -[ ] Setup snippet is used
+ -[ ] Wrapper used to constrain content on large displays
+ -[ ] Site is responsive and uses media queries
