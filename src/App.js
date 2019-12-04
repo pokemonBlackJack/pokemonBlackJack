@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './Header.js'
 import axios from "axios";
 
 class App extends Component {
@@ -138,6 +139,8 @@ class App extends Component {
   render() {
     return (
       <div>
+		  {/* Importing the Header Component */}
+		  <Header />
         {/* Rendering the pokemons and the names just to see what we are getting */}
         {this.state.randomPokemons.map((pokemon) => {
           return <div>
