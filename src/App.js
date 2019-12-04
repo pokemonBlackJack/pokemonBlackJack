@@ -7,7 +7,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      randomPokemons:[]
+      randomPokemons: [],
+      deckId: "",
+      player1Cards: [],
+      player2Cards: [],
+      player3Cards: [],
+      currentPlayer: 1,
+      numberOfPlayers: 2,
+      player1Total: 0,
+      player2Total: 0,
+      player3Total: 0,
+      round: 1
     }
   }
 
@@ -15,25 +25,144 @@ class App extends Component {
 
 	  //Calling deck of cards API to get a deck key, and then generate random cards.
 
-	  axios({
-  		method:'GET',
-  		url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
- 		dataResponse: 'json', 
-		parameter: {
-			deck_count: 6
-		}
+      axios({
+        method:'GET',
+        url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
+      dataResponse: 'json', 
+      params: {
+        deck_count: 1
+      }
 
 
-	}).then( (data) => {
-		console.log(data.data.deck_id)  
-});
-
-
+    }).then( (data) => {
+      this.setState({
+        deckId:data.data.deck_id
+      })  
+    });
 
 
 
     // Calling the method to get the random pokemons when the app is starting
     this.getRandomPokemon(2);
+    
+  }
+
+  // Method to draw a card from the deck
+
+  drawCard = (numberOfCards) => {
+
+    // Getting deck id from the state
+
+    const deckId = this.state.deckId;
+
+
+    // Making Deck API call to draw a card
+
+    axios({
+      url: `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${numberOfCards}`,
+      method: "get",
+      responseType: "json",
+      
+    }).then((response) => {
+      const currentPlayer = this.state.currentPlayer;
+
+      const currentCard = response.data.cards[0];
+
+    
+      const suits = ["QUEEN", "KING","JACK"];
+      
+      // Making a copy that we can modify from the state
+
+      const playerCards = [...this.state[`player${currentPlayer}Cards`]];
+
+      // push the new card into the copy we made
+
+      playerCards.push({
+        number: currentCard.value,
+        suit: currentCard.suit,
+        image: currentCard.image
+      });
+
+      // Create an empty array to store the cards values
+
+      let arrayOfValues = [];
+
+      // We loop through each card on the players hand and check if the card is an ACE then we give it a value of 11 and if it is a QUEEN, KING OR JACK we give it a value of 10.
+
+      playerCards.forEach((card) => {
+        
+        if (suits.includes(card.number)) {
+          arrayOfValues.push(10);
+        } else if (card.number === "ACE") {
+          arrayOfValues.push(11);
+        } else {
+          arrayOfValues.push(parseInt(card.number))
+        }
+
+      })
+
+
+      // We sum up the values of the array
+
+      let currentPlayerTotal = arrayOfValues.reduce((a, b) => a + b, 0);
+
+
+      // Use a while loop to check if the users total is higher than 21 and if there is an ace in the hand in order to start changing the value of the aces to 1.
+
+      while (currentPlayerTotal > 21 && arrayOfValues.includes(11) ) {
+        arrayOfValues[arrayOfValues.indexOf(11, 0)] = 1;
+        currentPlayerTotal = arrayOfValues.reduce((a, b) => a + b, 0);
+
+      }
+
+      // If the player has a total value higher than 21 then change the turn to the next player
+
+      if (currentPlayerTotal > 21) {
+        this.setState({
+          [`player${currentPlayer}Cards`]: playerCards,
+          [`player${currentPlayer}Total`]: currentPlayerTotal,
+          currentPlayer: currentPlayer + 1
+        }, () => {
+          console.log(this.state[`player${currentPlayer}Cards`]);
+          console.log(this.state[`player${currentPlayer}Total`]);
+        })
+      } else {
+        this.setState({
+          [`player${currentPlayer}Cards`]: playerCards,
+          [`player${currentPlayer}Total`]: currentPlayerTotal
+        }, () => {
+          console.log(this.state[`player${currentPlayer}Cards`]);
+          console.log(this.state[`player${currentPlayer}Total`]);
+        })
+      }
+      
+    })
+
+  }
+
+
+  stay = () => {
+    const numberOfPlayers = this.state.numberOfPlayers;
+    const currentPlayer = this.state.currentPlayer;
+
+    if (numberOfPlayers === currentPlayer) {
+      const player1Total = this.state.player1Total;
+      const player2Total = this.state.player2Total;
+      const player3Total = this.state.player3Total;
+
+      if (player1Total > player2Total && player1Total > player3Total && player1Total<=21) {
+        console.log("player 1 wins");
+      } else if (player2Total > player3Total && player2Total <= 21) {
+        console.log("player 2 wins");
+      } else {
+        console.log("its tie");
+      }
+
+    } else {
+      this.setState({
+        currentPlayer: currentPlayer + 1
+      })
+    }
     
   }
 
@@ -49,7 +178,7 @@ class App extends Component {
       
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 300);
+      const randomNumber = Math.ceil(Math.random() * 200);
   
       // Making an API call using the random number in order to get a random pokemon
 
@@ -138,6 +267,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <p>{`Player ${this.state.currentPlayer} turn`}</p>
         {/* Rendering the pokemons and the names just to see what we are getting */}
         {this.state.randomPokemons.map((pokemon) => {
           return <div>
@@ -147,6 +277,8 @@ class App extends Component {
             <img src={pokemon.evolutionPokemonImg} alt="" />
           </div>
         })}
+        <button onClick={() => { this.drawCard(1) }}>Draw a card</button>
+        <button onClick={this.stay}>STAY</button>
       </div>
     )
   }
