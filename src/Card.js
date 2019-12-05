@@ -1,6 +1,7 @@
 import React from 'react';
 import pokemonCardBack from './assets/pokemon-card-back.png';
 
+// Just waiting for the prop to go through after we mapped it.
 const Card = ({ cardFront }) => {
   return (
     <div className='card-container'>
