@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './App.css';
+import Header from './Header.js'
 import axios from "axios";
 import EvolveWindow from './EvolveWindow';
 
@@ -267,6 +269,8 @@ class App extends Component {
   render() {
     return (
       <div>
+		  {/* Importing the Header Component */}
+		  <Header />
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
         {this.state.randomPokemons.length !== 0
           &&
