@@ -365,8 +365,10 @@ class App extends Component {
         <EvolveWindow 
           preName={this.state.randomPokemons[0].firstPokemon}
           preImg={this.state.randomPokemons[0].firstPokemonImg}
+          preId={this.state.randomPokemons[0].firstPokemonId}
           postName={this.state.randomPokemons[0].evolution}
-          postImg={this.state.randomPokemons[0].evolutionPokemonImg} 
+          postImg={this.state.randomPokemons[0].evolutionPokemonImg}
+          postId={this.state.randomPokemons[0].evolutionPokemonId}
           />
         }
         {/* Rendering the pokemons and the names just to see what we are getting */}
