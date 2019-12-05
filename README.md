@@ -9,13 +9,13 @@ API, have two two randomly generated characters play a game of black jack and th
 evolves!
 
 ### Requirements:
-- [ ] Uses the PokéAPI and the Deck of Cards API
+- [x] Uses the PokéAPI and the Deck of Cards API
 - [ ] User operates both characters (ie. clicks buttons to generate next card, stay, etc)
 - [ ] Ensure both characters are able to evolve, you may need to be specific about this in your query
 - [ ] Game should be keyboard operable
 - [ ] Display a visual indicator of who won, and what evolution they experienced
 - [ ] Proper error handling. For example:
-- [ ] Common error responses should be handled
+- - [ ] Common error responses should be handled
 
 ### Stretch goals:
 - [ ] Dealer mode where operator is the dealer playing against 2 Pokémon
@@ -48,3 +48,9 @@ evolves!
 - [ ] Setup snippet is used
 - [ ] Wrapper used to constrain content on large displays
 - [ ] Site is responsive and uses media queries
+
+
+## References
+
+[Pokemon Sound Effects](https://downloads.khinsider.com/game-soundtracks/album/pokemon-gameboy-sound-collection)
+[Additional Pokemon Sounds](https://downloads.khinsider.com/game-soundtracks/album/pokemon-gold-silver-crystal)
