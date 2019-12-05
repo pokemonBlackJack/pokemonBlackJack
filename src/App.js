@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js'
+import Loading from './Loading.js'
 import axios from "axios";
 import EvolveWindow from './EvolveWindow';
 
@@ -271,6 +272,10 @@ class App extends Component {
       <div>
 		  {/* Importing the Header Component */}
 		  <Header />
+		  {/* Importing the Loading Screen Component */}
+		  <Loading />
+
+		{/* Displaying which player's turn it is */}
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
         {this.state.randomPokemons.length !== 0
           &&
