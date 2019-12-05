@@ -19,7 +19,11 @@ class App extends Component {
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,
-      round: 1
+      round: 1,
+      player1Score: 0,
+      player2Score: 0,
+      player3Score: 0,
+      winner: null
     }
   }
 
@@ -120,14 +124,27 @@ class App extends Component {
       // If the player has a total value higher than 21 then change the turn to the next player
 
       if (currentPlayerTotal > 21) {
-        this.setState({
-          [`player${currentPlayer}Cards`]: playerCards,
-          [`player${currentPlayer}Total`]: currentPlayerTotal,
-          currentPlayer: currentPlayer + 1
-        }, () => {
-          console.log(this.state[`player${currentPlayer}Cards`]);
-          console.log(this.state[`player${currentPlayer}Total`]);
-        })
+        if (currentPlayer === this.state.numberOfPlayers) {
+          this.setState({
+            [`player${currentPlayer}Cards`]: playerCards,
+            [`player${currentPlayer}Total`]: currentPlayerTotal,
+            
+          }, () => {
+              this.stay();
+            console.log(this.state[`player${currentPlayer}Cards`]);
+            console.log(this.state[`player${currentPlayer}Total`]);
+          })
+        } else {
+          this.setState({
+            [`player${currentPlayer}Cards`]: playerCards,
+            [`player${currentPlayer}Total`]: currentPlayerTotal,
+            currentPlayer: currentPlayer + 1
+          }, () => {
+            console.log(this.state[`player${currentPlayer}Cards`]);
+            console.log(this.state[`player${currentPlayer}Total`]);
+          })
+        }
+        
       } else {
         this.setState({
           [`player${currentPlayer}Cards`]: playerCards,
@@ -147,17 +164,44 @@ class App extends Component {
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
 
-    if (numberOfPlayers === currentPlayer) {
-      const player1Total = this.state.player1Total;
-      const player2Total = this.state.player2Total;
-      const player3Total = this.state.player3Total;
+    
 
-      if (player1Total > player2Total && player1Total > player3Total && player1Total<=21) {
-        console.log("player 1 wins");
-      } else if (player2Total > player3Total && player2Total <= 21) {
-        console.log("player 2 wins");
-      } else {
-        console.log("its tie");
+    if (numberOfPlayers === currentPlayer) {
+      const player1Total = this.state.player1Total > 21 ? 0 : this.state.player1Total;
+      const player2Total = this.state.player2Total > 21 ? 0 : this.state.player2Total;
+      const player3Total = this.state.player3Total > 21 ? 0 : this.state.player3Total;
+
+      if (player1Total === player2Total && (player2Total === player3Total && numberOfPlayers === 3)) {
+        console.log("its a tie");
+        
+        this.setState({
+          player1Cards: [],
+          player2Cards: [],
+          player3Cards: [],
+          currentPlayer: 1,
+          player1Total: 0,
+          player2Total: 0,
+          player3Total: 0,
+        })
+        
+      } else if (player1Total > player2Total && player1Total > player3Total) {
+        this.setState({
+          player1Score: this.state.player1Score + 1,
+          round: this.state.round + 1
+        }, this.checkWinner)
+        console.log("Player 1 won!");
+      } else if (player2Total > player3Total) {
+        this.setState({
+          player2Score: this.state.player2Score + 1,
+          round: this.state.round + 1
+        }, this.checkWinner)
+        console.log("Player 2 won!");
+      } else if (this.state.numberOfPlayers === 3) {
+        this.setState({
+          player3Score: this.state.player3Score + 1,
+          round: this.state.round + 1
+        }, this.checkWinner)
+        console.log("Player 3 won!");
       }
 
     } else {
@@ -166,6 +210,47 @@ class App extends Component {
       })
     }
     
+  }
+
+
+  checkWinner = () => {
+    console.log(this.state.round);
+    if (this.state.player1Score === 2 || this.state.player2Score === 2 || this.state.player3Score === 2) {
+
+      const player1TotalScore = this.state.player1Score;
+      const player2TotalScore = this.state.player2Score;
+      const player3TotalScore = this.state.player3Score;
+
+
+      if (player1TotalScore > player2TotalScore && player1TotalScore > player3TotalScore) {
+        this.setState({
+          winner: "Player 1"
+        })
+        console.log("Player 1 won!");
+      } else if (player2TotalScore > player3TotalScore) {
+        this.setState({
+          winner: "Player 2"
+        })
+        console.log("Player 2 won!");
+      } else {
+        this.setState({
+          winner: "Player 3"
+        })
+        console.log("Player 3 won!");
+      }
+
+      
+    }
+
+    this.setState({
+      player1Cards: [],
+      player2Cards: [],
+      player3Cards: [],
+      currentPlayer: 1,
+      player1Total: 0,
+      player2Total: 0,
+      player3Total: 0,
+    })
   }
 
   getRandomPokemon = (numberOfPlayers) => {
@@ -243,8 +328,12 @@ class App extends Component {
             // Store both images in the object we first created
 
             pokemons.firstPokemonImg = response[0].data.sprites.front_default;
+
+            pokemons.firstPokemonId = response[0].data.id;
   
             pokemons.evolutionPokemonImg = response[1].data.sprites.front_default;
+
+            pokemons.evolutionPokemonId = response[1].data.id;
 
             // Push the object with all the info into the array that has the current state stored
 
@@ -290,6 +379,18 @@ class App extends Component {
             <img src={pokemon.evolutionPokemonImg} alt="" />
           </div>
         })}
+        <p>Player 1 score: {this.state.player1Score}</p>
+        <p>Player 2 score: {this.state.player2Score}</p>
+        <p>Player 1 cards:</p>
+        {this.state.player1Cards.map((card) => {
+          return <p>{card.number}</p>
+        })}
+
+        <p>Player 2 cards:</p>
+        {this.state.player2Cards.map((card) => {
+          return <p>{card.number}</p>
+        })}
+
         <button onClick={() => { this.drawCard(1) }}>Draw a card</button>
         <button onClick={this.stay}>STAY</button>
       </div>
