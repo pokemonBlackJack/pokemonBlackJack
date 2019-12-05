@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js'
 import axios from "axios";
+import EvolveWindow from './EvolveWindow';
 
 class App extends Component {
 
@@ -271,6 +272,15 @@ class App extends Component {
 		  {/* Importing the Header Component */}
 		  <Header />
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
+        {this.state.randomPokemons.length !== 0
+          &&
+        <EvolveWindow 
+          preName={this.state.randomPokemons[0].firstPokemon}
+          preImg={this.state.randomPokemons[0].firstPokemonImg}
+          postName={this.state.randomPokemons[0].evolution}
+          postImg={this.state.randomPokemons[0].evolutionPokemonImg} 
+          />
+        }
         {/* Rendering the pokemons and the names just to see what we are getting */}
         {this.state.randomPokemons.map((pokemon) => {
           return <div>
