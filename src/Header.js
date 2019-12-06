@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Swal from 'sweetalert2'
 import pika from './assets/pika.png'
 import withReactContent from 'sweetalert2-react-content'
