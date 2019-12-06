@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import pika from './assets/pika.png'
 import withReactContent from 'sweetalert2-react-content'
-
+import pikachuSound from './sounds/cries/25.ogg';
 
  class Header extends Component {
 	 
+	pikachu = new Audio(pikachuSound)
+
 	 seeInstructions = () => {
 
 		 const MySwal = withReactContent(Swal)
 		 MySwal.fire({
  				 onOpen: () => {
-    				MySwal.clickConfirm()
+					MySwal.clickConfirm();
+					this.pikachu.play()
   				}
 		 }).then(() => {
 				

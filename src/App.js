@@ -322,7 +322,7 @@ class App extends Component {
 
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 300);
+      const randomNumber = Math.ceil(Math.random() * 250);
   
       // Making an API call using the random number in order to get a random pokemon
 
