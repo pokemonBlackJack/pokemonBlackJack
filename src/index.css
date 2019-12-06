@@ -53,10 +53,10 @@ body {
 }
 
 h1 {
-  color: #142b68;
+  color: #ffff00;
   font-family: 'Carter One', cursive;
   font-size: 3.5rem;
-  text-shadow: -2px 0px #ffff00, 0px -2px #ffff00, 2px 0px #ffff00, 0px 2px #ffff00;
+  text-shadow: -2px 0px #142b68, 0px -2px #142b68, 2px 0px #142b68, 0px 2px #142b68;
   font-weight: lighter;
   margin: 0 auto;
   padding: 3% 0;
