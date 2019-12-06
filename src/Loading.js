@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+=======
+import ash from './assets/ash.png'
+>>>>>>> master
 import ashGif from './assets/ash.gif'
 // import {Animated} from "react-animated-css";
 import Swal from 'sweetalert2'

@@ -1,19 +1,23 @@
 // import React from 'react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import preCrySound from './sounds/cries/1.ogg';
-import postCrySound from './sounds/cries/2.ogg';
 import evolveMusic from './sounds/evolution.ogg';
 import evolvedSound from './sounds/evolvedSound.ogg';
+// import preCrySound from './sounds/cries/1.ogg';
+// import postCrySound from './sounds/cries/2.ogg';
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal);
 
-let preCry = new Audio(preCrySound);
-let postCry = new Audio(postCrySound);
-let evolveBgm = new Audio(evolveMusic);
-let evolveSoundEffect = new Audio(evolvedSound);
+const soundToUse = require.context('./sounds/cries', true);
 
-const evolutionAlert = (pre, preImg, post, postImg) => {
+const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
+    let preCrySound = soundToUse(`./${preId}.ogg`);
+    let preCry = new Audio(preCrySound);
+    let postCrySound = soundToUse(`./${postId}.ogg`);
+    let postCry = new Audio(postCrySound);
+    let evolveBgm = new Audio(evolveMusic);
+    let evolveSoundEffect = new Audio(evolvedSound);
+
     MySwal.fire({
         onOpen: () => {
             preCry.play();

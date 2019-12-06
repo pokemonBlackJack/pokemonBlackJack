@@ -52,6 +52,19 @@ body {
 	background: #142b68;
 }
 
+.card-container {
+  width: 400px;
+  height: 600px;
+  perspective: 800px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
 
 h1 {
   color: #edfeff;
@@ -71,3 +84,6 @@ h1 {
 	top: 7%;
 }
 
+.card-front {
+  background: yellow;
+}
