@@ -9,32 +9,31 @@ import withReactContent from 'sweetalert2-react-content'
 
 
 
- class Loading extends Component {
+class Loading extends Component {
 	
-
-		 showLoading = () => {
-			  
-			  const MySwal = withReactContent(Swal)
+		showLoading = () => {
+			
+			const MySwal = withReactContent(Swal)
 				MySwal.fire({
- 				 onOpen: () => {
-    				MySwal.clickConfirm()
-  				}
-		 }).then(() => {
+				onOpen: () => {
+					MySwal.clickConfirm()
+				}
+		}).then(() => {
 				
-  				return MySwal.fire({
-					  title: "Fetching Your Pokemon",
-					  confirmButtonColor: "#142b68",
-					  text: "Hang tight while the trainers go and catch the Pokemon for your battle ",
-					 background: '#142b68',
-  						backdrop: `rgba(19,43,104)`,
-					  imageUrl: ashGif,
-					  imageHeight: 400,
-					  imageWidth: 800,
-					  showConfirmButton:true,
-					  customClass: 'swal-wide', 
-					  
-					  
-				  })
+				return MySwal.fire({
+					title: "Fetching Your Pokemon",
+					confirmButtonColor: "#142b68",
+					text: "Hang tight while the trainers go and catch the Pokemon for your battle ",
+					background: '#142b68',
+						backdrop: `rgba(19,43,104)`,
+					imageUrl: ashGif,
+					imageHeight: 400,
+					imageWidth: 800,
+					showConfirmButton:true,
+					customClass: 'swal-wide', 
+					
+					
+				})
 			})
 
 

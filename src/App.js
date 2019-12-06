@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import Loading from './Loading.js'
 import axios from "axios";
-import evolutionAlert from './evolveWindowAlert'
+import evolutionAlert from './evolveWindowAlert';
 import alert from "./alert";
 import Card from './Card';
+import levelUp from './sounds/levelUp.ogg';
 
 class App extends Component {
 
@@ -279,7 +280,6 @@ class App extends Component {
         player3Total: 0,
       }, () => { alert(this.drawCard,player) })
     }
-
     
   }
 

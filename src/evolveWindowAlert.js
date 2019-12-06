@@ -3,8 +3,6 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import evolveMusic from './sounds/evolution.ogg';
 import evolvedSound from './sounds/evolvedSound.ogg';
-// import preCrySound from './sounds/cries/1.ogg';
-// import postCrySound from './sounds/cries/2.ogg';
 
 const MySwal = withReactContent(Swal);
 
