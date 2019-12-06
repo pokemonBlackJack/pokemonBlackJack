@@ -49,18 +49,25 @@ body {
 .headerComponent{
 	margin: 0;
 	padding: 0;
+	background: #142b68;
 }
 
 
 h1 {
   color: #edfeff;
   font-family: 'Carter One', cursive;
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-shadow: -2px 0px black, 0px -2px black, 2px 0px black, 0px 2px black;
   font-weight: lighter;
-  background: #142b68;
   margin: 0 auto;
   padding: 3% 0;
+  width: 60%;
   text-align: center;
+}
+
+.infoCircle{
+	color: #ffff00;
+	right: 16%;
+	top: 7%;
 }
 

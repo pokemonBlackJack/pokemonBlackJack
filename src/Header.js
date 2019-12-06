@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2'
-// import Animate from 'animate.css-react'
-// import 'animate.css/animate.css'
 import pika from './assets/pika.png'
 import withReactContent from 'sweetalert2-react-content'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
  class Header extends Component {
@@ -39,9 +41,10 @@ import withReactContent from 'sweetalert2-react-content'
 			<div className="headerComponent">
 
 				
-				<h1 className="animate fadeIn">Pikachu BlackJack</h1>
-				{/* </Animate> */}
-				<button onClick={this.seeInstructions}>Click Me</button>
+				<h1 className="positionRelative">Pikachu BlackJack</h1>
+				<FontAwesomeIcon onClick={this.seeInstructions}className = "infoCircle positionAbsolute" icon={faInfoCircle} />
+				{/* Instructions
+				<button onClick={this.seeInstructions}>Click Me</button> */}
 				 
 			</div>
 		);
