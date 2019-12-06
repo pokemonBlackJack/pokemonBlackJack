@@ -29,7 +29,7 @@ export const nextPlayerAlert = (nextplayerFunction, player, message) => {
             
         },
         title: `What?`,
-        text: `${message} It's Player ${player} turn next! please press Ok when the next player is ready`,
+        text: `It's Player ${player} turn next! please press Ok when the next player is ready`,
         background: `rgba( 255, 255, 255, 0.9)`,
         showConfirmButton: true,
         confirmButtonText: 'Ok ready!',

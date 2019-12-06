@@ -433,22 +433,7 @@ class App extends Component {
           
         
         }
-        {/* Rendering the pokemons and the names to see what we are getting */}
-
-        {/* {this.state.randomPokemons.map((pokemon) => {
-          return <div>
-            <p>{pokemon.firstPokemon}</p>
-            <img src={pokemon.firstPokemonImg} alt="" />
-          </div>
-        })} */}
-        <p>Player 1 score: {this.state.player1Score}</p>
-        <p>Player 2 score: {this.state.player2Score}</p>
-        <p>Player 1 cards:</p>
-        
-        {this.state.player1Cards.map((card) => {
-          return <Card cardFront={card.image}/>
-        })}
-        
+            
 
         <div className="gameBoard">
 
