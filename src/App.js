@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header.js'
 import Loading from './Loading.js'
+import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 import evolutionAlert from './evolveWindowAlert';
 import alert from "./alert";
@@ -392,6 +393,7 @@ class App extends Component {
         <Header />
         {/* Importing the Loading Screen Component */}
         <Loading />
+		<PokemonPlayer getPokemon = {this.state.randomPokemons}/>
 
         {/* Displaying which player's turn it is */}
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
@@ -403,12 +405,20 @@ class App extends Component {
           
         
         }
-        {/* Rendering the pokemons and the names just to see what we are getting */}
-        {this.state.randomPokemons.map((pokemon) => {
+        {/* Rendering the pokemons and the names to see what we are getting */}
+
+        {/* {this.state.randomPokemons.map((pokemon) => {
           return <div>
             <p>{pokemon.firstPokemon}</p>
             <img src={pokemon.firstPokemonImg} alt="" />
           </div>
+        })} */}
+        <p>Player 1 score: {this.state.player1Score}</p>
+        <p>Player 2 score: {this.state.player2Score}</p>
+        <p>Player 1 cards:</p>
+        
+        {this.state.player1Cards.map((card) => {
+          return <Card cardFront={card.image}/>
         })}
 
         <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} />

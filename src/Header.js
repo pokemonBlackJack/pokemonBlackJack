@@ -58,7 +58,7 @@ class Header extends Component {
 			<div className="headerComponent">
 
 				
-				<h1 className="positionRelative">Pikachu BlackJack</h1>
+				<h1 className="positionRelative">Pokémon BlackJack</h1>
 				<FontAwesomeIcon onClick={this.seeInstructions}className = "infoCircle positionAbsolute" icon={faInfoCircle} />
 				{/* Instructions
 				<button onClick={this.seeInstructions}>Click Me</button> */}
