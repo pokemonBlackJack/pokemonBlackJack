@@ -8,7 +8,7 @@ const alert = (nextRound, winner) => {
     MySwal.fire({
     
         onClose: () => {
-            nextRound();
+            nextRound(2, "firstCards");
         },
         title: `What?`,
         text: `${winner} wins!`,

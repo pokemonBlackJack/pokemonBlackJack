@@ -47,7 +47,7 @@ class App extends Component {
         deckId:data.data.deck_id
       })  
     }).then(() => {
-      this.firstDraw();
+      this.drawCard(2, "firstCards");
     });
 
 
@@ -57,10 +57,10 @@ class App extends Component {
 
   }
 
-  // Method to draw a card from the deck
+ 
 
-  drawCard = (numberOfCards) => {
-
+  drawCard = (numberOfCards, type) => {
+    
     // Getting deck id from the state
 
     const deckId = this.state.deckId;
@@ -68,34 +68,31 @@ class App extends Component {
 
     // Making Deck API call to draw a card
 
+    const currentPlayer = this.state.currentPlayer;
+    
+    
     axios({
       url: `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${numberOfCards}`,
       method: "get",
       responseType: "json",
 
-    }).then((response) => {
-      const currentPlayer = this.state.currentPlayer;
-
-      const currentCard = response.data.cards[0];
-
-
-      const suits = ["QUEEN", "KING", "JACK"];
-
-      // Making a copy that we can modify from the state
-
-      const playerCards = [...this.state[`player${currentPlayer}Cards`]];
-
-      // push the new card into the copy we made
-
-      playerCards.push({
-        number: currentCard.value,
-        suit: currentCard.suit,
-        image: currentCard.image
+    }).then((result) => {
+      
+      const cards = result.data.cards;
+  
+      const playerCards = [...this.state[`player${this.state.currentPlayer}Cards`]];
+  
+      cards.forEach((card) => {
+        playerCards.push({
+          number: card.value,
+          suit: card.suit,
+          image: card.image
+        });
       });
 
-      // Create an empty array to store the cards values
+      const arrayOfValues = [];
 
-      let arrayOfValues = [];
+      const suits = ["QUEEN", "KING", "JACK"];
 
       // We loop through each card on the players hand and check if the card is an ACE then we give it a value of 11 and if it is a QUEEN, KING OR JACK we give it a value of 10.
 
@@ -127,93 +124,70 @@ class App extends Component {
 
       // If the player has a total value higher than 21 then change the turn to the next player
 
-      if (currentPlayerTotal > 21) {
-        if (currentPlayer === this.state.numberOfPlayers) {
-          this.setState({
-            [`player${currentPlayer}Cards`]: playerCards,
-            [`player${currentPlayer}Total`]: currentPlayerTotal,
+      if (type === "firstCards") {
+        this.setState({
+          [`player${this.state.currentPlayer}Cards`]: playerCards,
+          [`player${currentPlayer}Total`]: currentPlayerTotal,
+          currentPlayer: this.state.currentPlayer + 1
+        }, () => {
 
-          }, () => {
-            this.stay();
-            console.log(this.state[`player${currentPlayer}Cards`]);
-            console.log(this.state[`player${currentPlayer}Total`]);
-          })
-        } else {
-          this.setState({
-            [`player${currentPlayer}Cards`]: playerCards,
-            [`player${currentPlayer}Total`]: currentPlayerTotal,
-            currentPlayer: currentPlayer + 1
-          }, () => {
-            console.log(this.state[`player${currentPlayer}Cards`]);
-            console.log(this.state[`player${currentPlayer}Total`]);
-          })
-        }
+
+          if (this.state.currentPlayer <= this.state.numberOfPlayers) {
+            this.drawCard(2, "firstCards");
+          } else {
+            this.setState({
+              currentPlayer: 1
+            })
+          }
+        })
 
       } else {
-        this.setState({
-          [`player${currentPlayer}Cards`]: playerCards,
-          [`player${currentPlayer}Total`]: currentPlayerTotal
-        }, () => {
-          console.log(this.state[`player${currentPlayer}Cards`]);
-          console.log(this.state[`player${currentPlayer}Total`]);
-        })
-      }
-
-    })
-
-  }
-
-  firstDraw = () => {
-    
-    // Getting deck id from the state
-
-    const deckId = this.state.deckId;
-
-
-    // Making Deck API call to draw a card
-
-    
-    
-    
-    axios({
-      url: `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`,
-      method: "get",
-      responseType: "json",
-
-    }).then((result) => {
-      
-      const cards = result.data.cards;
+        if (currentPlayerTotal > 21) {
+          if (currentPlayer === this.state.numberOfPlayers) {
+            this.setState({
+              [`player${currentPlayer}Cards`]: playerCards,
+              [`player${currentPlayer}Total`]: currentPlayerTotal,
   
-      const playerCards = [];
+            }, () => {
+              this.stay();
+              console.log(this.state[`player${currentPlayer}Cards`]);
+              console.log(this.state[`player${currentPlayer}Total`]);
+            })
+          } else {
+            this.setState({
+              [`player${currentPlayer}Cards`]: playerCards,
+              [`player${currentPlayer}Total`]: currentPlayerTotal,
+              currentPlayer: currentPlayer + 1
+            }, () => {
+              console.log(this.state[`player${currentPlayer}Cards`]);
+              console.log(this.state[`player${currentPlayer}Total`]);
+            })
+          }
   
-      cards.forEach((card) => {
-        playerCards.push({
-          number: card.value,
-          suit: card.suit,
-          image: card.image
-        });
-      });
-      
-      this.setState({
-        [`player${this.state.currentPlayer}Cards`]: playerCards,
-        currentPlayer: this.state.currentPlayer + 1
-      }, () => {
-        console.log("here");
-        if (this.state.currentPlayer <= this.state.numberOfPlayers) {
-          this.firstDraw();
         } else {
           this.setState({
-            currentPlayer: 1
+            [`player${currentPlayer}Cards`]: playerCards,
+            [`player${currentPlayer}Total`]: currentPlayerTotal
+          }, () => {
+            console.log(this.state[`player${currentPlayer}Cards`]);
+            console.log(this.state[`player${currentPlayer}Total`]);
           })
         }
-      })
-      
+
+      }
+
     })
   } 
   
 
 
   stay = () => {
+
+    console.log(this.state.player1Cards);
+    console.log(this.state.player1Total);
+    console.log(this.state.player2Cards);
+    console.log(this.state.player2Total);
+
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
 
@@ -235,8 +209,7 @@ class App extends Component {
           player1Total: 0,
           player2Total: 0,
           player3Total: 0,
-        }, () => {
-            this.firstDraw();
+        }, () => { alert(this.drawCard, "Nobody") 
         })
 
       } else if (player1Total > player2Total && player1Total > player3Total) {
@@ -304,7 +277,7 @@ class App extends Component {
         player1Total: 0,
         player2Total: 0,
         player3Total: 0,
-      }, () => { alert(this.firstDraw,player) })
+      }, () => { alert(this.drawCard,player) })
     }
 
     
@@ -442,18 +415,17 @@ class App extends Component {
         <p>Player 1 score: {this.state.player1Score}</p>
         <p>Player 2 score: {this.state.player2Score}</p>
         <p>Player 1 cards:</p>
-        <Card />
+        
         {this.state.player1Cards.map((card) => {
-          return <p>{card.number}</p>
+          return <Card cardFront={card.image}/>
         })}
 
         <p>Player 2 cards:</p>
-        <Card />
         {this.state.player2Cards.map((card) => {
-          return <p>{card.number}</p>
+          return <Card cardFront={card.image} />
         })}
 
-        <button onClick={() => { this.drawCard(1) }}>Draw a card</button>
+        <button onClick={() => { this.drawCard(1,"") }}>Draw a card</button>
         <button onClick={this.stay}>STAY</button>
       </div>
     )
