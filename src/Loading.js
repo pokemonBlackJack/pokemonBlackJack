@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-import ash from './assets/ash.png'
 import ashGif from './assets/ash.gif'
 // import {Animated} from "react-animated-css";
 import Swal from 'sweetalert2'

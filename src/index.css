@@ -32,6 +32,7 @@ body {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   font-size: 125%;
+  background-color: #edfeff;
 }
 
 .positionRelative {
@@ -42,13 +43,24 @@ body {
   position: absolute;
 }
 
-h1 {
-  color: #ffff00;
-  font-family: 'Carter One', cursive;
-  font-size: 3rem;
-  text-shadow: -2px 0px #142b68, 0px -2px #142b68, 2px 0px #142b68, 0px 2px #142b68;
+
+
+/* Header Component Styling */
+.headerComponent{
+	margin: 0;
+	padding: 0;
 }
 
 
-
+h1 {
+  color: #edfeff;
+  font-family: 'Carter One', cursive;
+  font-size: 3rem;
+  text-shadow: -2px 0px black, 0px -2px black, 2px 0px black, 0px 2px black;
+  font-weight: lighter;
+  background: #142b68;
+  margin: 0 auto;
+  padding: 3% 0;
+  text-align: center;
+}
 

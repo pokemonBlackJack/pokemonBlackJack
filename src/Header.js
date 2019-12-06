@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import Swal from 'sweetalert2'
+// import Animate from 'animate.css-react'
+// import 'animate.css/animate.css'
 import pika from './assets/pika.png'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -36,7 +37,13 @@ import withReactContent from 'sweetalert2-react-content'
 		return (
 
 			<div className="headerComponent">
-				<h1>Welcome To Pikachu BlackJack</h1>
+
+				{/* <Animate
+    				appear="fadeInDown"
+   					 durationAppear={1000}
+   					 component="div" > */}
+				<h1 className="animate fadeIn">Pikachu BlackJack</h1>
+				{/* </Animate> */}
 				<button onClick={this.seeInstructions}>Click Me</button>
 				 
 			</div>
