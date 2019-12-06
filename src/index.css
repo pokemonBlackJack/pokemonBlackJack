@@ -32,6 +32,7 @@ body {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   font-size: 125%;
+  background-color: #edfeff;
 }
 
 .positionRelative {
@@ -42,11 +43,13 @@ body {
   position: absolute;
 }
 
-h1 {
-  color: #ffff00;
-  font-family: 'Carter One', cursive;
-  font-size: 3rem;
-  text-shadow: -2px 0px #142b68, 0px -2px #142b68, 2px 0px #142b68, 0px 2px #142b68;
+
+
+/* Header Component Styling */
+.headerComponent{
+	margin: 0;
+	padding: 0;
+	background: #142b68;
 }
 
 .card-container {
@@ -63,26 +66,23 @@ h1 {
   transform-style: preserve-3d;
 }
 
-.card-container:hover .card, 
-.card-front {
-  transform: rotateY(180deg);
-  transition: transform 1s;
+h1 {
+  color: #edfeff;
+  font-family: 'Carter One', cursive;
+  font-size: 3.5rem;
+  text-shadow: -2px 0px black, 0px -2px black, 2px 0px black, 0px 2px black;
+  font-weight: lighter;
+  margin: 0 auto;
+  padding: 3% 0;
+  width: 60%;
+  text-align: center;
 }
 
-.card-back,
-.back, 
-.card-front {
-  position: absolute;
-  backface-visibility: hidden;
+.infoCircle{
+	color: #ffff00;
+	right: 16%;
+	top: 7%;
 }
-
-.card-back,
-.back,
-.card-back img,
-.card-front {
-  height: 100%;
-  width: 100%;
-} 
 
 .card-front {
   background: yellow;
