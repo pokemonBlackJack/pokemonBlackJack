@@ -3,7 +3,8 @@ import './App.css';
 import Header from './Header.js'
 import Loading from './Loading.js'
 import axios from "axios";
-import EvolveWindow from './EvolveWindow';
+import evolutionAlert from './evolveWindowAlert'
+import alert from "./alert";
 import Card from './Card';
 
 class App extends Component {
@@ -44,8 +45,10 @@ class App extends Component {
 
     }).then((data) => {
       this.setState({
-        deckId: data.data.deck_id
-      })
+        deckId:data.data.deck_id
+      })  
+    }).then(() => {
+      this.firstDraw();
     });
 
 
@@ -161,6 +164,55 @@ class App extends Component {
 
   }
 
+  firstDraw = () => {
+    
+    // Getting deck id from the state
+
+    const deckId = this.state.deckId;
+
+
+    // Making Deck API call to draw a card
+
+    
+    
+    
+    axios({
+      url: `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`,
+      method: "get",
+      responseType: "json",
+
+    }).then((result) => {
+      
+      const cards = result.data.cards;
+  
+      const playerCards = [];
+  
+      cards.forEach((card) => {
+        playerCards.push({
+          number: card.value,
+          suit: card.suit,
+          image: card.image
+        });
+      });
+      
+      this.setState({
+        [`player${this.state.currentPlayer}Cards`]: playerCards,
+        currentPlayer: this.state.currentPlayer + 1
+      }, () => {
+        console.log("here");
+        if (this.state.currentPlayer <= this.state.numberOfPlayers) {
+          this.firstDraw();
+        } else {
+          this.setState({
+            currentPlayer: 1
+          })
+        }
+      })
+      
+    })
+  } 
+  
+
 
   stay = () => {
     const numberOfPlayers = this.state.numberOfPlayers;
@@ -173,7 +225,7 @@ class App extends Component {
       const player2Total = this.state.player2Total > 21 ? 0 : this.state.player2Total;
       const player3Total = this.state.player3Total > 21 ? 0 : this.state.player3Total;
 
-      if (player1Total === player2Total && (player2Total === player3Total && numberOfPlayers === 3)) {
+      if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
         console.log("its a tie");
 
         this.setState({
@@ -184,25 +236,27 @@ class App extends Component {
           player1Total: 0,
           player2Total: 0,
           player3Total: 0,
+        }, () => {
+            this.firstDraw();
         })
 
       } else if (player1Total > player2Total && player1Total > player3Total) {
         this.setState({
           player1Score: this.state.player1Score + 1,
           round: this.state.round + 1
-        }, this.checkWinner)
+        }, () => { this.checkWinner("player1") });
         console.log("Player 1 won!");
       } else if (player2Total > player3Total) {
         this.setState({
           player2Score: this.state.player2Score + 1,
           round: this.state.round + 1
-        }, this.checkWinner)
+        }, () => { this.checkWinner("player2") })
         console.log("Player 2 won!");
       } else if (this.state.numberOfPlayers === 3) {
         this.setState({
           player3Score: this.state.player3Score + 1,
           round: this.state.round + 1
-        }, this.checkWinner)
+        }, () => { this.checkWinner("player3") })
         console.log("Player 3 won!");
       }
 
@@ -215,7 +269,7 @@ class App extends Component {
   }
 
 
-  checkWinner = () => {
+  checkWinner = (player) => {
     console.log(this.state.round);
     if (this.state.player1Score === 2 || this.state.player2Score === 2 || this.state.player3Score === 2) {
 
@@ -226,33 +280,35 @@ class App extends Component {
 
       if (player1TotalScore > player2TotalScore && player1TotalScore > player3TotalScore) {
         this.setState({
-          winner: "Player 1"
+          winner: 1
         })
         console.log("Player 1 won!");
       } else if (player2TotalScore > player3TotalScore) {
         this.setState({
-          winner: "Player 2"
+          winner: 2
         })
         console.log("Player 2 won!");
       } else {
         this.setState({
-          winner: "Player 3"
+          winner: 3
         })
         console.log("Player 3 won!");
       }
 
-
+      
+    }else{
+      this.setState({
+        player1Cards: [],
+        player2Cards: [],
+        player3Cards: [],
+        currentPlayer: 1,
+        player1Total: 0,
+        player2Total: 0,
+        player3Total: 0,
+      }, () => { alert(this.firstDraw,player) })
     }
 
-    this.setState({
-      player1Cards: [],
-      player2Cards: [],
-      player3Cards: [],
-      currentPlayer: 1,
-      player1Total: 0,
-      player2Total: 0,
-      player3Total: 0,
-    })
+    
   }
 
   getRandomPokemon = (numberOfPlayers) => {
@@ -267,8 +323,8 @@ class App extends Component {
 
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 200);
-
+      const randomNumber = Math.ceil(Math.random() * 300);
+  
       // Making an API call using the random number in order to get a random pokemon
 
       axios({
@@ -367,14 +423,13 @@ class App extends Component {
 
         {/* Displaying which player's turn it is */}
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
-        {this.state.randomPokemons.length !== 0
+        {this.state.winner
           &&
-          <EvolveWindow
-            preName={this.state.randomPokemons[0].firstPokemon}
-            preImg={this.state.randomPokemons[0].firstPokemonImg}
-            postName={this.state.randomPokemons[0].evolution}
-            postImg={this.state.randomPokemons[0].evolutionPokemonImg}
-          />
+          (
+            
+          evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg)))
+          
+        
         }
         {/* Rendering the pokemons and the names just to see what we are getting */}
         {this.state.randomPokemons.map((pokemon) => {
