@@ -6,6 +6,7 @@ import axios from "axios";
 import evolutionAlert from './evolveWindowAlert'
 import alert from "./alert";
 import Card from './Card';
+import PlayerContainer from "./PlayerContainer";
 
 class App extends Component {
 
@@ -202,16 +203,8 @@ class App extends Component {
       if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
         console.log("its a tie");
 
-        this.setState({
-          player1Cards: [],
-          player2Cards: [],
-          player3Cards: [],
-          currentPlayer: 1,
-          player1Total: 0,
-          player2Total: 0,
-          player3Total: 0,
-        }, () => { alert(this.drawCard, "Nobody") 
-        })
+        alert(this.drawCard, "Nobody",this.reset) 
+        
 
       } else if (player1Total > player2Total && player1Total > player3Total) {
         this.setState({
@@ -270,18 +263,22 @@ class App extends Component {
 
       
     }else{
-      this.setState({
-        player1Cards: [],
-        player2Cards: [],
-        player3Cards: [],
-        currentPlayer: 1,
-        player1Total: 0,
-        player2Total: 0,
-        player3Total: 0,
-      }, () => { alert(this.drawCard,player) })
+      alert(this.drawCard, player, this.reset); 
     }
 
     
+  }
+
+  reset = () => {
+    this.setState({
+      player1Cards: [],
+      player2Cards: [],
+      player3Cards: [],
+      currentPlayer: 1,
+      player1Total: 0,
+      player2Total: 0,
+      player3Total: 0,
+    })
   }
 
   getRandomPokemon = (numberOfPlayers) => {
@@ -410,22 +407,12 @@ class App extends Component {
           return <div>
             <p>{pokemon.firstPokemon}</p>
             <img src={pokemon.firstPokemonImg} alt="" />
-            <p>{pokemon.evolution}</p>
-            <img src={pokemon.evolutionPokemonImg} alt="" />
           </div>
         })}
-        <p>Player 1 score: {this.state.player1Score}</p>
-        <p>Player 2 score: {this.state.player2Score}</p>
-        <p>Player 1 cards:</p>
-        
-        {this.state.player1Cards.map((card) => {
-          return <Card cardFront={card.image}/>
-        })}
 
-        <p>Player 2 cards:</p>
-        {this.state.player2Cards.map((card) => {
-          return <Card cardFront={card.image} />
-        })}
+        <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} />
+
+        <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score}/>
 
         <button onClick={() => { this.drawCard(1,"") }}>Draw a card</button>
         <button onClick={this.stay}>STAY</button>

@@ -72,10 +72,31 @@ h1 {
 }
 /* End of Header Styling */
 
+/* Start of player Container component styling */
+
+.playerCards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Start of Cards Component styling */
+
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+
+
 .card-container {
-  width: 400px;
-  height: 600px;
+  max-width: 150px;
+  flex-basis: 200px;
+  height: 200px;
   perspective: 800px;
 }
 
@@ -87,29 +108,11 @@ h1 {
   transform-style: preserve-3d;
 }
 
-.card-front {
-  background: yellow;
-}
-
-.card-container {
-  width: 400px;
-  height: 600px;
-  perspective: 800px;
-}
-
-.card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
-.card-container:hover .card, 
+/* .card-container:hover .card, 
 .card-front {
   transform: rotateY(180deg);
   transition: transform 1s;
-}
+} */
 
 .card-back,
 .back, 
@@ -122,12 +125,12 @@ h1 {
 .back,
 .card-back img,
 .card-front {
-  height: 100%;
   width: 100%;
 } 
 
-.card-front {
-  background: yellow;
+.card-front img {
+  height: 100%;
+  width: 100%;
 } 
 
 /* End of card styling */
