@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js'
+import Loading from './Loading.js'
 import axios from "axios";
-import EvolveWindow from './EvolveWindow';
 import evolutionAlert from './evolveWindowAlert'
 import alert from "./alert";
-import { promises } from 'fs';
+import Card from './Card';
 
 class App extends Component {
 
@@ -32,18 +32,18 @@ class App extends Component {
 
   componentDidMount() {
 
-	  //Calling deck of cards API to get a deck key, and then generate random cards.
+    //Calling deck of cards API to get a deck key, and then generate random cards.
 
-      axios({
-        method:'GET',
-        url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
-      dataResponse: 'json', 
+    axios({
+      method: 'GET',
+      url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
+      dataResponse: 'json',
       params: {
         deck_count: 1
       }
 
 
-    }).then( (data) => {
+    }).then((data) => {
       this.setState({
         deckId:data.data.deck_id
       })  
@@ -55,7 +55,7 @@ class App extends Component {
 
     // Calling the method to get the random pokemons when the app is starting
     this.getRandomPokemon(2);
-    
+
   }
 
   // Method to draw a card from the deck
@@ -73,15 +73,15 @@ class App extends Component {
       url: `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${numberOfCards}`,
       method: "get",
       responseType: "json",
-      
+
     }).then((response) => {
       const currentPlayer = this.state.currentPlayer;
 
       const currentCard = response.data.cards[0];
 
-    
-      const suits = ["QUEEN", "KING","JACK"];
-      
+
+      const suits = ["QUEEN", "KING", "JACK"];
+
       // Making a copy that we can modify from the state
 
       const playerCards = [...this.state[`player${currentPlayer}Cards`]];
@@ -101,7 +101,7 @@ class App extends Component {
       // We loop through each card on the players hand and check if the card is an ACE then we give it a value of 11 and if it is a QUEEN, KING OR JACK we give it a value of 10.
 
       playerCards.forEach((card) => {
-        
+
         if (suits.includes(card.number)) {
           arrayOfValues.push(10);
         } else if (card.number === "ACE") {
@@ -120,7 +120,7 @@ class App extends Component {
 
       // Use a while loop to check if the users total is higher than 21 and if there is an ace in the hand in order to start changing the value of the aces to 1.
 
-      while (currentPlayerTotal > 21 && arrayOfValues.includes(11) ) {
+      while (currentPlayerTotal > 21 && arrayOfValues.includes(11)) {
         arrayOfValues[arrayOfValues.indexOf(11, 0)] = 1;
         currentPlayerTotal = arrayOfValues.reduce((a, b) => a + b, 0);
 
@@ -133,9 +133,9 @@ class App extends Component {
           this.setState({
             [`player${currentPlayer}Cards`]: playerCards,
             [`player${currentPlayer}Total`]: currentPlayerTotal,
-            
+
           }, () => {
-              this.stay();
+            this.stay();
             console.log(this.state[`player${currentPlayer}Cards`]);
             console.log(this.state[`player${currentPlayer}Total`]);
           })
@@ -149,7 +149,7 @@ class App extends Component {
             console.log(this.state[`player${currentPlayer}Total`]);
           })
         }
-        
+
       } else {
         this.setState({
           [`player${currentPlayer}Cards`]: playerCards,
@@ -159,7 +159,7 @@ class App extends Component {
           console.log(this.state[`player${currentPlayer}Total`]);
         })
       }
-      
+
     })
 
   }
@@ -218,7 +218,7 @@ class App extends Component {
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
 
-    
+
 
     if (numberOfPlayers === currentPlayer) {
       const player1Total = this.state.player1Total > 21 ? 0 : this.state.player1Total;
@@ -227,7 +227,7 @@ class App extends Component {
 
       if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
         console.log("its a tie");
-        
+
         this.setState({
           player1Cards: [],
           player2Cards: [],
@@ -239,7 +239,7 @@ class App extends Component {
         }, () => {
             this.firstDraw();
         })
-        
+
       } else if (player1Total > player2Total && player1Total > player3Total) {
         this.setState({
           player1Score: this.state.player1Score + 1,
@@ -265,7 +265,7 @@ class App extends Component {
         currentPlayer: currentPlayer + 1
       })
     }
-    
+
   }
 
 
@@ -315,12 +315,12 @@ class App extends Component {
 
     // Foor loop that will repeat depending on the amount of players that will play the game
 
-    for (let i = 0; i < numberOfPlayers; i++){
+    for (let i = 0; i < numberOfPlayers; i++) {
 
       // Create an empty object that will store the information about the pokemon that we get randomly
 
       const pokemons = {};
-      
+
       // Getting a random number between 1 and 500 using the random function
 
       const randomNumber = Math.ceil(Math.random() * 300);
@@ -335,7 +335,7 @@ class App extends Component {
 
         // Storing the part of the response that we need in an array
         const pokemonEvolutionsArray = response.data.chain.evolves_to;
-  
+
         // Check if the pokemon has an evolution, if it doesn't then use recursion to call the function one more time and get a new pokemon.
 
         if (pokemonEvolutionsArray.length === 0) {
@@ -349,14 +349,14 @@ class App extends Component {
 
           console.log(pokemonName);
           console.log(pokemonNextEvolution);
-  
+
           pokemons.firstPokemon = pokemonName;
           pokemons.evolution = pokemonNextEvolution;
-          
+
           // Make an empty array to store the promises of calling the api to get the base pokemon and the evolution image
 
           const imagesPromises = [];
-          
+
           // Make the api call for both images and store the promise in the array
 
           const promiseOne = axios({
@@ -364,15 +364,15 @@ class App extends Component {
             method: "get",
             responseType: "json"
           })
-  
+
           imagesPromises.push(promiseOne);
-  
+
           const promiseTwo = axios({
             url: `https://pokeapi.co/api/v2/pokemon/${pokemonNextEvolution}`,
             method: "get",
             responseType: "json"
           })
-  
+
           imagesPromises.push(promiseTwo);
 
           // Use promise.all to wait for both responses before storing them on the state
@@ -382,13 +382,13 @@ class App extends Component {
             // When both promises resolve then get the current pokemons in the state and store them in a variable.
 
             const currentPokemons = [...this.state.randomPokemons];
-  
+
             // Store both images in the object we first created
 
             pokemons.firstPokemonImg = response[0].data.sprites.front_default;
 
             pokemons.firstPokemonId = response[0].data.id;
-  
+
             pokemons.evolutionPokemonImg = response[1].data.sprites.front_default;
 
             pokemons.evolutionPokemonId = response[1].data.id;
@@ -396,16 +396,16 @@ class App extends Component {
             // Push the object with all the info into the array that has the current state stored
 
             currentPokemons.push(pokemons);
-  
+
             // Set the state to the new array
 
             this.setState({
               randomPokemons: currentPokemons
             }, () => {
-                
-                // Console login when all of this is done just to see the result
 
-                console.log(this.state.randomPokemons);
+              // Console login when all of this is done just to see the result
+
+              console.log(this.state.randomPokemons);
             })
           })
         }
@@ -416,8 +416,12 @@ class App extends Component {
   render() {
     return (
       <div>
-		  {/* Importing the Header Component */}
-		  <Header />
+        {/* Importing the Header Component */}
+        <Header />
+        {/* Importing the Loading Screen Component */}
+        <Loading />
+
+        {/* Displaying which player's turn it is */}
         <p>{`Player ${this.state.currentPlayer} turn`}</p>
         {this.state.winner
           &&
@@ -439,11 +443,13 @@ class App extends Component {
         <p>Player 1 score: {this.state.player1Score}</p>
         <p>Player 2 score: {this.state.player2Score}</p>
         <p>Player 1 cards:</p>
+        <Card />
         {this.state.player1Cards.map((card) => {
           return <p>{card.number}</p>
         })}
 
         <p>Player 2 cards:</p>
+        <Card />
         {this.state.player2Cards.map((card) => {
           return <p>{card.number}</p>
         })}

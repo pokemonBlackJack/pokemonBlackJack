@@ -49,4 +49,41 @@ h1 {
   text-shadow: -2px 0px #142b68, 0px -2px #142b68, 2px 0px #142b68, 0px 2px #142b68;
 }
 
+.card-container {
+  width: 400px;
+  height: 600px;
+  perspective: 800px;
+}
 
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card-container:hover .card, 
+.card-front {
+  transform: rotateY(180deg);
+  transition: transform 1s;
+}
+
+.card-back,
+.back, 
+.card-front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card-back,
+.back,
+.card-back img,
+.card-front {
+  height: 100%;
+  width: 100%;
+} 
+
+.card-front {
+  background: yellow;
+}
