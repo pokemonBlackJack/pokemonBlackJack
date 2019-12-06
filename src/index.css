@@ -93,6 +93,7 @@ h1 {
 	padding: 2% 0;
 	display: flex;
 	flex-direction: column;
+
 }
 
 .playerPokemonContainer img{
@@ -102,14 +103,21 @@ h1 {
 	width: 35%;
 }
 
-
+.imageShadow{
+	width: 10%;
+	background-color: black;
+	margin:0 auto;
+	opacity: 0.5;
+	width: 30%;
+	height: 10%;
+	border-radius: 50%;
+	margin-top: 1%;
+}
 
 .pokemonPlayer p:last-of-type {
 	top: 35%;
 	right: 50%;
 }
-
-
 
 /* Start of Cards Component styling */
 .card-container {
