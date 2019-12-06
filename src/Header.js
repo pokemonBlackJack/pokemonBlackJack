@@ -38,10 +38,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 			<div className="headerComponent">
 
-				{/* <Animate
-    				appear="fadeInDown"
-   					 durationAppear={1000}
-   					 component="div" > */}
+				
 				<h1 className="animate fadeIn">Pikachu BlackJack</h1>
 				{/* </Animate> */}
 				<button onClick={this.seeInstructions}>Click Me</button>
