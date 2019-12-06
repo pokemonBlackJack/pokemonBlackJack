@@ -8,7 +8,7 @@ class EvolveWindow extends Component {
         return (
             <div>
                 <button onClick={() => {
-                    evolutionAlert((this.props.preName), (this.props.preImg), (this.props.postName), (this.props.postImg))}
+                    evolutionAlert((this.props.preName), (this.props.preImg), (this.props.preId), (this.props.postName), (this.props.postImg), (this.props.postId))}
                 }>Evolve</button>
             </div>
         );
