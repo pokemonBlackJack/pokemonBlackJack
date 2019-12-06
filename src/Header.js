@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import pika from './assets/pika.png'
 import withReactContent from 'sweetalert2-react-content'
+<<<<<<< HEAD
 import pikachuSound from './sounds/cries/25.ogg';
+=======
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
+
+
+>>>>>>> master
 
  class Header extends Component {
 	 
@@ -38,8 +46,12 @@ import pikachuSound from './sounds/cries/25.ogg';
 		return (
 
 			<div className="headerComponent">
-				<h1>Welcome To Pikachu BlackJack</h1>
-				<button onClick={this.seeInstructions}>Click Me</button>
+
+				
+				<h1 className="positionRelative">Pikachu BlackJack</h1>
+				<FontAwesomeIcon onClick={this.seeInstructions}className = "infoCircle positionAbsolute" icon={faInfoCircle} />
+				{/* Instructions
+				<button onClick={this.seeInstructions}>Click Me</button> */}
 				 
 			</div>
 		);

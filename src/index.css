@@ -32,6 +32,7 @@ body {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   font-size: 125%;
+  background-color: #edfeff;
 }
 
 .positionRelative {
@@ -42,11 +43,51 @@ body {
   position: absolute;
 }
 
+
+
+/* Header Component Styling */
+.headerComponent{
+	margin: 0;
+	padding: 0;
+	background: #142b68;
+}
+
 h1 {
-  color: #ffff00;
+  color: #edfeff;
   font-family: 'Carter One', cursive;
-  font-size: 3rem;
-  text-shadow: -2px 0px #142b68, 0px -2px #142b68, 2px 0px #142b68, 0px 2px #142b68;
+  font-size: 3.5rem;
+  text-shadow: -2px 0px black, 0px -2px black, 2px 0px black, 0px 2px black;
+  font-weight: lighter;
+  margin: 0 auto;
+  padding: 3% 0;
+  width: 60%;
+  text-align: center;
+}
+
+.infoCircle{
+	color: #ffff00;
+	right: 16%;
+	top: 7%;
+}
+/* End of Header Styling */
+
+/* Start of Cards Component styling */
+.card-container {
+  width: 400px;
+  height: 600px;
+  perspective: 800px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card-front {
+  background: yellow;
 }
 
 .card-container {
@@ -86,4 +127,6 @@ h1 {
 
 .card-front {
   background: yellow;
-}
+} 
+
+/* End of card styling */
