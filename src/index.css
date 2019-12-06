@@ -52,20 +52,6 @@ body {
 	background: #142b68;
 }
 
-.card-container {
-  width: 400px;
-  height: 600px;
-  perspective: 800px;
-}
-
-.card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
 h1 {
   color: #edfeff;
   font-family: 'Carter One', cursive;
@@ -83,7 +69,64 @@ h1 {
 	right: 16%;
 	top: 7%;
 }
+/* End of Header Styling */
+
+/* Start of Cards Component styling */
+.card-container {
+  width: 400px;
+  height: 600px;
+  perspective: 800px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
 
 .card-front {
   background: yellow;
 }
+
+.card-container {
+  width: 400px;
+  height: 600px;
+  perspective: 800px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card-container:hover .card, 
+.card-front {
+  transform: rotateY(180deg);
+  transition: transform 1s;
+}
+
+.card-back,
+.back, 
+.card-front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card-back,
+.back,
+.card-back img,
+.card-front {
+  height: 100%;
+  width: 100%;
+} 
+
+.card-front {
+  background: yellow;
+} 
+
+/* End of card styling */
