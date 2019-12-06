@@ -71,12 +71,37 @@ h1 {
 }
 /* End of Header Styling */
 
+.gameBoard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gameBoard>div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.playerOptions {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Start of player Container component styling */
+
+.playerContainer {
+  width: 40%;
+  
+}
 
 .playerCards {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Start of Cards Component styling */
@@ -107,11 +132,24 @@ h1 {
   transform-style: preserve-3d;
 }
 
-/* .card-container:hover .card, 
-.card-front {
+/* .card-container
+ {
   transform: rotateY(180deg);
   transition: transform 1s;
 } */
+
+ .card-front {
+  transform: rotateY(180deg);
+  transition: all 1s;
+}
+
+.card-front.flipable {
+  animation: flipFront 1s both 1 linear;
+}
+
+.card-back.flipable {
+  animation: flipBack 1s both 1 linear;
+}
 
 .card-back,
 .back, 
@@ -133,3 +171,23 @@ h1 {
 } 
 
 /* End of card styling */
+
+@keyframes flipFront {
+  from {
+    transform: rotateY(180deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes flipBack {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
+}

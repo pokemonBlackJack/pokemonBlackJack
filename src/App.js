@@ -3,7 +3,7 @@ import Header from './Header.js'
 import Loading from './Loading.js'
 import axios from "axios";
 import evolutionAlert from './evolveWindowAlert'
-import alert from "./alert";
+import alert, { nextPlayerAlert } from "./alert";
 import Card from './Card';
 import PlayerContainer from "./PlayerContainer";
 
@@ -26,7 +26,9 @@ class App extends Component {
       player1Score: 0,
       player2Score: 0,
       player3Score: 0,
-      winner: null
+      winner: null,
+      hideCards: false,
+      showAll: false
     }
   }
 
@@ -158,8 +160,17 @@ class App extends Component {
             this.setState({
               [`player${currentPlayer}Cards`]: playerCards,
               [`player${currentPlayer}Total`]: currentPlayerTotal,
-              currentPlayer: currentPlayer + 1
+              
             }, () => {
+              setTimeout(() => {
+                this.setState({
+                  hideCards: true
+                }, () => {
+                  nextPlayerAlert(this.changeRound, this.state.currentPlayer + 1)
+                })
+              }, 2000);
+              
+              
               console.log(this.state[`player${currentPlayer}Cards`]);
               console.log(this.state[`player${currentPlayer}Total`]);
             })
@@ -201,6 +212,9 @@ class App extends Component {
 
       if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
         console.log("its a tie");
+        this.setState({
+          showAll: true
+        })
 
         alert(this.drawCard, "Nobody",this.reset) 
         
@@ -226,11 +240,25 @@ class App extends Component {
       }
 
     } else {
+      // this.setState({
+      //   currentPlayer: currentPlayer + 1
+      // })
       this.setState({
-        currentPlayer: currentPlayer + 1
+        hideCards: true
+      },()=>{
+        nextPlayerAlert(this.changeRound, this.state.currentPlayer + 1)
       })
+      
     }
 
+  }
+
+  changeRound = () => {
+    
+    this.setState({
+        currentPlayer: this.state.currentPlayer + 1,
+        hideCards: false
+      })
   }
 
 
@@ -262,6 +290,9 @@ class App extends Component {
 
       
     }else{
+      this.setState({
+          showAll: true
+        })
       alert(this.drawCard, player, this.reset); 
     }
 
@@ -277,6 +308,7 @@ class App extends Component {
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,
+      showAll: false
     })
   }
 
@@ -292,7 +324,7 @@ class App extends Component {
 
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 300);
+      const randomNumber = Math.ceil(Math.random() * 250);
   
       // Making an API call using the random number in order to get a random pokemon
 
@@ -390,8 +422,7 @@ class App extends Component {
         {/* Importing the Loading Screen Component */}
         <Loading />
 
-        {/* Displaying which player's turn it is */}
-        <p>{`Player ${this.state.currentPlayer} turn`}</p>
+        
         {this.state.winner
           &&
           (
@@ -407,13 +438,30 @@ class App extends Component {
             <img src={pokemon.firstPokemonImg} alt="" />
           </div>
         })}
+        
 
-        <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} />
+        <div className="gameBoard">
 
-        <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score}/>
+          {/* Displaying which player's turn it is */}
+          <p>{`Player ${this.state.currentPlayer} turn`}</p>
 
-        <button onClick={() => { this.drawCard(1,"") }}>Draw a card</button>
-        <button onClick={this.stay}>STAY</button>
+          <div>
+            <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} />
+
+            <div className="playerOptions">
+              <button onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
+
+              <button onClick={this.stay}>STAY</button>
+
+            </div>
+
+
+            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false}/>
+
+          </div>
+        </div>
+
+        
       </div>
     )
   }

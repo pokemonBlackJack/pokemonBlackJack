@@ -20,4 +20,20 @@ const alert = (nextRound, winner,reset) => {
     })
 }
 
+export const nextPlayerAlert = (nextplayerFunction, player, message) => {
+
+    MySwal.fire({
+
+        onClose: () => {
+            nextplayerFunction();
+            
+        },
+        title: `What?`,
+        text: `${message} It's Player ${player} turn next! please press Ok when the next player is ready`,
+        background: `rgba( 255, 255, 255, 0.9)`,
+        showConfirmButton: true,
+        confirmButtonText: 'Ok ready!',
+    })
+}
+
 export default alert;
