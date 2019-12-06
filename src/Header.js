@@ -7,12 +7,13 @@ import instructionBgm from './sounds/instructionBgm.ogg';
 import playBgm from './sounds/playBgm.ogg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-
+import pokeball from './assets/pokeball.gif';
 
 
 
 class Header extends Component {
 	
+	pokeballBg = pokeball;
 	pikachu = new Audio(pikachuSound);
 	casinoBgm = new Audio(instructionBgm);
 	playBgm = new Audio(playBgm);
@@ -43,7 +44,7 @@ class Header extends Component {
 					imageHeight: 200,
 					imageWidth: 250,
 					showConfirmButton:true,
-					customClass: 'swal-wide', 
+					customClass: 'swal-wide',
 					
 					
 				  })

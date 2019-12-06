@@ -182,6 +182,7 @@ class App extends Component {
   } 
   
 
+  levelUpSound = new Audio(levelUp);
 
   stay = () => {
 
@@ -192,7 +193,6 @@ class App extends Component {
 
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
-
 
 
     if (numberOfPlayers === currentPlayer) {
@@ -212,18 +212,21 @@ class App extends Component {
           round: this.state.round + 1
         }, () => { this.checkWinner("player1") });
         console.log("Player 1 won!");
+        setTimeout((this.levelUpSound.play()),500);
       } else if (player2Total > player3Total) {
         this.setState({
           player2Score: this.state.player2Score + 1,
           round: this.state.round + 1
         }, () => { this.checkWinner("player2") })
         console.log("Player 2 won!");
+        setTimeout((this.levelUpSound.play()),500);
       } else if (this.state.numberOfPlayers === 3) {
         this.setState({
           player3Score: this.state.player3Score + 1,
           round: this.state.round + 1
         }, () => { this.checkWinner("player3") })
         console.log("Player 3 won!");
+        setTimeout((this.levelUpSound.play()),500);
       }
 
     } else {
@@ -292,7 +295,7 @@ class App extends Component {
 
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 250);
+      const randomNumber = Math.ceil(Math.random() * 200);
   
       // Making an API call using the random number in order to get a random pokemon
 

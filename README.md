@@ -54,3 +54,4 @@ evolves!
 
 [Pokemon Sound Effects](https://downloads.khinsider.com/game-soundtracks/album/pokemon-gameboy-sound-collection)
 [Additional Pokemon Sounds](https://downloads.khinsider.com/game-soundtracks/album/pokemon-gold-silver-crystal)
+[Pokeball Pixel gif](https://www.pixilart.com/art/popular-pokeballs-gif-01f0e1d56d70da7)

@@ -18,8 +18,8 @@ const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
 
     MySwal.fire({
         onOpen: () => {
-            preCry.play();
-            setTimeout(() => (evolveBgm.play()),500,);
+            setTimeout(() => (preCry.play()),1000);
+            setTimeout(() => (evolveBgm.play()),2000,);
         },
         onClose: () => {
             evolveBgm.pause();
@@ -32,7 +32,7 @@ const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
         background: `rgba( 255, 255, 255, 0.9)`,
         backdrop: `
             #142b68`,
-        timer: 12000,
+        timer: 13500,
         timerProgressBar: true,
         showConfirmButton: true,
         confirmButtonText: 'Skip',
