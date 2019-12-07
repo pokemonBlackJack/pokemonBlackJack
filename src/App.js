@@ -4,7 +4,7 @@ import Loading from './Loading.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert } from "./alert";
+import alert, { nextPlayerAlert, seeInstructions } from "./alert";
 import Card from './Card';
 import PlayerContainer from "./PlayerContainer";
 
@@ -29,7 +29,9 @@ class App extends Component {
       player3Score: 0,
       winner: null,
       hideCards: false,
-      showAll: false
+      showAll: false,
+      loading: false,
+      disabled: false
     }
   }
 
@@ -55,9 +57,11 @@ class App extends Component {
     });
 
 
+    seeInstructions(this.getRandomPokemon);
+
 
     // Calling the method to get the random pokemons when the app is starting
-    this.getRandomPokemon(2);
+    // this.getRandomPokemon(2);
 
   }
 
@@ -163,13 +167,17 @@ class App extends Component {
               [`player${currentPlayer}Total`]: currentPlayerTotal,
               
             }, () => {
-              setTimeout(() => {
+
+              
                 this.setState({
-                  hideCards: true
-                }, () => {
-                  nextPlayerAlert(this.changeRound, this.state.currentPlayer + 1)
-                })
-              }, 2000);
+                  disabled: true,
+                });
+                
+              
+
+              
+              
+              
               
               
               console.log(this.state[`player${currentPlayer}Cards`]);
@@ -244,12 +252,12 @@ class App extends Component {
       // this.setState({
       //   currentPlayer: currentPlayer + 1
       // })
-      this.setState({
-        hideCards: true
-      },()=>{
-        nextPlayerAlert(this.changeRound, this.state.currentPlayer + 1)
-      })
       
+        this.setState({
+          hideCards: true,
+          disabled: false
+        });
+        nextPlayerAlert(this.changeRound, this.state.currentPlayer + 1)
     }
 
   }
@@ -258,7 +266,8 @@ class App extends Component {
     
     this.setState({
         currentPlayer: this.state.currentPlayer + 1,
-        hideCards: false
+        hideCards: false,
+        // disabled:false
       })
   }
 
@@ -309,7 +318,8 @@ class App extends Component {
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,
-      showAll: false
+      showAll: false,
+      hideCards: false
     })
   }
 
@@ -444,7 +454,7 @@ class App extends Component {
             <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} />
 
             <div className="playerOptions">
-              <button onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
+              <button disabled={this.state.disabled} onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
 
               <button onClick={this.stay}>STAY</button>
 
