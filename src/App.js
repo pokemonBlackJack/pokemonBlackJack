@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Header from './Header.js'
-import Loading from './Loading.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions } from "./alert";
+import alert, { nextPlayerAlert, seeInstructions, showLoading } from "./alert";
 import Card from './Card';
+import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
 class App extends Component {
@@ -31,7 +31,8 @@ class App extends Component {
       hideCards: false,
       showAll: false,
       loading: false,
-      disabled: false
+      disabled: false,
+      cleanBoard: false
     }
   }
 
@@ -50,10 +51,8 @@ class App extends Component {
 
     }).then((data) => {
       this.setState({
-        deckId:data.data.deck_id
-      })  
-    }).then(() => {
-      this.drawCard(2, "firstCards");
+        deckId: data.data.deck_id
+      })
     });
 
 
@@ -68,6 +67,8 @@ class App extends Component {
  
 
   drawCard = (numberOfCards, type) => {
+
+    
     
     // Getting deck id from the state
 
@@ -200,7 +201,41 @@ class App extends Component {
     })
   } 
   
+  pokemonAppear = () => {
+    const pokemonImages = document.querySelectorAll(".pokemon");
+    const shadows = document.querySelectorAll(".imageShadow");
+    pokemonImages.forEach((pokemon, i) => {
+      const index = i + 1;
+      // pokemon.style.display = "none";
+      const pokeballImg = document.createElement("img");
+      pokeballImg.src = pokeball;
+      pokeballImg.classList.add("pokeball")
+      setTimeout(() => {
+        document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
+    
+        setTimeout(() => {
+          const whiteDiv = document.createElement("div");
+          whiteDiv.classList.add("whiteDiv");
+          document.querySelector("body").appendChild(whiteDiv)
+          setTimeout(() => {
+            pokeballImg.remove();
+            pokemon.style.display = "block";
+            shadows[i].style.display = "block";
+          }, 300 * index);
+          setTimeout(() => {
+            whiteDiv.remove();
+            
+          }, 1000 * index);
+        }, 500 * index);
+        
+      }, 1000 * index);
+      
+    });
+    
 
+    
+
+  }
 
   stay = () => {
 
@@ -311,19 +346,67 @@ class App extends Component {
 
   reset = () => {
     this.setState({
-      player1Cards: [],
-      player2Cards: [],
-      player3Cards: [],
-      currentPlayer: 1,
-      player1Total: 0,
-      player2Total: 0,
-      player3Total: 0,
-      showAll: false,
+      cleanBoard: true,
       hideCards: false
     })
+    
+    setTimeout(() => {
+      this.setState({
+        player1Cards: [],
+        player2Cards: [],
+        player3Cards: [],
+        currentPlayer: 1,
+        player1Total: 0,
+        player2Total: 0,
+        player3Total: 0,
+        showAll: false,
+        hideCards: false,
+        cleanBoard: false
+      }, () => {
+          this.drawCard(2, "firstCards");
+      })
+      
+    }, 2000);
+  }
+
+  resetGame = () => {
+    this.setState({
+        randomPokemons: [],
+        player1Cards: [],
+        player2Cards: [],
+        player3Cards: [],
+        currentPlayer: 1,
+        numberOfPlayers: 2,
+        player1Total: 0,
+        player2Total: 0,
+        player3Total: 0,
+        round: 1,
+        player1Score: 0,
+        player2Score: 0,
+        player3Score: 0,
+        winner: null,
+        hideCards: false,
+        showAll: false,
+        loading: false,
+        disabled: false,
+        cleanBoard: false
+      },()=>{
+        showLoading(this.drawCard);
+        this.getRandomPokemon(2);
+      })
   }
 
   getRandomPokemon = (numberOfPlayers) => {
+    const loading = showLoading(this.drawCard);
+    // if(!this.state.loading){
+    //   const loading = showLoading(this.drawCard);
+    // }
+
+    this.setState({
+      loading:true
+    })
+    
+    
 
     // Foor loop that will repeat depending on the amount of players that will play the game
 
@@ -335,7 +418,7 @@ class App extends Component {
 
       // Getting a random number between 1 and 500 using the random function
 
-      const randomNumber = Math.ceil(Math.random() * 250);
+      const randomNumber = Math.ceil(Math.random() * 200);
   
       // Making an API call using the random number in order to get a random pokemon
 
@@ -412,9 +495,14 @@ class App extends Component {
             // Set the state to the new array
 
             this.setState({
-              randomPokemons: currentPokemons
+              randomPokemons: currentPokemons,
+              loading: false
             }, () => {
-
+                if (this.state.randomPokemons.length === this.state.numberOfPlayers) {
+                  this.pokemonAppear();
+                  console.log("all pokemons are here");
+                  loading.close();
+              }
               // Console login when all of this is done just to see the result
 
               console.log(this.state.randomPokemons);
@@ -430,8 +518,7 @@ class App extends Component {
       <div>
         {/* Importing the Header Component */}
         <Header />
-        {/* Importing the Loading Screen Component */}
-        <Loading />
+        
 		<PokemonPlayer getPokemon = {this.state.randomPokemons}/>
 
         
@@ -439,7 +526,7 @@ class App extends Component {
           &&
           (
             
-          evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId)))
+          evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame))
           
         
         }
@@ -448,10 +535,10 @@ class App extends Component {
         <div className="gameBoard">
 
           {/* Displaying which player's turn it is */}
-          <p>{`Player ${this.state.currentPlayer} turn`}</p>
+          <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
 
           <div>
-            <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} />
+            <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} />
 
             <div className="playerOptions">
               <button disabled={this.state.disabled} onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
@@ -461,7 +548,7 @@ class App extends Component {
             </div>
 
 
-            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false}/>
+            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard}/>
 
           </div>
         </div>

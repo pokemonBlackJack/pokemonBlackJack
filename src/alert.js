@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import pika from './assets/pika.png'
+import ashGif from './assets/ash.gif'
 
 
 const MySwal = withReactContent(Swal);
@@ -10,7 +11,6 @@ const alert = (nextRound, winner,reset) => {
     MySwal.fire({
     
         onClose: () => {
-            nextRound(2, "firstCards");
             reset();
         },
         title: `What?`,
@@ -20,6 +20,35 @@ const alert = (nextRound, winner,reset) => {
         confirmButtonText: 'Next round!',
     })
 }
+
+
+export const showLoading = (startGameFunction) => {
+			  
+			
+				
+    return MySwal.fire({
+        title: "Fetching Your Pokemon",
+        onClose: () => {
+            setTimeout(() => {
+                startGameFunction(2, "firstCards");
+                
+            }, 4000);
+        },
+        confirmButtonColor: "#142b68",
+        text: "Hang tight while the trainers go and catch the Pokemon for your battle ",
+        background: '#142b68',
+        backdrop: `rgba(19,43,104)`,
+        imageUrl: ashGif,
+        imageHeight: 400,
+        imageWidth: 800,
+        showConfirmButton:true,
+        customClass: 'swal-wide', 
+            
+            
+    })
+}
+
+
 
 export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 
@@ -40,13 +69,14 @@ export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 export const seeInstructions = (getPokemonFunction) => {
 
 		MySwal.fire({
-            title: "Welcome To Pikachu BlackJack!",
-            text: "The rules are simple. Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2. ",
-            icon: "info",
+            title: "Welcome To Pokemon BlackJack!",
+            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2. ",
+            // icon: "info",
             imageUrl: pika,
             onClose: () => {
                 if(getPokemonFunction){
-                    getPokemonFunction(2)
+                    getPokemonFunction(2);
+
                 }
             
             },

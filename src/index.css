@@ -80,38 +80,74 @@ h1 {
 /* Start of Pokemon Player Component */
 
 .pokemonPlayer{
-	background-color: rgb(20, 43, 104, 0.5);
+  background-color: rgb(20, 43, 104, 0.5);
+  background-image: linear-gradient(120deg, rgb(20, 43, 104, 0.5) 50%, rgba(45, 67, 126, 0.5) 50%);
 	text-align: center;
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	display: flex;
-	
+	min-height: 45vh;
 }
+
+.pokemonPlayer p {
+  color: #ffff00;
+}
+
+.pokemonPlayer>p {
+  
+  border-radius: 50%;
+  background-color: brown;
+  font-size: 2rem;
+  padding: 10px;
+  transform: translate(50%);
+}
+
+
 
 .playerPokemonContainer{
 	width: 50%;
 	padding: 2% 0;
 	display: flex;
-	flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  
 
 }
 
-.playerPokemonContainer img{
-	margin: 0 auto;
-	background-color: #142b68;
+
+
+.playerPokemonContainer .pokemon{
+  margin: 0 auto;
+  display: none;
+	/* background-color: #142b68; */
 	border-radius: 50%;
-	width: 35%;
+  width: 20%;
+  animation: moveSecond both alternate ease-in-out infinite 2s;
+}
+
+.playerPokemonContainer:first-child .pokemon {
+  transform: rotateY(180deg);
+  animation: moveFirst both alternate ease-in-out infinite 2.5s;
 }
 
 .imageShadow{
+  display: none;
 	width: 10%;
 	background-color: black;
 	margin:0 auto;
 	opacity: 0.5;
-	width: 30%;
-	height: 10%;
+	width: 15%;
+	height: 20px;
 	border-radius: 50%;
 	margin-top: 1%;
+}
+
+.imageShadow {
+  animation: shadow both alternate ease-in-out infinite 2s;
+}
+
+.playerPokemonContainer:first-child .imageShadow {
+  animation: shadow both alternate ease-in-out infinite 2.5s;
 }
 
 .pokemonPlayer p:last-of-type {
@@ -124,6 +160,7 @@ h1 {
   width: 400px;
   height: 600px;
   perspective: 800px;
+  margin: 10px;
 }
 /* End of Header Styling */
 
@@ -132,6 +169,7 @@ h1 {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  
 }
 
 .gameBoard>div{
@@ -158,6 +196,7 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  min-height: 50vh;
 }
 
 /* Start of Cards Component styling */
@@ -167,7 +206,7 @@ h1 {
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: transform 1s;
+  transition: all 1s;
   transform-style: preserve-3d;
 }
 
@@ -178,6 +217,7 @@ h1 {
   flex-basis: 200px;
   height: 200px;
   perspective: 800px;
+  transition: all 1s;
 }
 
 .card {
@@ -186,13 +226,8 @@ h1 {
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
+  animation: deal both ease-out 1 1.5s;
 }
-
-/* .card-container
- {
-  transform: rotateY(180deg);
-  transition: transform 1s;
-} */
 
  .card-front {
   transform: rotateY(180deg);
@@ -204,6 +239,14 @@ h1 {
 }
 
 .card-back.flipable {
+  animation: flipBack 1s both 1 linear;
+}
+
+.card-back.hidden {
+  animation: flipFront 1s both 1 linear;
+}
+
+.card-front.hidden {
   animation: flipBack 1s both 1 linear;
 }
 
@@ -221,12 +264,116 @@ h1 {
   width: 100%;
 } 
 
+.flipable.clean {
+  animation: deal both alternate-reverse ease-out 1 0.8s;
+}
+
 .card-front img {
   height: 100%;
   width: 100%;
 } 
 
 /* End of card styling */
+
+ .playerPokemonContainer:first-child .pokeball {
+  animation: pokeballLeft both alternate linear 1 1s;
+  
+  
+}
+
+.playerPokemonContainer .pokeball {
+  animation: pokeballRight both alternate linear 1 1s;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+
+
+.whiteDiv {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: light forwards 1 1s linear;
+  background-color: white;
+
+}
+
+@keyframes light {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pokeballLeft {
+    0% {
+        top: 50%;
+        left: 0;
+    }
+
+    20% {
+        top: 25%;
+        left: 20%;
+    }
+
+    40% {
+        top: 0%;
+        left: 30%;
+    }
+
+    60% {
+        top: 25%;
+        left: 40%;
+
+    }
+
+    80% {
+        top: 50%;
+        left: 50%;
+    }
+
+    100% {
+        top: 50%;
+        left:50%;
+    }
+}
+
+@keyframes pokeballRight {
+    0% {
+        top: 50%;
+        right: 0;
+    }
+
+    20% {
+        top: 20%;
+        right: 20%;
+    }
+
+    40% {
+        top: -20%;
+        right: 30%;
+    }
+
+    60% {
+        top: 20%;
+        right: 40%;
+
+    }
+
+    80% {
+        top: 50%;
+        right: 50%;
+    }
+
+    100% {
+        top: 50%;
+        right:50%;
+    }
+}
 
 @keyframes flipFront {
   from {
@@ -245,5 +392,45 @@ h1 {
 
   to {
     transform: rotateY(180deg);
+  }
+}
+
+@keyframes deal {
+  from {
+    transform: translate(0%, -1000px) rotate(0deg);
+  }
+
+  to {
+    transform: translate(0%) rotate(720deg);
+  }
+}
+
+@keyframes moveFirst {
+  from {
+    transform: translate(0,20px) rotateY(180deg);
+  }
+
+  to {
+    transform: translate(0,-20px) rotateY(180deg);
+  }
+}
+
+@keyframes moveSecond {
+  from {
+    transform: translate(0,20px);
+  }
+
+  to {
+    transform: translate(0,-20px);
+  }
+}
+
+@keyframes shadow {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.8);
   }
 }

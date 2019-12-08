@@ -10,11 +10,11 @@ import React, { Component } from 'react';
          		 return <div className="playerPokemonContainer">
 					
             			<p>{pokemon.firstPokemon}</p>
-            			<img src={pokemon.firstPokemonImg} alt="" />
+            			<img className="pokemon" src={pokemon.firstPokemonImg} alt="" />
 						<span className="imageShadow"></span>
          			 	</div>
        			 })}
-				<p className="positionAbsolute">VS.</p>	
+				<p className="positionAbsolute">VS</p>	
 
 			</div>
 		);
