@@ -586,12 +586,16 @@ class App extends Component {
           
         
         }
-            
 
-        <div className="gameBoard">
+		{/* Displaying which player's turn it is */}
+         <div className="player">
+          
+       		   <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+		 </div>
 
-          {/* Displaying which player's turn it is */}
-          <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+         <div className="gameBoard">
+
+			
 
           <div>
             {/* <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
