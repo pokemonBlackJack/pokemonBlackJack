@@ -427,7 +427,7 @@ class App extends Component {
   }
 
   evolutionAnimation = (player) => {
-    const pokemonImage = document.querySelector(".swal-image");
+    const pokemonImage = document.querySelector(".swal2-image");
     let counter = 1;
     let image = 1;
 
@@ -441,10 +441,11 @@ class App extends Component {
         source = this.state.randomPokemons[player].evolutionPokemonImg;
         image = 1;
       }
+      pokemonImage.src = source;
     }, 500 - (15 * counter));
 
     setTimeout(() => {
-      
+      clearInterval(interval);
     }, 13500);
   }
 

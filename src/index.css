@@ -34,6 +34,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 125%;
   background-color: #edfeff;
+  overflow-x: hidden;
 }
 
 .positionRelative {
