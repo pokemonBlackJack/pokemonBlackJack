@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
+import Loading from "./Loading.js"
 // import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, playMusic } from "./alert";
+import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
 import hitSound from './sounds/hit.ogg';
 import tackleSound from './sounds/tackle.ogg';
-import bounceSound from './sounds/bounce.ogg';
 import openPokeballSound from './sounds/openPokeball.ogg';
 
 class App extends Component {
@@ -59,6 +59,10 @@ class App extends Component {
       })
     });
 
+    casinoBgm.addEventListener("ended", () => {
+      casinoBgm.currentTime = 0;
+      casinoBgm.play();
+    })
 
     seeInstructions(this.getRandomPokemon);
 
@@ -226,7 +230,6 @@ class App extends Component {
   }
   
   // Animation of pokemons using vanilla javaScript
-  bounce = new Audio(bounceSound);
   appear = new Audio(openPokeballSound);
   
   pokemonAppear = () => {
@@ -242,16 +245,14 @@ class App extends Component {
         textParagraph.innerText = `Player ${times} is sending ${this.state.randomPokemons[i].firstPokemon} out!`;
         textParagraph.classList.add("pokemonText");
         document.querySelectorAll(".playerPokemonContainer")[i].appendChild(textParagraph);
-        setInterval(() => this.bounce,200);
         setTimeout(() => {
           document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
           setTimeout(() => {
             const whiteDiv = document.createElement("div");
             whiteDiv.classList.add("whiteDiv");
             document.querySelector("body").appendChild(whiteDiv)
+            this.appear.play();
             setTimeout(() => {
-              clearInterval(this.bounce);
-              this.appear.play();
               pokeballImg.remove();
               textParagraph.remove();
               document.querySelectorAll(".healthBar")[i].style.display = "block";
@@ -259,10 +260,12 @@ class App extends Component {
               // shadows[i].style.display = "block";
             }, 300 * times);
             setTimeout(() => {
+              let sound = soundToUse(`./${this.state.randomPokemons[i].firstPokemonId}.ogg`);
+              let appearSound = new Audio(sound);
+              appearSound.play();
               whiteDiv.remove();
             }, 1000 * times);
           }, 1000 * times);
-          
         }, 500 * times);
         
       }, 3000 * i);
@@ -385,7 +388,8 @@ class App extends Component {
       })
       setTimeout(() => {
         alert(this.drawCard, player, this.reset);
-        playMusic.pause();
+        // playMusic.pause();
+        casinoBgm.pause();
         levelUpSound.play();
       }, 1000)
     }
@@ -471,7 +475,7 @@ class App extends Component {
   // }
 
   getRandomPokemon = (numberOfPlayers) => {
-    const loading = showLoading(this.drawCard);
+    // const loading = showLoading(this.drawCard);
     // if(!this.state.loading){
     //   const loading = showLoading(this.drawCard);
     // }
@@ -570,12 +574,18 @@ class App extends Component {
 
             this.setState({
               randomPokemons: currentPokemons,
-              loading: false
+            
             }, () => {
                 if (this.state.randomPokemons.length === this.state.numberOfPlayers) {
                   this.pokemonAppear();
                   console.log("all pokemons are here");
-                  loading.close();
+                //   loading.close();
+				this.setState({
+					loading: false
+				})
+				 setTimeout(() => {
+              	  this.drawCard(2, "firstCards");
+                }, 7000);
               }
               // Console login when all of this is done just to see the result
 
@@ -592,7 +602,7 @@ class App extends Component {
       <div>
         {/* Importing the Header Component */}
         <Header />
-        
+        {this.state.loading && <Loading />}
 		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards}  />
 
         

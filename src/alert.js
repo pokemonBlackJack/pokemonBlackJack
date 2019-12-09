@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import pika from './assets/pika.png'
-import rollingPokeball from './assets/rollingPokeball.gif';
 import ashGif from './assets/ash.gif'
 
 import pikachuSound from './sounds/cries/25.ogg';
@@ -13,12 +12,12 @@ import levelUp from './sounds/levelUp.ogg';
 
 const MySwal = withReactContent(Swal);
 const pikachu = new Audio(pikachuSound);
-const casinoBgm = new Audio(instructionBgm);
+export const casinoBgm = new Audio(instructionBgm);
 export const playMusic = new Audio(playBgm);
 export const levelUpSound = new Audio(levelUp);
 
 
-const soundToUse = require.context('./sounds/cries', true);
+export const soundToUse = require.context('./sounds/cries', true);
 
 export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetGame) => {
     let preCrySound = soundToUse(`./${preId}.ogg`);
@@ -53,8 +52,8 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
 
     MySwal.fire({
         onOpen: () => {
-            playMusic.pause();
-            playMusic.currentTime = 0;
+            casinoBgm.pause();
+            casinoBgm.currentTime = 0;
             document.querySelector(".swal2-confirm").disabled = true;
             
             setTimeout(() => (preCry.play()), 1000);
@@ -69,7 +68,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
             evolveBgm.currentTime = 0;
             clearInterval(interval);
         },
-        title: `What?`,
+        icon: "success",
         text: `${pre} is evolving!`,
         imageUrl: preImg,
         imageWidth: 300,
@@ -111,7 +110,7 @@ const alert = (nextRound, winner, reset) => {
         // },
         onClose: () => {
             reset();
-            playMusic.play();
+            casinoBgm.play();
         },
         title: `What?`,
         text: `${winner} wins!`,
@@ -139,7 +138,7 @@ export const showLoading = (startGameFunction) => {
         imageHeight: 400,
         imageWidth: 800,
         showConfirmButton: false,
-        customClass: 'swal-wide', 
+     
     })
 }
 
@@ -148,7 +147,6 @@ export const showLoading = (startGameFunction) => {
 export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 
     MySwal.fire({
-
         onClose: () => {
             nextplayerFunction();
             
@@ -164,12 +162,12 @@ export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 export const seeInstructions = (getPokemonFunction) => {
 
 		MySwal.fire({
-            title: "Welcome To Pokemon BlackJack!",
-            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2. ",
-            // icon: "info",
+			
+            title: "<span style='color: #142b68'>Welcome To Pokemon BlackJack!",
+            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2.",
             imageUrl: pika,
             onOpen: () => {
-                playMusic.pause();
+                // playMusic.pause();
                 setTimeout(pikachu.play(), 1000);
                 casinoBgm.play();
             },
@@ -177,15 +175,15 @@ export const seeInstructions = (getPokemonFunction) => {
                 if(getPokemonFunction){
                     getPokemonFunction(2)
                 };
-                casinoBgm.pause();
-                casinoBgm.currentTime = 0;
-                setTimeout(playMusic.play(), 1000);
+                casinoBgm.play();
+                // casinoBgm.pause();
+                // casinoBgm.currentTime = 0;
+                // setTimeout(playMusic.play(), 1000);
             },
             imageHeight: 200,
             imageWidth: 250,
             showConfirmButton:true,
-            customClass: 'swal-wide', 
-  
+            
         })	
 	}
 
