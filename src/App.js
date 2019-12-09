@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
+import Loading from "./Loading.js"
 // import evolutionAlert from './evolveWindowAlert'
 import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
 import pokeball from "./assets/pokeball.png"
@@ -474,7 +475,7 @@ class App extends Component {
   // }
 
   getRandomPokemon = (numberOfPlayers) => {
-    const loading = showLoading(this.drawCard);
+    // const loading = showLoading(this.drawCard);
     // if(!this.state.loading){
     //   const loading = showLoading(this.drawCard);
     // }
@@ -573,12 +574,18 @@ class App extends Component {
 
             this.setState({
               randomPokemons: currentPokemons,
-              loading: false
+            
             }, () => {
                 if (this.state.randomPokemons.length === this.state.numberOfPlayers) {
                   this.pokemonAppear();
                   console.log("all pokemons are here");
-                  loading.close();
+                //   loading.close();
+				this.setState({
+					loading: false
+				})
+				 setTimeout(() => {
+              	  this.drawCard(2, "firstCards");
+                }, 7000);
               }
               // Console login when all of this is done just to see the result
 
@@ -595,7 +602,7 @@ class App extends Component {
       <div>
         {/* Importing the Header Component */}
         <Header />
-        
+        {this.state.loading && <Loading />}
 		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards}  />
 
         
