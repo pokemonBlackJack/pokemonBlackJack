@@ -442,11 +442,10 @@ class App extends Component {
         winner: null,
         hideCards: false,
         showAll: false,
-        loading: false,
+        loading: true,
         disabled: false,
-        cleanBoard: false
+        cleanBoard: false,
       },()=>{
-        showLoading(this.drawCard);
         this.getRandomPokemon(2);
       })
   }
