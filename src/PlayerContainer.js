@@ -7,8 +7,8 @@ function PlayerContainer({player, score, cards, flipable, cleanBoard}) {
         <div className="playerContainer">
             <p>{player} score: {score}</p>
             <div className="playerCards">
-                {cards.map((card) => {
-                    return <Card cardFront={card.image} flipable={flipable} cleanBoard={cleanBoard} />
+                {cards.map((card, index) => {
+                    return <Card key={index} cardFront={card.image} flipable={flipable} cleanBoard={cleanBoard} />
                 })}
             </div>
         </div>

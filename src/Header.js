@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Swal from 'sweetalert2'
 
-import withReactContent from 'sweetalert2-react-content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import alert, { seeInstructions } from "./alert"
+import { seeInstructions } from "./alert"
 
 
 

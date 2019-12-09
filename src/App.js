@@ -4,7 +4,6 @@ import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 import evolutionAlert from './evolveWindowAlert'
 import alert, { nextPlayerAlert, seeInstructions, showLoading } from "./alert";
-import Card from './Card';
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
@@ -173,14 +172,7 @@ class App extends Component {
                 this.setState({
                   disabled: true,
                 });
-                
-              
 
-              
-              
-              
-              
-              
               console.log(this.state[`player${currentPlayer}Cards`]);
               console.log(this.state[`player${currentPlayer}Total`]);
             })
@@ -200,35 +192,66 @@ class App extends Component {
 
     })
   } 
+
+  // Attack animation using vanilla javaScript
+
+  attack = (attackingPlayer) => {
+    const pokemons = document.querySelectorAll(".pokemon");
+    const attackingPokemon = pokemons[attackingPlayer - 1];
+    attackingPokemon.classList.add("attacking");
+    setTimeout(() => {
+      attackingPokemon.classList.remove("attacking");
+      pokemons.forEach((pokemon,index) => {
+        if ((attackingPlayer - 1) !== index) {
+          pokemon.classList.add("damaged");
+          setTimeout(() => {
+
+          pokemon.classList.remove("damaged");
+
+        }, 1000);
+        }
+        
+      })
+    }, 1000);
+
+  }
   
+
+  // Animation of pokemons using vanilla javaScript
   pokemonAppear = () => {
     const pokemonImages = document.querySelectorAll(".pokemon");
     const shadows = document.querySelectorAll(".imageShadow");
     pokemonImages.forEach((pokemon, i) => {
-      const index = i + 1;
-      // pokemon.style.display = "none";
+      const times = i + 1;
       const pokeballImg = document.createElement("img");
       pokeballImg.src = pokeball;
       pokeballImg.classList.add("pokeball")
       setTimeout(() => {
-        document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
-    
+        const textParagraph = document.createElement("p");
+        textParagraph.innerText = `Player ${times} is sending ${this.state.randomPokemons[i].firstPokemon} out!`;
+        textParagraph.classList.add("pokemonText")
+        document.querySelectorAll(".playerPokemonContainer")[i].appendChild(textParagraph);
         setTimeout(() => {
-          const whiteDiv = document.createElement("div");
-          whiteDiv.classList.add("whiteDiv");
-          document.querySelector("body").appendChild(whiteDiv)
+          document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
           setTimeout(() => {
-            pokeballImg.remove();
-            pokemon.style.display = "block";
-            shadows[i].style.display = "block";
-          }, 300 * index);
-          setTimeout(() => {
-            whiteDiv.remove();
-            
-          }, 1000 * index);
-        }, 500 * index);
+            const whiteDiv = document.createElement("div");
+            whiteDiv.classList.add("whiteDiv");
+            document.querySelector("body").appendChild(whiteDiv)
+            setTimeout(() => {
+              pokeballImg.remove();
+              textParagraph.remove();
+              document.querySelectorAll(".healthBar")[i].style.display = "block";
+              pokemon.style.display = "block";
+              shadows[i].style.display = "block";
+            }, 300 * times);
+            setTimeout(() => {
+              whiteDiv.remove();
+            }, 1000 * times);
+          }, 1000 * times);
+          
+        }, 500 * times);
         
-      }, 1000 * index);
+      }, 3000 * i);
       
     });
     
@@ -238,11 +261,6 @@ class App extends Component {
   }
 
   stay = () => {
-
-    console.log(this.state.player1Cards);
-    console.log(this.state.player1Total);
-    console.log(this.state.player2Cards);
-    console.log(this.state.player2Total);
 
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
@@ -264,29 +282,39 @@ class App extends Component {
         
 
       } else if (player1Total > player2Total && player1Total > player3Total) {
-        this.setState({
-          player1Score: this.state.player1Score + 1,
-          round: this.state.round + 1
-        }, () => { this.checkWinner("player1") });
-        console.log("Player 1 won!");
+        this.attack(1)
+        setTimeout(() => {
+          this.setState({
+            player1Score: this.state.player1Score + 1,
+            round: this.state.round + 1
+          }, () => { this.checkWinner("player1") });
+          console.log("Player 1 won!");
+          
+        }, 1000);
       } else if (player2Total > player3Total) {
-        this.setState({
-          player2Score: this.state.player2Score + 1,
-          round: this.state.round + 1
-        }, () => { this.checkWinner("player2") })
-        console.log("Player 2 won!");
+        this.attack(2)
+        setTimeout(() => {
+          this.setState({
+            player2Score: this.state.player2Score + 1,
+            round: this.state.round + 1
+          }, () => { this.checkWinner("player2") });
+          console.log("Player 2 won!");
+
+        }, 1000);
       } else if (this.state.numberOfPlayers === 3) {
-        this.setState({
-          player3Score: this.state.player3Score + 1,
-          round: this.state.round + 1
-        }, () => { this.checkWinner("player3") })
-        console.log("Player 3 won!");
+        this.attack(3)
+        setTimeout(() => {
+          this.setState({
+            player3Score: this.state.player3Score + 1,
+            round: this.state.round + 1
+          }, () => { this.checkWinner("player3") });
+          console.log("Player 3 won!");
+
+        }, 1000);
       }
 
     } else {
-      // this.setState({
-      //   currentPlayer: currentPlayer + 1
-      // })
+      
       
         this.setState({
           hideCards: true,
@@ -296,6 +324,8 @@ class App extends Component {
     }
 
   }
+
+  // Method called to change round
 
   changeRound = () => {
     
@@ -307,43 +337,43 @@ class App extends Component {
   }
 
 
+  // Method to check if there is a game winner
+
   checkWinner = (player) => {
-    console.log(this.state.round);
-    if (this.state.player1Score === 2 || this.state.player2Score === 2 || this.state.player3Score === 2) {
+    
+    // If there is a player with a score of 2 then the game is over if not then play the next round
+    
 
       const player1TotalScore = this.state.player1Score;
       const player2TotalScore = this.state.player2Score;
       const player3TotalScore = this.state.player3Score;
 
 
-      if (player1TotalScore > player2TotalScore && player1TotalScore > player3TotalScore) {
-        this.setState({
-          winner: 1
-        })
-        console.log("Player 1 won!");
-      } else if (player2TotalScore > player3TotalScore) {
-        this.setState({
-          winner: 2
-        })
-        console.log("Player 2 won!");
-      } else {
-        this.setState({
-          winner: 3
-        })
-        console.log("Player 3 won!");
-      }
-
-      
-    }else{
+    if (player1TotalScore === 2) {
       this.setState({
-          showAll: true
-        })
-      alert(this.drawCard, player, this.reset); 
+        winner: 1
+      })
+      console.log("Player 1 won!");
+    } else if (player2TotalScore === 2) {
+      this.setState({
+        winner: 2
+      })
+      console.log("Player 2 won!");
+    } else if (player3TotalScore === 2) {
+      this.setState({
+        winner: 3
+      })
+      console.log("Player 3 won!");
+    } else {
+      this.setState({
+        showAll: true
+      })
+      alert(this.drawCard, player, this.reset);
     }
-
     
   }
 
+  // Method to reset hands and totals on each round
   reset = () => {
     this.setState({
       cleanBoard: true,
@@ -368,6 +398,8 @@ class App extends Component {
       
     }, 2000);
   }
+
+  // Method to reset game in case of playing again
 
   resetGame = () => {
     this.setState({
@@ -519,14 +551,16 @@ class App extends Component {
         {/* Importing the Header Component */}
         <Header />
         
-		<PokemonPlayer getPokemon = {this.state.randomPokemons}/>
+		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
 
         
         {this.state.winner
           &&
           (
-            
-          evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame))
+            setTimeout(() => {
+              
+              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame)
+            }, 1000))
           
         
         }
@@ -548,7 +582,7 @@ class App extends Component {
             </div>
 
 
-            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard}/>
+            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} />
 
           </div>
         </div>

@@ -32,7 +32,7 @@ export const showLoading = (startGameFunction) => {
             setTimeout(() => {
                 startGameFunction(2, "firstCards");
                 
-            }, 4000);
+            }, 7000);
         },
         confirmButtonColor: "#142b68",
         text: "Hang tight while the trainers go and catch the Pokemon for your battle ",
