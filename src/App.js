@@ -426,6 +426,29 @@ class App extends Component {
       })
   }
 
+  evolutionAnimation = (player) => {
+    const pokemonImage = document.querySelector(".swal2-image");
+    let counter = 1;
+    let image = 1;
+
+    const interval = setInterval(() => {
+      let source = "";
+      counter++;
+      if (image === 1) {
+        source = this.state.randomPokemons[player].firstPokemonImg;
+        image = 2;
+      } else {
+        source = this.state.randomPokemons[player].evolutionPokemonImg;
+        image = 1;
+      }
+      pokemonImage.src = source;
+    }, 500 - (15 * counter));
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 13500);
+  }
+
   getRandomPokemon = (numberOfPlayers) => {
     const loading = showLoading(this.drawCard);
     // if(!this.state.loading){
@@ -557,7 +580,8 @@ class App extends Component {
           (
             setTimeout(() => {
               
-              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame)
+              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame);
+              this.evolutionAnimation(this.state.winner - 1);
             }, 1000))
           
         
