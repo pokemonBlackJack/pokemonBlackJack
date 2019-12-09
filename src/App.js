@@ -3,9 +3,14 @@ import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 // import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert } from "./alert";
+import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, playMusic } from "./alert";
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
+
+import hitSound from './sounds/hit.ogg';
+import tackleSound from './sounds/tackle.ogg';
+import bounceSound from './sounds/bounce.ogg';
+import openPokeballSound from './sounds/openPokeball.ogg';
 
 class App extends Component {
 
@@ -194,16 +199,20 @@ class App extends Component {
   } 
 
   // Attack animation using vanilla javaScript
+  tackle = new Audio(tackleSound);
+  hit = new Audio(hitSound);
 
   attack = (attackingPlayer) => {
     const pokemons = document.querySelectorAll(".pokemon");
     const attackingPokemon = pokemons[attackingPlayer - 1];
     attackingPokemon.classList.add("attacking");
+    this.tackle.play();
     setTimeout(() => {
       attackingPokemon.classList.remove("attacking");
       pokemons.forEach((pokemon,index) => {
         if ((attackingPlayer - 1) !== index) {
           pokemon.classList.add("damaged");
+          this.hit.play();
           setTimeout(() => {
 
           pokemon.classList.remove("damaged");
@@ -217,6 +226,9 @@ class App extends Component {
   }
   
   // Animation of pokemons using vanilla javaScript
+  bounce = new Audio(bounceSound);
+  appear = new Audio(openPokeballSound);
+  
   pokemonAppear = () => {
     const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
     // const shadows = document.querySelectorAll(".imageShadow");
@@ -230,6 +242,7 @@ class App extends Component {
         textParagraph.innerText = `Player ${times} is sending ${this.state.randomPokemons[i].firstPokemon} out!`;
         textParagraph.classList.add("pokemonText");
         document.querySelectorAll(".playerPokemonContainer")[i].appendChild(textParagraph);
+        setInterval(() => this.bounce,200);
         setTimeout(() => {
           document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
           setTimeout(() => {
@@ -237,6 +250,8 @@ class App extends Component {
             whiteDiv.classList.add("whiteDiv");
             document.querySelector("body").appendChild(whiteDiv)
             setTimeout(() => {
+              clearInterval(this.bounce);
+              this.appear.play();
               pokeballImg.remove();
               textParagraph.remove();
               document.querySelectorAll(".healthBar")[i].style.display = "block";
@@ -276,7 +291,9 @@ class App extends Component {
           showAll: true
         })
 
-        alert(this.drawCard, "Nobody",this.reset) 
+        setTimeout(() => {
+          alert(this.drawCard, "Nobody",this.reset)
+        }, 1000)
         
 
       } else if (player1Total > player2Total && player1Total > player3Total) {
@@ -366,7 +383,11 @@ class App extends Component {
       this.setState({
         showAll: true
       })
-      alert(this.drawCard, player, this.reset);
+      setTimeout(() => {
+        alert(this.drawCard, player, this.reset);
+        playMusic.pause();
+        levelUpSound.play();
+      }, 1000)
     }
     
   }

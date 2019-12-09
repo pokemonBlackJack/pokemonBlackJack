@@ -1,11 +1,12 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import pika from './assets/pika.png'
+import rollingPokeball from './assets/rollingPokeball.gif';
+import ashGif from './assets/ash.gif'
+
 import pikachuSound from './sounds/cries/25.ogg';
 import instructionBgm from './sounds/instructionBgm.ogg';
 import playBgm from './sounds/playBgm.ogg';
-import rollingPokeball from './assets/rollingPokeball.gif';
-import ashGif from './assets/ash.gif'
 import evolveMusic from './sounds/evolution.ogg';
 import evolvedSound from './sounds/evolvedSound.ogg';
 import levelUp from './sounds/levelUp.ogg';
@@ -13,8 +14,8 @@ import levelUp from './sounds/levelUp.ogg';
 const MySwal = withReactContent(Swal);
 const pikachu = new Audio(pikachuSound);
 const casinoBgm = new Audio(instructionBgm);
-const playMusic = new Audio(playBgm);
-const levelUpSound = new Audio(levelUp);
+export const playMusic = new Audio(playBgm);
+export const levelUpSound = new Audio(levelUp);
 
 
 const soundToUse = require.context('./sounds/cries', true);
@@ -79,10 +80,9 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
 
 const alert = (nextRound, winner, reset) => {
     MySwal.fire({
-        onOpen: () => {
-            playMusic.pause();
-            levelUpSound.play();
-        },
+        // onOpen: () => {
+        //     // playMusic.pause();
+        // },
         onClose: () => {
             reset();
             playMusic.play();
