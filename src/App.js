@@ -5,7 +5,7 @@ import axios from "axios";
 import Loading from "./Loading.js"
 // import evolutionAlert from './evolveWindowAlert'
 import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
-import pokeball from "./assets/pokeball.png"
+import pokeball from "./assets/pokeball.png";
 import PlayerContainer from "./PlayerContainer";
 
 import hitSound from './sounds/hit.ogg';
@@ -442,11 +442,10 @@ class App extends Component {
         winner: null,
         hideCards: false,
         showAll: false,
-        loading: false,
+        loading: true,
         disabled: false,
         cleanBoard: false
       },()=>{
-        showLoading(this.drawCard);
         this.getRandomPokemon(2);
       })
   }
