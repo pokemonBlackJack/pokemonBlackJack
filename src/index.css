@@ -27,11 +27,12 @@ Body Font: Montserrat (Regular 400)  -  font-family: 'Montserrat', sans-serif;
 
 
 /* GLOBAL */
-
+html{
+	font-size: 125%;
+}
 body {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
-  font-size: 125%;
   background-color: #edfeff;
 }
 
