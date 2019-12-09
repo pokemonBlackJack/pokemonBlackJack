@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import pokemonball from "./assets/pokemonball.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { seeInstructions } from "./alert"
@@ -16,12 +16,10 @@ import { seeInstructions } from "./alert"
 		return (
 
 			<div className="headerComponent">
-
 				
-				<h1 className="positionRelative">Pokémon BlackJack</h1>
+				<img className="pokemonball" src={pokemonball} alt=""/>
+				<h1 className="positionRelative">PB <span>&trade;</span></h1>
 				<FontAwesomeIcon onClick={()=>{seeInstructions()}}className = "infoCircle positionAbsolute" icon={faInfoCircle} />
-				{/* Instructions
-				<button onClick={this.seeInstructions}>Click Me</button> */}
 				 
 			</div>
 		);

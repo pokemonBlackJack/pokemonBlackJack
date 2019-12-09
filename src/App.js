@@ -219,8 +219,8 @@ class App extends Component {
 
   // Animation of pokemons using vanilla javaScript
   pokemonAppear = () => {
-    const pokemonImages = document.querySelectorAll(".pokemon");
-    const shadows = document.querySelectorAll(".imageShadow");
+    const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
+    // const shadows = document.querySelectorAll(".imageShadow");
     pokemonImages.forEach((pokemon, i) => {
       const times = i + 1;
       const pokeballImg = document.createElement("img");
@@ -229,7 +229,7 @@ class App extends Component {
       setTimeout(() => {
         const textParagraph = document.createElement("p");
         textParagraph.innerText = `Player ${times} is sending ${this.state.randomPokemons[i].firstPokemon} out!`;
-        textParagraph.classList.add("pokemonText")
+        textParagraph.classList.add("pokemonText");
         document.querySelectorAll(".playerPokemonContainer")[i].appendChild(textParagraph);
         setTimeout(() => {
           document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
@@ -241,8 +241,8 @@ class App extends Component {
               pokeballImg.remove();
               textParagraph.remove();
               document.querySelectorAll(".healthBar")[i].style.display = "block";
-              pokemon.style.display = "block";
-              shadows[i].style.display = "block";
+              pokemon.style.display = "flex";
+              // shadows[i].style.display = "block";
             }, 300 * times);
             setTimeout(() => {
               whiteDiv.remove();
@@ -551,7 +551,7 @@ class App extends Component {
         {/* Importing the Header Component */}
         <Header />
         
-		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll}  />
 
         
         {this.state.winner
@@ -564,15 +564,19 @@ class App extends Component {
           
         
         }
-            
 
-        <div className="gameBoard">
+		{/* Displaying which player's turn it is */}
+         <div className="player">
+          
+       		   <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+		 </div>
 
-          {/* Displaying which player's turn it is */}
-          <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+         <div className="gameBoard">
+
+			
 
           <div>
-            <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} />
+            {/* <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
 
             <div className="playerOptions">
               <button disabled={this.state.disabled} onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
@@ -582,7 +586,7 @@ class App extends Component {
             </div>
 
 
-            <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} />
+            {/* <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
 
           </div>
         </div>
