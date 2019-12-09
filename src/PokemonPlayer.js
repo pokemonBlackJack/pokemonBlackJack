@@ -11,13 +11,9 @@ import React, { Component } from 'react';
 					
             			<p>{pokemon.firstPokemon}</p>
             			<img src={pokemon.firstPokemonImg} alt="" />
-				 
-			
-			
-         			 </div>
+						<span className="imageShadow"></span>
+         			 	</div>
        			 })}
-
-		
 				<p className="positionAbsolute">VS.</p>	
 
 			</div>
