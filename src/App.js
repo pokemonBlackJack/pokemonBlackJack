@@ -447,6 +447,29 @@ class App extends Component {
       })
   }
 
+  // evolutionAnimation = (player) => {
+  //   const pokemonImage = document.querySelector(".swal2-image");
+  //   let counter = 1;
+  //   let image = 1;
+
+  //   const interval = setInterval(() => {
+  //     let source = "";
+  //     counter++;
+  //     if (image === 1) {
+  //       source = this.state.randomPokemons[player].firstPokemonImg;
+  //       image = 2;
+  //     } else {
+  //       source = this.state.randomPokemons[player].evolutionPokemonImg;
+  //       image = 1;
+  //     }
+  //     pokemonImage.src = source;
+  //   }, 500 - (15 * counter));
+
+  //   setTimeout(() => {
+  //     clearInterval(interval);
+  //   }, 13500);
+  // }
+
   getRandomPokemon = (numberOfPlayers) => {
     const loading = showLoading(this.drawCard);
     // if(!this.state.loading){
@@ -578,17 +601,22 @@ class App extends Component {
           (
             setTimeout(() => {
               
-              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame)
+              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame);
+              
             }, 1000))
           
         
         }
-            
 
-        <div className="gameBoard">
+		{/* Displaying which player's turn it is */}
+         <div className="player">
+          
+       		   <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+		 </div>
 
-          {/* Displaying which player's turn it is */}
-          <p>{this.state.player2Cards.length<2 ? "Shuffling cards.." : `Player ${this.state.currentPlayer} turn`}</p>
+         <div className="gameBoard">
+
+			
 
           <div>
             {/* <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
