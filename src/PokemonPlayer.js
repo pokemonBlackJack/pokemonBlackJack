@@ -9,7 +9,7 @@ import PlayerContainer from "./PlayerContainer";
 				
 				    {this.props.getPokemon.map((pokemon, index) => {
 						return <div key={pokemon.id} className="playerPokemonContainer">
-							<PlayerContainer cards={this.props[`player${index + 1}Cards`]} player={`Player ${index + 1}`} score={this.props[`player${index + 1}Score`]} flipable={(this.props.currentPlayer === index + 1 && !this.props.hideCards) || this.props.showAll ? true : false} cleanBoard={this.props.cleanBoard} />
+							<PlayerContainer cards={this.props[`player${index + 1}Cards`]} player={`Player ${index + 1}`} score={this.props[`player${index + 1}Score`]} flipable={(this.props.currentPlayer === (index + 1) && !this.props.hideCards) || this.props.showAll ? true : false} cleanBoard={this.props.cleanBoard} />
 							<div className="playerPokemonDiv">
 								<p>{pokemon.firstPokemon}</p>
 								<img className="pokemon" src={pokemon.firstPokemonImg} alt={`a ${pokemon.firstPokemon} ready to battle`} />

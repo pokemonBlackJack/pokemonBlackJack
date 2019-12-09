@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
-import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading } from "./alert";
+// import evolutionAlert from './evolveWindowAlert'
+import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert } from "./alert";
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
@@ -216,7 +216,6 @@ class App extends Component {
 
   }
   
-
   // Animation of pokemons using vanilla javaScript
   pokemonAppear = () => {
     const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
@@ -264,7 +263,6 @@ class App extends Component {
 
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
-
 
 
     if (numberOfPlayers === currentPlayer) {
@@ -428,6 +426,29 @@ class App extends Component {
       })
   }
 
+  evolutionAnimation = (player) => {
+    const pokemonImage = document.querySelector(".swal2-image");
+    let counter = 1;
+    let image = 1;
+
+    const interval = setInterval(() => {
+      let source = "";
+      counter++;
+      if (image === 1) {
+        source = this.state.randomPokemons[player].firstPokemonImg;
+        image = 2;
+      } else {
+        source = this.state.randomPokemons[player].evolutionPokemonImg;
+        image = 1;
+      }
+      pokemonImage.src = source;
+    }, 500 - (15 * counter));
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 13500);
+  }
+
   getRandomPokemon = (numberOfPlayers) => {
     const loading = showLoading(this.drawCard);
     // if(!this.state.loading){
@@ -492,7 +513,7 @@ class App extends Component {
             responseType: "json"
           })
 
-          imagesPromises.push(promiseOne);
+          setTimeout(imagesPromises.push(promiseOne), 100);
 
           const promiseTwo = axios({
             url: `https://pokeapi.co/api/v2/pokemon/${pokemonNextEvolution}`,
@@ -500,7 +521,7 @@ class App extends Component {
             responseType: "json"
           })
 
-          imagesPromises.push(promiseTwo);
+          setTimeout(imagesPromises.push(promiseTwo), 100);
 
           // Use promise.all to wait for both responses before storing them on the state
 
@@ -551,7 +572,7 @@ class App extends Component {
         {/* Importing the Header Component */}
         <Header />
         
-		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll}  />
+		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards}  />
 
         
         {this.state.winner
@@ -559,7 +580,8 @@ class App extends Component {
           (
             setTimeout(() => {
               
-              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame)
+              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame);
+              this.evolutionAnimation(this.state.winner - 1);
             }, 1000))
           
         
