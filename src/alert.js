@@ -26,14 +26,39 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
     let postCry = new Audio(postCrySound);
     let evolveBgm = new Audio(evolveMusic);
     let evolveSoundEffect = new Audio(evolvedSound);
+    let interval;
+    const evolutionAnimation = () => {
+        const pokemonImage = document.querySelector(".swal2-image");
+        let counter = 1;
+        let image = 1;
+
+        interval = setInterval(() => {
+        let source = "";
+        counter++;
+        if (image === 1) {
+            source = preImg
+            image = 2;
+        } else {
+            source = postImg
+            image = 1;
+        }
+        pokemonImage.src = source;
+        }, 500 - (15 * counter));
+
+        setTimeout(() => {
+        clearInterval(interval);
+        }, 12500);
+    }
 
     MySwal.fire({
         onOpen: () => {
             playMusic.pause();
             playMusic.currentTime = 0;
             document.querySelector(".swal2-confirm").disabled = true;
+            
             setTimeout(() => (preCry.play()), 1000);
             setTimeout(() => {
+                evolutionAnimation()
                 evolveBgm.play();
                 document.querySelector(".swal2-confirm").disabled = false;
             }, 2000);
@@ -41,6 +66,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
         onClose: () => {
             evolveBgm.pause();
             evolveBgm.currentTime = 0;
+            clearInterval(interval);
         },
         title: `What?`,
         text: `${pre} is evolving!`,
