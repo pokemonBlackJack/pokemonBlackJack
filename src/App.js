@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
-import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading } from "./alert";
+// import evolutionAlert from './evolveWindowAlert'
+import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert } from "./alert";
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
@@ -216,7 +216,6 @@ class App extends Component {
 
   }
   
-
   // Animation of pokemons using vanilla javaScript
   pokemonAppear = () => {
     const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
@@ -264,7 +263,6 @@ class App extends Component {
 
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
-
 
 
     if (numberOfPlayers === currentPlayer) {
@@ -492,7 +490,7 @@ class App extends Component {
             responseType: "json"
           })
 
-          imagesPromises.push(promiseOne);
+          setTimeout(imagesPromises.push(promiseOne), 100);
 
           const promiseTwo = axios({
             url: `https://pokeapi.co/api/v2/pokemon/${pokemonNextEvolution}`,
@@ -500,7 +498,7 @@ class App extends Component {
             responseType: "json"
           })
 
-          imagesPromises.push(promiseTwo);
+          setTimeout(imagesPromises.push(promiseTwo), 100);
 
           // Use promise.all to wait for both responses before storing them on the state
 
