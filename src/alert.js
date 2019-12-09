@@ -46,7 +46,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
         }, 500 - (15 * counter));
 
         setTimeout(() => {
-        clearInterval(interval);
+            clearInterval(interval);
         }, 12500);
     }
 
@@ -68,7 +68,6 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
             evolveBgm.currentTime = 0;
             clearInterval(interval);
         },
-        icon: "success",
         text: `${pre} is evolving!`,
         imageUrl: preImg,
         imageWidth: 300,
@@ -88,7 +87,8 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
                 setTimeout(() => (evolveSoundEffect.play()), 1200)
             },
             onClose: () => {
-                resetGame()
+                resetGame();
+                casinoBgm.play();
             },
             title: `Congratulations!`,
             text: `Your ${pre} evolved into ${post}!`,
@@ -119,30 +119,6 @@ const alert = (nextRound, winner, reset) => {
         confirmButtonText: 'Next round!',
     })
 }
-
-
-export const showLoading = (startGameFunction) => {
-    return MySwal.fire({
-        title: "Fetching Your Pokemon",
-        onClose: () => {
-            setTimeout(() => {
-                startGameFunction(2, "firstCards");
-                
-            }, 7000);
-        },
-        confirmButtonColor: "#142b68",
-        text: "Hang tight while the trainers go and catch the Pokemon for your battle ",
-        background: '#142b68',
-        backdrop: `rgba(19,43,104)`,
-        imageUrl: ashGif,
-        imageHeight: 400,
-        imageWidth: 800,
-        showConfirmButton: false,
-     
-    })
-}
-
-
 
 export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 
