@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-import Swal from 'sweetalert2'
-
-import withReactContent from 'sweetalert2-react-content'
-import pikachuSound from './sounds/cries/25.ogg';
-import instructionBgm from './sounds/instructionBgm.ogg';
-import playBgm from './sounds/playBgm.ogg';
+// import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import pokeball from './assets/pokeball.gif';
 import alert, { seeInstructions } from "./alert"
-
 
 
 class Header extends Component {
 	
-	pokeballBg = pokeball;
-	pikachu = new Audio(pikachuSound);
-	casinoBgm = new Audio(instructionBgm);
-	playBgm = new Audio(playBgm);
+
 
 	
 	// 

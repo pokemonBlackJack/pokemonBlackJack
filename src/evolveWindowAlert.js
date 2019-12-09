@@ -39,6 +39,8 @@ const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
     }).then(() => {
         return MySwal.fire({
             onOpen: () => {
+                evolveBgm.pause();
+                evolveBgm.currentTime = 0;
                 postCry.play();
                 setTimeout(() => (evolveSoundEffect.play()), 1200,)
             },

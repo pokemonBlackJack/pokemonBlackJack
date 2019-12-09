@@ -1,9 +1,15 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import pika from './assets/pika.png'
-
+import pikachuSound from './sounds/cries/25.ogg';
+import instructionBgm from './sounds/instructionBgm.ogg';
+import playBgm from './sounds/playBgm.ogg';
+import rollingPokeball from './assets/rollingPokeball.gif';
 
 const MySwal = withReactContent(Swal);
+const pikachu = new Audio(pikachuSound);
+const casinoBgm = new Audio(instructionBgm);
+const playMusic = new Audio(playBgm);
 
 const alert = (nextRound, winner, reset) => {
     MySwal.fire({
@@ -43,11 +49,18 @@ export const seeInstructions = (getPokemonFunction) => {
             text: "The rules are simple. Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2. ",
             icon: "info",
             imageUrl: pika,
+            onOpen: () => {
+                playMusic.pause();
+                setTimeout(pikachu.play(), 1000);
+                casinoBgm.play();
+            },
             onClose: () => {
                 if(getPokemonFunction){
                     getPokemonFunction(2)
-                }
-            
+                };
+                casinoBgm.pause();
+                casinoBgm.currentTime = 0;
+                setTimeout(playMusic.play(), 1000);
             },
             imageHeight: 200,
             imageWidth: 250,
