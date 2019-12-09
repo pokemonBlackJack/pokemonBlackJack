@@ -6,18 +6,86 @@ import instructionBgm from './sounds/instructionBgm.ogg';
 import playBgm from './sounds/playBgm.ogg';
 import rollingPokeball from './assets/rollingPokeball.gif';
 import ashGif from './assets/ash.gif'
-
+import evolveMusic from './sounds/evolution.ogg';
+import evolvedSound from './sounds/evolvedSound.ogg';
+import levelUp from './sounds/levelUp.ogg';
 
 const MySwal = withReactContent(Swal);
 const pikachu = new Audio(pikachuSound);
 const casinoBgm = new Audio(instructionBgm);
 const playMusic = new Audio(playBgm);
+const levelUpSound = new Audio(levelUp);
+
+
+const soundToUse = require.context('./sounds/cries', true);
+
+export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetGame) => {
+    let preCrySound = soundToUse(`./${preId}.ogg`);
+    let preCry = new Audio(preCrySound);
+    let postCrySound = soundToUse(`./${postId}.ogg`);
+    let postCry = new Audio(postCrySound);
+    let evolveBgm = new Audio(evolveMusic);
+    let evolveSoundEffect = new Audio(evolvedSound);
+
+    MySwal.fire({
+        onOpen: () => {
+            playMusic.pause();
+            playMusic.currentTime = 0;
+            document.querySelector(".swal2-confirm").disabled = true;
+            setTimeout(() => (preCry.play()), 1000);
+            setTimeout(() => {
+                evolveBgm.play();
+                document.querySelector(".swal2-confirm").disabled = false;
+            }, 2000);
+        },
+        onClose: () => {
+            evolveBgm.pause();
+            evolveBgm.currentTime = 0;
+        },
+        title: `What?`,
+        text: `${pre} is evolving!`,
+        imageUrl: preImg,
+        imageWidth: 300,
+        background: `rgba( 255, 255, 255, 0.9)`,
+        backdrop: `
+            #142b68`,
+        timer: 13500,
+        timerProgressBar: true,
+        showConfirmButton: true,
+        confirmButtonText: 'Skip',
+    }).then(() => {
+        return MySwal.fire({
+            onOpen: () => {
+                evolveBgm.pause();
+                evolveBgm.currentTime = 0;
+                postCry.play();
+                setTimeout(() => (evolveSoundEffect.play()), 1200)
+            },
+            onClose: () => {
+                resetGame()
+            },
+            title: `Congratulations!`,
+            text: `Your ${pre} evolved into ${post}!`,
+
+            imageUrl: postImg,
+            imageWidth: 300,
+            backdrop: `
+            #edfeff`,
+            confirmButtonText: 'Play Again',
+        })
+    })
+}
+
 
 const alert = (nextRound, winner, reset) => {
     MySwal.fire({
-    
+        onOpen: () => {
+            playMusic.pause();
+            levelUpSound.play();
+        },
         onClose: () => {
             reset();
+            playMusic.play();
         },
         title: `What?`,
         text: `${winner} wins!`,
@@ -29,9 +97,6 @@ const alert = (nextRound, winner, reset) => {
 
 
 export const showLoading = (startGameFunction) => {
-			  
-			
-				
     return MySwal.fire({
         title: "Fetching Your Pokemon",
         onClose: () => {
@@ -47,10 +112,8 @@ export const showLoading = (startGameFunction) => {
         imageUrl: ashGif,
         imageHeight: 400,
         imageWidth: 800,
-        showConfirmButton:true,
+        showConfirmButton: false,
         customClass: 'swal-wide', 
-            
-            
     })
 }
 

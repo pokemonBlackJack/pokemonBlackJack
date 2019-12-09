@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
-import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions } from "./alert";
-import Card from './Card';
-import levelUp from './sounds/levelUp.ogg';
-import alert, { nextPlayerAlert, seeInstructions, showLoading } from "./alert";
+// import evolutionAlert from './evolveWindowAlert'
+import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert } from "./alert";
 import pokeball from "./assets/pokeball.png"
 import PlayerContainer from "./PlayerContainer";
 
@@ -219,8 +216,6 @@ class App extends Component {
 
   }
   
-  levelUpSound = new Audio(levelUp);
-
   // Animation of pokemons using vanilla javaScript
   pokemonAppear = () => {
     const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
