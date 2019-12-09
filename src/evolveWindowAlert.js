@@ -8,7 +8,7 @@ const MySwal = withReactContent(Swal);
 
 const soundToUse = require.context('./sounds/cries', true);
 
-const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
+const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetGame) => {
     let preCrySound = soundToUse(`./${preId}.ogg`);
     let preCry = new Audio(preCrySound);
     let postCrySound = soundToUse(`./${postId}.ogg`);
@@ -44,13 +44,17 @@ const evolutionAlert = (pre, preImg, preId, post, postImg, postId) => {
                 postCry.play();
                 setTimeout(() => (evolveSoundEffect.play()), 1200,)
             },
+            onClose: () => {
+                resetGame()
+            },
             title: `Congratulations!`,
             text: `Your ${pre} evolved into ${post}!`,
 
             imageUrl: postImg,
             imageWidth: 300,
             backdrop: `
-            #edfeff`
+            #edfeff`,
+            confirmButtonText: 'Play Again',
         })
     })
 }
