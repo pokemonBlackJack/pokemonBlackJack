@@ -69,7 +69,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
             evolveBgm.currentTime = 0;
             clearInterval(interval);
         },
-        title: `What?`,
+        icon: "success",
         text: `${pre} is evolving!`,
         imageUrl: preImg,
         imageWidth: 300,
@@ -139,7 +139,7 @@ export const showLoading = (startGameFunction) => {
         imageHeight: 400,
         imageWidth: 800,
         showConfirmButton: false,
-        customClass: 'swal-wide', 
+     
     })
 }
 
@@ -164,9 +164,9 @@ export const nextPlayerAlert = (nextplayerFunction, player, message) => {
 export const seeInstructions = (getPokemonFunction) => {
 
 		MySwal.fire({
-            title: "Welcome To Pokemon BlackJack!",
-            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2. ",
-            // icon: "info",
+			
+            title: "<span style='color: #142b68'>Welcome To Pokemon BlackJack!",
+            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2.",
             imageUrl: pika,
             onOpen: () => {
                 playMusic.pause();
@@ -184,8 +184,7 @@ export const seeInstructions = (getPokemonFunction) => {
             imageHeight: 200,
             imageWidth: 250,
             showConfirmButton:true,
-            customClass: 'swal-wide', 
-  
+            
         })	
 	}
 
