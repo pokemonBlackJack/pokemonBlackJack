@@ -638,12 +638,18 @@ class App extends Component {
 	   })
    }
 
+   	seeInstructions = () => {
+		this.setState({
+			instruction: true
+		})
+	}
+
   render() {
-    return (
+    return (  
       <div>
 		
         {/* Importing the Header Component */}
-        <Header />
+        <Header showInstructions = {this.seeInstructions}/>
 		{this.state.instruction && <WelcomeScreen playerCount = {this.numberOfPlayers} getpokemon = {this.getRandomPokemon}/>}
 
 		{/* Showing loading screen while pokemon get fetched from API */}

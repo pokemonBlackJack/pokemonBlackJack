@@ -3,7 +3,9 @@ import './index.css';
 import pika from "./assets/pikachuGif.gif"
 
  class WelcomeScreen extends Component {
-	
+
+
+	// Function to close the instruction screen/welcome window once the user selects number of players
 	closeInstruction = (getPokemonFunction, playerCount) => {
 		if(getPokemonFunction){
                     getPokemonFunction(playerCount)
@@ -15,9 +17,11 @@ import pika from "./assets/pikachuGif.gif"
 	render() {
 		return (
 			<div className="welcomeScreen">
+
 				<h1>Welcome To Pokemon BlackJack</h1>
+
 				<div className="contentContainer">
-					<img src={pika} alt=""/>
+					<img src={pika} alt="Pikachu putting up a peace sign"/>
 					<ul>
 						<li>The Goal of the game is to get your card values as close to 21 as possible without going over.</li>
 						<li>Click “draw a card” to get a new card, and “stay” if you want to stay.</li>
@@ -26,8 +30,9 @@ import pika from "./assets/pikachuGif.gif"
 					</ul>
 				</div>
 			
-					<div className="playerButtons">
-						<button onClick={() => {
+				<div className="playerButtons">
+					{/* Buttons calling function above to start the game/close the window */}
+					<button onClick={() => {
 						this.closeInstruction(this.props.getpokemon, 2);
 						this.props.playerCount(2)}}>Player vs Player</button>
 						<button onClick={() => {
