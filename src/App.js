@@ -72,6 +72,8 @@ class App extends Component {
 
   }
 
+
+
  
 
   drawCard = (numberOfCards, type) => {
@@ -81,9 +83,6 @@ class App extends Component {
       button.disabled = true;
     })
 
-    
-
-    
     // Getting deck id from the state
 
     const deckId = this.state.deckId;
@@ -92,6 +91,8 @@ class App extends Component {
     // Making Deck API call to draw a card
 
     const currentPlayer = this.state.currentPlayer;
+
+    const numberOfPlayers = this.state.numberOfPlayers;
     
     
     axios({
@@ -170,37 +171,32 @@ class App extends Component {
 
       } else {
         if (currentPlayerTotal > 21) {
-          // if (currentPlayer === this.state.numberOfPlayers) {
-          //   this.setState({
-          //     [`player${currentPlayer}Cards`]: playerCards,
-          //     [`player${currentPlayer}Total`]: currentPlayerTotal,
-  
-          //   }, () => {
-          //     this.stay();
-          //     console.log(this.state[`player${currentPlayer}Cards`]);
-          //     console.log(this.state[`player${currentPlayer}Total`]);
-          //   })
-          // } else {
+
+          if (numberOfPlayers === 2 || currentPlayer === 1) {
             this.setState({
               [`player${currentPlayer}Cards`]: playerCards,
               [`player${currentPlayer}Total`]: currentPlayerTotal,
               
             }, () => {
-
-                buttons.forEach((button) => {
-                  button.disabled = false;
-                })
-                this.setState({
-                  disabled: true,
-                });
-
-              console.log(this.state[`player${currentPlayer}Cards`]);
-              console.log(this.state[`player${currentPlayer}Total`]);
+  
+              buttons.forEach((button) => {
+                button.disabled = false;
+              })
+              this.setState({
+                disabled: true,
+              });
             })
-          // }
+            
+          } else {
+            this.stay();
+          }
+          
+          
   
         } else {
 
+          
+            
           setTimeout(() => {
             buttons.forEach((button) => {
               button.disabled = false;
@@ -210,9 +206,26 @@ class App extends Component {
             [`player${currentPlayer}Cards`]: playerCards,
             [`player${currentPlayer}Total`]: currentPlayerTotal
           }, () => {
-            console.log(this.state[`player${currentPlayer}Cards`]);
-            console.log(this.state[`player${currentPlayer}Total`]);
+              
+              console.log(this.state[`player${this.state.currentPlayer}Total`]);
+              console.log(this.state.player1Total);
+
+              if (this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total && this.state.player1Total <= 21 && currentPlayer !== 1 && numberOfPlayers === 3) {
+                setTimeout(() => {
+                  
+                  this.drawCard(1);
+                }, 2000);
+              } else if(currentPlayer !== 1 && numberOfPlayers === 3) {
+                setTimeout(() => {
+                  
+                  this.stay();
+                }, 2000);
+            }
+            
           })
+        
+          
+
         }
 
       }
@@ -293,11 +306,8 @@ class App extends Component {
       }, 3000 * i);
       
     });
-    
-
-    
-
   }
+
 
   stay = () => {
 
@@ -317,7 +327,7 @@ class App extends Component {
         })
 
         setTimeout(() => {
-          alert("Nobody",this.reset)
+          alert("Nobody", this.reset)
         }, 1000)
         
 
@@ -353,8 +363,13 @@ class App extends Component {
         }, 2000);
       }
 
+    // } else if( currentPlayer === 1 && numberOfPlayers === 3){
+      
+    //   console.log("player 1 done")
+    
     } else {
       
+        // if(currentPlayer !== numberOfPlayers )
       
         this.setState({
           hideCards: true,
@@ -373,6 +388,21 @@ class App extends Component {
         currentPlayer: this.state.currentPlayer + 1,
         hideCards: false,
         // disabled:false
+    }, () => {
+        
+
+        if (this.state[`player${this.state.currentPlayer}Total`] !== 21 && this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total && this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
+          
+          
+          this.drawCard(1);
+            
+          
+        } else if (this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
+          setTimeout(() => {
+            this.stay();
+            
+          }, 2000);
+        }
       })
   }
 
@@ -453,7 +483,7 @@ class App extends Component {
         player2Cards: [],
         player3Cards: [],
         currentPlayer: 1,
-        numberOfPlayers: 2,
+        // numberOfPlayers: 2,
         player1Total: 0,
         player2Total: 0,
         player3Total: 0,
@@ -468,7 +498,7 @@ class App extends Component {
         disabled: false,
         cleanBoard: false,
       },()=>{
-        this.getRandomPokemon(2);
+        this.getRandomPokemon(this.state.numberOfPlayers);
       })
   }
 
@@ -600,7 +630,7 @@ class App extends Component {
         {/* Importing the Header Component */}
         <Header />
         {this.state.loading && <Loading />}
-		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards} winner={this.state.winner}  />
+		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards} winner={this.state.winner} numberOfPlayers={this.state.numberOfPlayers} />
 
         
         {this.state.winner
