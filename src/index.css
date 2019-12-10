@@ -220,7 +220,7 @@ font-family: 'Carter One', cursive;
 
 .player{
 	position: absolute;
-	top: 23%;
+	top: 15%;
 	left: 45%;
 	font-weight: 800;
 	color: #edfeff;
@@ -228,13 +228,16 @@ font-family: 'Carter One', cursive;
 }
 
 .pokemonPlayer{
+  padding: 50px 0;
   background-color: rgb(20, 43, 104, 0.5);
   background-image: linear-gradient(120deg, rgb(20, 43, 104, 0.5) 50%, rgba(45, 67, 126, 0.5) 50%);
 	text-align: center;
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	display: flex;
-	min-height: 75vh;
+  min-height: 75vh;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .pokemonPlayer p {
@@ -259,6 +262,7 @@ font-family: 'Carter One', cursive;
   flex-direction: row;
   position: relative;
   justify-content: center;
+  flex: 0 1 50%;
   
   
 
@@ -274,6 +278,10 @@ font-family: 'Carter One', cursive;
 
 }
 
+.wideDiv {
+  min-width: 55%;
+}
+
 
 
 .playerPokemonContainer .pokemon{
@@ -281,11 +289,11 @@ font-family: 'Carter One', cursive;
   /* display: none; */
 	/* background-color: #142b68; */
 	border-radius: 50%;
-  width: 70%;
+  width: 50%;
   animation: moveSecond both alternate ease-in-out infinite 2s;
 }
 
-.playerPokemonContainer:first-child .pokemon {
+.playerPokemonContainer .facingRight.pokemon {
   transform: rotateY(180deg);
   animation: moveFirst both alternate ease-in-out infinite 2.5s;
 }
@@ -308,9 +316,11 @@ font-family: 'Carter One', cursive;
   animation: shadow both alternate ease-in-out infinite 2.5s;
 }
 
-.pokemonPlayer p:last-of-type {
-	top: 35%;
-	right: 50%;
+.pokemonPlayer> p:last-of-type {
+	top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  margin: 0;
 }
 
 
@@ -381,7 +391,7 @@ font-family: 'Carter One', cursive;
   align-items: center;
   align-content: flex-start;
   flex-wrap: wrap;
-  min-height: 50vh;
+  /* min-height: 50vh; */
 }
 
 /* Start of Cards Component styling */
@@ -401,7 +411,7 @@ font-family: 'Carter One', cursive;
   min-height: 100px;
   perspective: 800px;
   transition: all 1s;
-  flex: 0 1 calc(50% - 10px);
+  flex: 0 1 calc(40% - 10px);
   margin: 5px;
 }
 
@@ -481,7 +491,7 @@ font-family: 'Carter One', cursive;
 
 
 .whiteDiv {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -530,11 +540,11 @@ font-family: 'Carter One', cursive;
   animation: faint forwards 1 1s linear;
 }
 
-.playerPokemonContainer:first-child .attacking, .playerPokemonContainer .attacking {
+.playerPokemonContainer .facingRight.attacking, .playerPokemonContainer .attacking {
   animation: attack linear both 1 1s;
 }
 
-.playerPokemonContainer .damaged, .playerPokemonContainer:first-child .damaged {
+.playerPokemonContainer .damaged, .playerPokemonContainer .facingRight.damaged {
   animation: hit linear 1 1s;
 }
 

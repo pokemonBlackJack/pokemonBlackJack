@@ -20,13 +20,17 @@ class PokemonPlayer extends Component {
 		return (
 			<div className="pokemonPlayer positionRelative">
 				
-				    {this.props.getPokemon.map((pokemon, index) => {
-						return <div key={pokemon.id} className="playerPokemonContainer">
+				{this.props.getPokemon.map((pokemon, index) => {
+					return <div key={pokemon.id} className={`playerPokemonContainer ${this.props.numberOfPlayers === 3 && index === 0 ? " wideDiv" : ""}`}>
 							<PlayerContainer cards={this.props[`player${index + 1}Cards`]} player={`Player ${index + 1}`} score={this.props[`player${index + 1}Score`]} flipable={(this.props.currentPlayer === (index + 1) && !this.props.hideCards) || this.props.showAll ? true : false} cleanBoard={this.props.cleanBoard} />
 
-							<div className="playerPokemonDiv">
+							<div className={`playerPokemonDiv`}>
 								<p>{pokemon.firstPokemon}</p>
-								<img className={`pokemon ${this.props.winner !== null && this.props.winner !== (index + 1) ?  "faint" : ""}`} src={pokemon.firstPokemonImg} alt={`a ${pokemon.firstPokemon} ready to battle`} />
+								<img 
+								className={`pokemon ${this.props.winner !== null && this.props.winner !== (index + 1) ? "faint" : ""} ${(this.props.numberOfPlayers === 3 && index === 1 ) || (this.props.numberOfPlayers === 2 && index === 0) ? "facingRight" : ""}`}
+								src={pokemon.firstPokemonImg}
+								alt={`a ${pokemon.firstPokemon} ready to battle`} 
+								/>
 								<span className="imageShadow"></span>
 								<div className={`healthBar`}>
 									<div style={{
