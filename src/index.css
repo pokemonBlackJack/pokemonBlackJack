@@ -771,8 +771,8 @@ font-family: 'Carter One', cursive;
 
 @media (max-width:760px){
 	
-		.contentContainer ul{
-			font-size: 10px;
+		.contentContainer li{
+			font-size: 0.8rem;
 		}
 	
 }

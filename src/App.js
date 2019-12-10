@@ -5,7 +5,7 @@ import axios from "axios";
 import Loading from "./Loading.js"
 import WelcomeScreen from "./WelcomeScreen.js"
 // import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
+import alert, { nextPlayerAlert, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
 import pokeball from "./assets/pokeball.png";
 import PlayerContainer from "./PlayerContainer";
 
@@ -71,7 +71,8 @@ class App extends Component {
       casinoBgm.play();
     })
 
-    seeInstructions(this.getRandomPokemon);
+    // seeInstructions(this.getRandomPokemon);
+
 
   }
 
@@ -481,7 +482,9 @@ class App extends Component {
     
 
     this.setState({
-      loading:true
+      loading:true,
+	  instruction: false
+
     })
     
     
@@ -600,9 +603,10 @@ class App extends Component {
   render() {
     return (
       <div>
+		
         {/* Importing the Header Component */}
         <Header />
-		{this.state.instruction && <WelcomeScreen />}
+		{this.state.instruction && <WelcomeScreen getpokemon = {this.getRandomPokemon}/>}
 
 		{/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading && <Loading />}

@@ -4,6 +4,13 @@ import pika from "./assets/pikachuGif.gif"
 
  class WelcomeScreen extends Component {
 	
+	closeInstruction = (getPokemonFunction) => {
+		if(getPokemonFunction){
+                    getPokemonFunction(2)
+                };
+		
+	}
+
 	 
 	render() {
 		return (
@@ -18,7 +25,8 @@ import pika from "./assets/pikachuGif.gif"
 						<li>The closest player to 21 wins! The player than wins 2/3 games will have their pokemon evolve.</li>
 					</ul>
 				</div>
-				<button className="welcomeButton"onClick={this.closeInstruction}>Let's Play!</button>
+				<button className="welcomeButton"onClick={() => {
+					this.closeInstruction(this.props.getpokemon)}}>Let's Play!</button>
 				
 			
 			</div>

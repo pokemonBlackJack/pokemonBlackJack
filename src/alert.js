@@ -138,32 +138,32 @@ export const nextPlayerAlert = (nextplayerFunction, player) => {
     })
 }
 
-export const seeInstructions = (getPokemonFunction) => {
+// export const seeInstructions = (getPokemonFunction) => {
 
-		MySwal.fire({
+// 		MySwal.fire({
 			
-            title: "<span style='color: #142b68'>Welcome To Pokemon BlackJack!",
-            text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2.",
-            imageUrl: pika,
-            onOpen: () => {
-                // playMusic.pause();
-                setTimeout(()=>{pikachu.play()}, 1000);
-                casinoBgm.play();
-            },
-            onClose: () => {
-                if(getPokemonFunction){
-                    getPokemonFunction(2)
-                };
-                casinoBgm.play();
-                // casinoBgm.pause();
-                // casinoBgm.currentTime = 0;
-                // setTimeout(playMusic.play(), 1000);
-            },
-            imageHeight: 200,
-            imageWidth: 250,
-            showConfirmButton:true,
+//             title: "<span style='color: #142b68'>Welcome To Pokemon BlackJack!",
+//             text: "The rules are simple! Player 1 goes first, and will click 'Hit Me' to total their cards as close to 21 without going over. Once they click 'stay', it's time for Player 2.",
+//             imageUrl: pika,
+//             onOpen: () => {
+//                 // playMusic.pause();
+//                 setTimeout(()=>{pikachu.play()}, 1000);
+//                 casinoBgm.play();
+//             },
+//             onClose: () => {
+//                 if(getPokemonFunction){
+//                     getPokemonFunction(2)
+//                 };
+//                 casinoBgm.play();
+//                 // casinoBgm.pause();
+//                 // casinoBgm.currentTime = 0;
+//                 // setTimeout(playMusic.play(), 1000);
+//             },
+//             imageHeight: 200,
+//             imageWidth: 250,
+//             showConfirmButton:true,
             
-        })	
-	}
+//         })	
+// 	}
 
 export default alert;
