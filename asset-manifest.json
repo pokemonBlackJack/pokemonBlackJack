@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pokemonBlackJack/static/css/main.b72bdb20.chunk.css",
-    "main.js": "/pokemonBlackJack/static/js/main.0b27e549.chunk.js",
-    "main.js.map": "/pokemonBlackJack/static/js/main.0b27e549.chunk.js.map",
+    "main.css": "/pokemonBlackJack/static/css/main.e4b8084a.chunk.css",
+    "main.js": "/pokemonBlackJack/static/js/main.37cbb432.chunk.js",
+    "main.js.map": "/pokemonBlackJack/static/js/main.37cbb432.chunk.js.map",
     "runtime-main.js": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js",
     "runtime-main.js.map": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js.map",
-    "static/js/2.c320f585.chunk.js": "/pokemonBlackJack/static/js/2.c320f585.chunk.js",
-    "static/js/2.c320f585.chunk.js.map": "/pokemonBlackJack/static/js/2.c320f585.chunk.js.map",
+    "static/js/2.820b93a2.chunk.js": "/pokemonBlackJack/static/js/2.820b93a2.chunk.js",
+    "static/js/2.820b93a2.chunk.js.map": "/pokemonBlackJack/static/js/2.820b93a2.chunk.js.map",
     "index.html": "/pokemonBlackJack/index.html",
-    "precache-manifest.fe670356a770157d8aa1c148820e3967.js": "/pokemonBlackJack/precache-manifest.fe670356a770157d8aa1c148820e3967.js",
+    "precache-manifest.2e68951cf9b9cb87cb0ac507434c4fa3.js": "/pokemonBlackJack/precache-manifest.2e68951cf9b9cb87cb0ac507434c4fa3.js",
     "service-worker.js": "/pokemonBlackJack/service-worker.js",
-    "static/css/main.b72bdb20.chunk.css.map": "/pokemonBlackJack/static/css/main.b72bdb20.chunk.css.map",
+    "static/css/main.e4b8084a.chunk.css.map": "/pokemonBlackJack/static/css/main.e4b8084a.chunk.css.map",
     "static/media/1.ogg": "/pokemonBlackJack/static/media/1.29eff88c.ogg",
     "static/media/10.ogg": "/pokemonBlackJack/static/media/10.be4349af.ogg",
     "static/media/100.ogg": "/pokemonBlackJack/static/media/100.b31e4dde.ogg",
@@ -789,6 +789,7 @@
     "static/media/levelUp.ogg": "/pokemonBlackJack/static/media/levelUp.c6bf5de5.ogg",
     "static/media/openPokeball.ogg": "/pokemonBlackJack/static/media/openPokeball.e5f466a3.ogg",
     "static/media/pika.png": "/pokemonBlackJack/static/media/pika.9a7ba23f.png",
+    "static/media/pikachuGif.gif": "/pokemonBlackJack/static/media/pikachuGif.f9bd021e.gif",
     "static/media/playBgm.ogg": "/pokemonBlackJack/static/media/playBgm.0450f8b1.ogg",
     "static/media/pokeball-icon-transparent-20.jpg": "/pokemonBlackJack/static/media/pokeball-icon-transparent-20.0f7daaa5.jpg",
     "static/media/pokemon-card-back.png": "/pokemonBlackJack/static/media/pokemon-card-back.d6cc1c82.png",
@@ -796,8 +797,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5b9fef1c.js",
-    "static/js/2.c320f585.chunk.js",
-    "static/css/main.b72bdb20.chunk.css",
-    "static/js/main.0b27e549.chunk.js"
+    "static/js/2.820b93a2.chunk.js",
+    "static/css/main.e4b8084a.chunk.css",
+    "static/js/main.37cbb432.chunk.js"
   ]
 }

@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "197996c84f9c3771ae07725955e72734",
+    "revision": "fa1e9d73e3c787e58b7d188226af56c5",
     "url": "/pokemonBlackJack/index.html"
   },
   {
-    "revision": "d417c3ffe9c26ccf1c5e",
-    "url": "/pokemonBlackJack/static/css/main.b72bdb20.chunk.css"
+    "revision": "dc9ea088a3f13b590372",
+    "url": "/pokemonBlackJack/static/css/main.e4b8084a.chunk.css"
   },
   {
-    "revision": "71546c761ffbb3aeabda",
-    "url": "/pokemonBlackJack/static/js/2.c320f585.chunk.js"
+    "revision": "59acb8f1d8b86f37f85b",
+    "url": "/pokemonBlackJack/static/js/2.820b93a2.chunk.js"
   },
   {
-    "revision": "d417c3ffe9c26ccf1c5e",
-    "url": "/pokemonBlackJack/static/js/main.0b27e549.chunk.js"
+    "revision": "dc9ea088a3f13b590372",
+    "url": "/pokemonBlackJack/static/js/main.37cbb432.chunk.js"
   },
   {
     "revision": "69851800e09357c2dd36",
@@ -3130,6 +3130,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "9a7ba23f62d913cc4e0c8e590b50995c",
     "url": "/pokemonBlackJack/static/media/pika.9a7ba23f.png"
+  },
+  {
+    "revision": "f9bd021ee9ccffd24d74d911d3212c4f",
+    "url": "/pokemonBlackJack/static/media/pikachuGif.f9bd021e.gif"
   },
   {
     "revision": "0450f8b1a0f23a6169438666d9e83eb0",
