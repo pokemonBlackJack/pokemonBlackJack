@@ -323,8 +323,18 @@ class App extends Component {
       const player1Total = this.state.player1Total > 21 ? 0 : this.state.player1Total;
       const player2Total = this.state.player2Total > 21 ? 0 : this.state.player2Total;
       const player3Total = this.state.player3Total > 21 ? 0 : this.state.player3Total;
+      if (numberOfPlayers === 3 && player1Total === 21) {
+        this.attack(1)
+        setTimeout(() => {
+          this.setState({
+            player1Score: this.state.player1Score + 1,
+            round: this.state.round + 1
+          }, () => { this.checkWinner("Player1") });
 
-      if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
+
+        }, 2000);
+      
+      } else if (player1Total === player2Total && (player2Total === player3Total || numberOfPlayers !== 3)) {
         console.log("its a tie");
         this.setState({
           showAll: true
@@ -366,15 +376,9 @@ class App extends Component {
 
         }, 2000);
       }
-
-    // } else if( currentPlayer === 1 && numberOfPlayers === 3){
-      
-    //   console.log("player 1 done")
     
     } else {
-      
-        // if(currentPlayer !== numberOfPlayers )
-      
+            
         this.setState({
           hideCards: true,
           disabled: false
@@ -391,7 +395,6 @@ class App extends Component {
     this.setState({
         currentPlayer: this.state.currentPlayer + 1,
         hideCards: false,
-        // disabled:false
     }, () => {
         
 
@@ -613,16 +616,14 @@ class App extends Component {
                   this.pokemonAppear();
                   console.log("all pokemons are here");
                 //   loading.close();
-				this.setState({
-					loading: false
-				})
-				 setTimeout(() => {
-              	  this.drawCard(2, "firstCards");
-                }, 7000);
-              }
-              // Console login when all of this is done just to see the result
+                  this.setState({
+                    loading: false
+                  });
 
-              console.log(this.state.randomPokemons);
+                  setTimeout(() => {
+                        this.drawCard(2, "firstCards");
+                      }, 3500 * this.state.numberOfPlayers);
+                }
             })
           })
         }
@@ -647,7 +648,20 @@ class App extends Component {
 
 		{/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading && <Loading />}
-		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards} winner={this.state.winner} numberOfPlayers={this.state.numberOfPlayers} />
+        <PokemonPlayer
+          getPokemon={this.state.randomPokemons}
+          player1Score={this.state.player1Score}
+          player2Score={this.state.player2Score}
+          player3Score={this.state.player3Score}
+          cleanBoard={this.state.cleanBoard}
+          player1Cards={this.state.player1Cards}
+          player2Cards={this.state.player2Cards}
+          player3Cards={this.state.player3Cards}
+          currentPlayer={this.state.currentPlayer}
+          showAll={this.state.showAll}
+          hideCards={this.state.hideCards}
+          winner={this.state.winner}
+          numberOfPlayers={this.state.numberOfPlayers} />
 
         
         {this.state.winner
