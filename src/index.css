@@ -100,7 +100,7 @@ span{
 	align-items: center;	
 }
 
-.welcomeScreen h1{	
+h1 {	
 	font-family: 'Carter One', cursive;
 	font-size: 2.5rem;
 	font-weight: lighter;
@@ -707,9 +707,134 @@ span{
 }
 
 @media (max-width:760px){
+	.contentContainer li{
+		font-size: 0.8rem;
+	}
+}
+
+@media (max-width: 350px) {	
+	/* Welcome Screen */
+	.welcomeScreen {
+		overflow: hidden;
+	}
 	
-		.contentContainer li{
-			font-size: 0.8rem;
-		}
+	body,
+	p,
+	p.positionAbsolute {
+		font-size: 80%;
+	}
+
+	.player p {
+		font-size: 50%;
+		margin-top: 0;
+	}
+
+	.playerPokemonContainer {
+		flex-direction: column-reverse;
+	}
+
+	.playerContainer,
+	.playerPokemonDiv {
+		width: 100%;
+	}
+
+	p.positionAbsolute {
+		margin: 0;
+	}
+
+	h1,
+	h2 {
+		font-size: 1.5rem;
+		margin: 0;
+		padding: 0 5px;
+	}
+
+	.contentContainer {
+		flex-direction: column;
+		padding-bottom: 25px;
+	}
+
+	.contentContainer img {
+		width: 60%;
+	}
+
+	.contentContainer ul {
+		width: 90%;
+		margin: 0;
+		padding-left: 20px;
+	}
+
+	.contentContainer li {
+		font-size: 0.75rem;
+	}
+
+	.playerButtons button {
+		font-size: 0.6rem;
+	}
+
+	/* In game */
+
+	.headerComponent {
+		position: relative;
+		min-height: 70px;
+		align-self: flex-start;
+	}
+
+	.headerComponent img,
+	.infoCircle {
+		position: absolute;
+		bottom: 5px;
+		margin-left: 0;
+		width: 25px;
+	}
 	
+	.headerComponent img {
+		left: 5px;
+	}
+
+	.infoCircle {
+		right: 5px;
+		top: initial;
+		font-size: 25px;
+	}
+
+	.pokemonPlayer {
+		padding: 0;
+	}
+
+	.playerPokemonDiv {
+		padding-top: 20px;
+	}
+
+	.playerOptions,
+	.playerButtons {
+		bottom: 5px;
+	}
+
+	.playerPokemonContainer:nth-child(2) .playerContainer {
+		order: 0;
+	}
+
+	.healthBar {
+		height: 15px;
+		margin-top: 15px;
+	}
+
+	.playerContainer {
+		min-height: 40vh;
+	}
+
+	.playerContainer p {
+		width: 60%;
+		margin: 13px auto;
+	}
+
+	.card-container {
+		min-height: 30px;
+	}
+
+	.playerCards {
+		justify-content: center;
+	}
+
 }
