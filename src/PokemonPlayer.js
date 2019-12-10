@@ -31,7 +31,7 @@ class PokemonPlayer extends Component {
 								src={pokemon.firstPokemonImg}
 								alt={`a ${pokemon.firstPokemon} ready to battle`} 
 								/>
-								<span className="imageShadow"></span>
+							<span className={`imageShadow ${this.props.winner !== null && this.props.winner !== (index + 1) ? "faint" : ""}`}></span>
 								<div className={`healthBar`}>
 									<div style={{
 										width: `${this.props.winner !== index + 1 && this.props.winner !== null ? 0 :  this.healthCalculator(this.props.player1Score, this.props.player2Score, this.props.player3Score,this.props[`player${index + 1}Score`])}%`,
@@ -39,11 +39,7 @@ class PokemonPlayer extends Component {
 									}}>
 
 									</div>
-												
-
-									
 								</div>
-
 							</div>
          			 	</div>
        			 })}

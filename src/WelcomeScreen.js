@@ -7,9 +7,10 @@ import pika from "./assets/pikachuGif.gif"
 
 	// Function to close the instruction screen/welcome window once the user selects number of players
 	closeInstruction = (getPokemonFunction, playerCount) => {
-		if(getPokemonFunction){
-                    getPokemonFunction(playerCount)
-                };
+		if (getPokemonFunction) {
+			getPokemonFunction(playerCount);
+			this.props.hideButtons();
+		};
 		
 		}
 
@@ -30,15 +31,24 @@ import pika from "./assets/pikachuGif.gif"
 					</ul>
 				</div>
 			
-				<div className="playerButtons">
-					{/* Buttons calling function above to start the game/close the window */}
-					<button onClick={() => {
+				
+					{this.props.showButtons ? 
+					<div className="playerButtons">
+						{/* Buttons calling function above to start the game/close the window */}
+						<button onClick={() => {
 						this.closeInstruction(this.props.getpokemon, 2);
 						this.props.playerCount(2)}}>Player vs Player</button>
 						<button onClick={() => {
 						this.closeInstruction(this.props.getpokemon, 3);
-						this.props.playerCount(3)}}>Player vs CPU</button>
+							this.props.playerCount(3)
+						}}>Player vs CPU</button>
 					</div>
+					:
+					<div className="playerButtons">
+						<button onClick={this.props.closeInstructions}>Ok</button>
+					</div>
+						
+						}
 		
 			
 			</div>

@@ -38,7 +38,8 @@ class App extends Component {
       loading: false,
 	  instruction: true,
       disabled: false,
-      cleanBoard: false
+      cleanBoard: false,
+      showButtons: true,
     }
   }
 
@@ -49,8 +50,37 @@ class App extends Component {
     buttons.forEach((button) => {
       button.disabled = true;
     })
+
+    this.getNewDeck();
     //Calling deck of cards API to get a deck key, and then generate random cards.
 
+    // axios({
+    //   method: 'GET',
+    //   url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
+    //   dataResponse: 'json',
+    //   params: {
+    //     deck_count: 1
+    //   }
+
+
+    // }).then((data) => {
+    //   this.setState({
+    //     deckId: data.data.deck_id
+    //   })
+    // });
+
+    casinoBgm.addEventListener("ended", () => {
+      casinoBgm.currentTime = 0;
+      casinoBgm.play();
+    })
+
+    // seeInstructions(this.getRandomPokemon);
+
+
+  }
+
+
+  getNewDeck = () => {
     axios({
       method: 'GET',
       url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
@@ -66,18 +96,7 @@ class App extends Component {
       })
     });
 
-    casinoBgm.addEventListener("ended", () => {
-      casinoBgm.currentTime = 0;
-      casinoBgm.play();
-    })
-
-    // seeInstructions(this.getRandomPokemon);
-
-
   }
-
-
-
  
 
   drawCard = (numberOfCards, type) => {
@@ -200,12 +219,13 @@ class App extends Component {
         } else {
 
           
-          if(currentPlayer === 1 || numberOfPlayers !==3)  
-          setTimeout(() => {
-            buttons.forEach((button) => {
-              button.disabled = false;
-            })
-          }, 1500);
+          if (currentPlayer === 1 || numberOfPlayers !== 3) {
+            setTimeout(() => {
+              buttons.forEach((button) => {
+                button.disabled = false;
+              })
+            }, 1500);
+          }
           this.setState({
             [`player${currentPlayer}Cards`]: playerCards,
             [`player${currentPlayer}Total`]: currentPlayerTotal
@@ -315,6 +335,10 @@ class App extends Component {
 
   stay = () => {
 
+    const buttons = document.querySelectorAll(".playerOptions button");
+    buttons.forEach((button) => {
+      button.disabled = true;
+    })
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
 
@@ -400,8 +424,9 @@ class App extends Component {
 
         if (this.state[`player${this.state.currentPlayer}Total`] !== 21 && this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total && this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
           
-          
-          this.drawCard(1);
+          setTimeout(() => {
+            this.drawCard(1);
+          }, 2000)
             
           
         } else if (this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
@@ -484,6 +509,7 @@ class App extends Component {
   // Method to reset game in case of playing again
 
   resetGame = () => {
+    this.getNewDeck();
     this.setState({
         randomPokemons: [],
         player1Cards: [],
@@ -640,7 +666,7 @@ class App extends Component {
 
    	seeInstructions = () => {
 		this.setState({
-			instruction: true
+			instruction: !this.state.instruction
 		})
 	}
 
@@ -650,7 +676,7 @@ class App extends Component {
 		
         {/* Importing the Header Component */}
         <Header showInstructions = {this.seeInstructions}/>
-		{this.state.instruction && <WelcomeScreen playerCount = {this.numberOfPlayers} getpokemon = {this.getRandomPokemon}/>}
+        {this.state.instruction && <WelcomeScreen playerCount={this.numberOfPlayers} getpokemon={this.getRandomPokemon} showButtons={this.state.showButtons} hideButtons={() => { this.setState({ showButtons: false }) }} closeInstructions={this.seeInstructions}/>}
 
 		{/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading && <Loading />}
