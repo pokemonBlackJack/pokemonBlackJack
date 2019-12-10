@@ -24,7 +24,7 @@ class App extends Component {
       player2Cards: [],
       player3Cards: [],
       currentPlayer: 1,
-      numberOfPlayers: 2,
+      numberOfPlayers: 3,
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,

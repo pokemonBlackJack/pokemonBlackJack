@@ -6,7 +6,7 @@ import pika from "./assets/pikachuGif.gif"
 	
 	closeInstruction = (getPokemonFunction) => {
 		if(getPokemonFunction){
-                    getPokemonFunction(2)
+                    getPokemonFunction(3)
                 };
 		
 	}
