@@ -34,12 +34,13 @@ import pika from "./assets/pikachuGif.gif"
 					{/* Buttons calling function above to start the game/close the window */}
 					<button onClick={() => {
 						this.closeInstruction(this.props.getpokemon, 2);
-						this.props.playerCount(2)}}>2 Player</button>
-					<button onClick={() => {
+						this.props.playerCount(2)}}>Player vs Player</button>
+						<button onClick={() => {
 						this.closeInstruction(this.props.getpokemon, 3);
-						this.props.playerCount(3)}}>1 Player</button>
-				</div>
-
+						this.props.playerCount(3)}}>Player vs CPU</button>
+					</div>
+		
+			
 			</div>
 		);
 	}

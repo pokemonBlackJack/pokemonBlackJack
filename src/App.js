@@ -200,7 +200,7 @@ class App extends Component {
         } else {
 
           
-            
+          if(currentPlayer === 1 || numberOfPlayers !==3)  
           setTimeout(() => {
             buttons.forEach((button) => {
               button.disabled = false;
