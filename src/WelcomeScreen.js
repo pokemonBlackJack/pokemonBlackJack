@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './index.css';
 import pika from "./assets/pikachuGif.gif"
+import pikachuSound from './sounds/cries/25.ogg';
+import { casinoBgm } from './alert';
 
- class WelcomeScreen extends Component {
-	
+class WelcomeScreen extends Component {
+	pikachu = new Audio(pikachuSound);
 	closeInstruction = (getPokemonFunction, playerCount) => {
 		if(getPokemonFunction){
-                    getPokemonFunction(playerCount)
-                };
-		
+			getPokemonFunction(playerCount)
+		};
+		this.pikachu.play();
+		casinoBgm.play();
 		}
 
-	 
 	render() {
 		return (
 			<div className="welcomeScreen">
