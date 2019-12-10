@@ -186,6 +186,11 @@ font-family: 'Carter One', cursive;
 	
 }
 
+.playerButtons{
+	display: flex;
+	
+}
+
 
 /* Loading Screen Styling */
 
@@ -319,13 +324,10 @@ font-family: 'Carter One', cursive;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+
   
 }
 
-.gameBoard {
-	position: absolute;
-	min-height: 12.5vh;
-}
 
 .gameBoard>div{
   display: flex;
@@ -334,11 +336,12 @@ font-family: 'Carter One', cursive;
   width: 100%;
 }
 
-.playerOptions {
+.playerOptions, 
+.playerButtons {
   display: flex;
   position: fixed;
-  bottom: 3%;
-  left: 38%;
+
+
   width: 25%;
   min-width: 300px;
   padding: 10px;
@@ -348,7 +351,8 @@ font-family: 'Carter One', cursive;
   
 }
 
-.playerOptions button{
+.playerOptions button, 
+.playerButtons button{
 	padding: 4%;
 	background-color: #142b68;
 	color: #edfeff;
@@ -362,7 +366,8 @@ font-family: 'Carter One', cursive;
   transition: all 0.5s;
 }
 
-.playerOptions button:enabled:hover, .playerOptions button:enabled:focus{
+.playerOptions button:enabled:hover, .playerOptions button:enabled:focus, 
+.playerButtons button:enabled:hover, .playerButtons button:enabled:focus{
 	background-color: #ffff00;
 	color: #142b68;
 	cursor: pointer;
@@ -731,7 +736,7 @@ font-family: 'Carter One', cursive;
 	}
 	
 	.contentContainer{
-		
+		position:relative;
 		align-items: center;
 	}
 
