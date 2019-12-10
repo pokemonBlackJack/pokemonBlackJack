@@ -300,14 +300,17 @@ class App extends Component {
 
 
   stay = () => {
-
-    const buttons = document.querySelectorAll(".playerOptions button");
-    buttons.forEach((button) => {
-      button.disabled = true;
-    })
     const numberOfPlayers = this.state.numberOfPlayers;
     const currentPlayer = this.state.currentPlayer;
 
+    if (numberOfPlayers === 3 && currentPlayer === 1) {
+      const buttons = document.querySelectorAll(".playerOptions button");
+      buttons.forEach((button) => {
+        button.disabled = true;
+      })
+      
+    }
+    
     if (numberOfPlayers === currentPlayer) {
       const player1Total = this.state.player1Total > 21 ? 0 : this.state.player1Total;
       const player2Total = this.state.player2Total > 21 ? 0 : this.state.player2Total;
