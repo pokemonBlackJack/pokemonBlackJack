@@ -4,12 +4,12 @@ import pika from "./assets/pikachuGif.gif"
 
  class WelcomeScreen extends Component {
 	
-	closeInstruction = (getPokemonFunction) => {
+	closeInstruction = (getPokemonFunction, playerCount) => {
 		if(getPokemonFunction){
-                    getPokemonFunction(3)
+                    getPokemonFunction(playerCount)
                 };
 		
-	}
+		}
 
 	 
 	render() {
@@ -20,14 +20,21 @@ import pika from "./assets/pikachuGif.gif"
 					<img src={pika} alt=""/>
 					<ul>
 						<li>The Goal of the game is to get your card values as close to 21 as possible without going over.</li>
-						<li>Player 1 goes first, click “draw a card” to get a new card, and “stay” if you want to stay.</li>
-						<li>Player 2 goes next, and will repeat step 2.</li>
-						<li>The closest player to 21 wins! The player than wins 2/3 games will have their pokemon evolve.</li>
+						<li>Click “draw a card” to get a new card, and “stay” if you want to stay.</li>
+						<li>Each player takes a turn, and the player closest to 21 wins the round.</li>
+						<li>The first player to win 2 rounds wins the game.</li>
 					</ul>
 				</div>
-				<button className="welcomeButton"onClick={() => {
-					this.closeInstruction(this.props.getpokemon)}}>Let's Play!</button>
-				
+			
+					<div className="playerButtons">
+						<button onClick={() => {
+						this.closeInstruction(this.props.getpokemon, 2);
+						this.props.playerCount(2)}}>2 Player</button>
+						<button onClick={() => {
+						this.closeInstruction(this.props.getpokemon, 3);
+						this.props.playerCount(3)}}>1 Player</button>
+					</div>
+		
 			
 			</div>
 		);
