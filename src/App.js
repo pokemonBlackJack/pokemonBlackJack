@@ -3,8 +3,9 @@ import Header from './Header.js'
 import PokemonPlayer from './PokemonPlayer.js'
 import axios from "axios";
 import Loading from "./Loading.js"
+import WelcomeScreen from "./WelcomeScreen.js"
 // import evolutionAlert from './evolveWindowAlert'
-import alert, { nextPlayerAlert, seeInstructions, showLoading, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
+import alert, { nextPlayerAlert, evolutionAlert, levelUpSound, soundToUse, casinoBgm } from "./alert";
 import pokeball from "./assets/pokeball.png";
 import PlayerContainer from "./PlayerContainer";
 
@@ -23,7 +24,7 @@ class App extends Component {
       player2Cards: [],
       player3Cards: [],
       currentPlayer: 1,
-      numberOfPlayers: 2,
+      numberOfPlayers: 3,
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,
@@ -35,12 +36,14 @@ class App extends Component {
       hideCards: false,
       showAll: false,
       loading: false,
+	  instruction: true,
       disabled: false,
       cleanBoard: false
     }
   }
 
   componentDidMount() {
+	  
 
     const buttons = document.querySelectorAll(".playerOptions button");
     buttons.forEach((button) => {
@@ -68,7 +71,8 @@ class App extends Component {
       casinoBgm.play();
     })
 
-    seeInstructions(this.getRandomPokemon);
+    // seeInstructions(this.getRandomPokemon);
+
 
   }
 
@@ -508,7 +512,9 @@ class App extends Component {
     
 
     this.setState({
-      loading:true
+      loading:true,
+	  instruction: false
+
     })
     
     
@@ -627,8 +633,12 @@ class App extends Component {
   render() {
     return (
       <div>
+		
         {/* Importing the Header Component */}
         <Header />
+		{this.state.instruction && <WelcomeScreen getpokemon = {this.getRandomPokemon}/>}
+
+		{/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading && <Loading />}
 		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards} winner={this.state.winner} numberOfPlayers={this.state.numberOfPlayers} />
 
