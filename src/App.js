@@ -161,6 +161,8 @@ class App extends Component {
             this.stay();
           }
         } else {
+
+          if(currentPlayer === 1 || numberOfPlayers !==3)  
           setTimeout(() => {
             buttons.forEach((button) => {
               button.disabled = false;
@@ -539,10 +541,16 @@ class App extends Component {
     })
   }
 
+   	seeInstructions = () => {
+		this.setState({
+			instruction: true
+		})
+	}
+
   render() {
-    return (
+    return (  
       <div>
-        <Header />
+        <Header showInstructions = {this.seeInstructions} />
         {this.state.instruction 
           && 
         <WelcomeScreen 
@@ -550,11 +558,11 @@ class App extends Component {
           getpokemon = {this.getRandomPokemon}/>
         }
 		
-    {/* Showing loading screen while pokemon get fetched from API */}
+        {/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading 
           && 
         <Loading />}
-    
+
         <PokemonPlayer
           getPokemon={this.state.randomPokemons}
           player1Score={this.state.player1Score}
