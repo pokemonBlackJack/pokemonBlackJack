@@ -280,7 +280,7 @@ span{
 	animation: shadow both alternate ease-in-out infinite 2s;
 }
 
-.playerPokemonContainer:first-child .imageShadow {
+.playerPokemonContainer .facingRight +.imageShadow {
 	animation: shadow both alternate ease-in-out infinite 2.5s;
 }
 
