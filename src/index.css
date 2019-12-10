@@ -268,6 +268,7 @@ font-family: 'Carter One', cursive;
   position: relative;
   justify-content: center;
   flex: 0 1 50%;
+  min-height: 330px;
   
   
 
@@ -350,7 +351,7 @@ font-family: 'Carter One', cursive;
 .playerButtons {
   display: flex;
   position: fixed;
-
+  bottom: 5%;
 
   width: 25%;
   min-width: 300px;
