@@ -595,7 +595,9 @@ class App extends Component {
   render() {
     return (  
       <div>
-      		
+        
+        {this.state.loading && <Loading/>}
+		
         {/* Importing the Header Component */}
         <Header showInstructions = {this.seeInstructions}/>
         {this.state.instruction && <WelcomeScreen playerCount={this.numberOfPlayers} getpokemon={this.getRandomPokemon} showButtons={this.state.showButtons} hideButtons={() => { this.setState({ showButtons: false }) }} closeInstructions={this.seeInstructions}/>}
