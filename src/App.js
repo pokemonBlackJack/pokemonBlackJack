@@ -24,7 +24,7 @@ class App extends Component {
       player2Cards: [],
       player3Cards: [],
       currentPlayer: 1,
-      numberOfPlayers: 3,
+      numberOfPlayers: 2,
       player1Total: 0,
       player2Total: 0,
       player3Total: 0,
@@ -631,13 +631,20 @@ class App extends Component {
     }
   }
 
+
+   numberOfPlayers = (playerCount) => {
+	   this.setState({
+		   numberOfPlayers: playerCount
+	   })
+   }
+
   render() {
     return (
       <div>
 		
         {/* Importing the Header Component */}
         <Header />
-		{this.state.instruction && <WelcomeScreen getpokemon = {this.getRandomPokemon}/>}
+		{this.state.instruction && <WelcomeScreen playerCount = {this.numberOfPlayers} getpokemon = {this.getRandomPokemon}/>}
 
 		{/* Showing loading screen while pokemon get fetched from API */}
         {this.state.loading && <Loading />}
