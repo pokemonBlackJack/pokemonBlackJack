@@ -19,7 +19,7 @@ export const levelUpSound = new Audio(levelUp);
 
 export const soundToUse = require.context('./sounds/cries', true);
 
-export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetGame) => {
+export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetGame, winner) => {
     let preCrySound = soundToUse(`./${preId}.ogg`);
     let preCry = new Audio(preCrySound);
     let postCrySound = soundToUse(`./${postId}.ogg`);
@@ -68,7 +68,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
             evolveBgm.currentTime = 0;
             clearInterval(interval);
         },
-        text: `${pre} is evolving!`,
+        text: `It looks like something is happening to ${pre}!`,
         imageUrl: preImg,
         imageWidth: 300,
         background: `rgba( 255, 255, 255, 0.9)`,
@@ -90,7 +90,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
                 resetGame();
                 casinoBgm.play();
             },
-            title: `Congratulations!`,
+            title: `Congratulations Player${winner}!`,
             text: `Your ${pre} evolved into ${post}!`,
 
             imageUrl: postImg,
@@ -103,7 +103,7 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
 }
 
 
-const alert = (nextRound, winner, reset) => {
+const alert = (winner, reset) => {
     MySwal.fire({
         // onOpen: () => {
         //     // playMusic.pause();
@@ -112,23 +112,23 @@ const alert = (nextRound, winner, reset) => {
             reset();
             casinoBgm.play();
         },
-        title: `What?`,
-        text: `${winner} wins!`,
+        title: `Congrats ${winner}!`,
+        text: `${winner} wins this round!`,
         background: `rgba( 255, 255, 255, 0.9)`,        
         showConfirmButton: true,
         confirmButtonText: 'Next round!',
     })
 }
 
-export const nextPlayerAlert = (nextplayerFunction, player, message) => {
+export const nextPlayerAlert = (nextplayerFunction, player) => {
 
     MySwal.fire({
         onClose: () => {
             nextplayerFunction();
             
         },
-        title: `What?`,
-        text: `It's Player ${player} turn next! please press Ok when the next player is ready`,
+        title: `It's Player ${player} turn!`,
+        text: `Please press Ok when the next player is ready`,
         background: `rgba( 255, 255, 255, 0.9)`,
         showConfirmButton: true,
         confirmButtonText: 'Ok ready!',
@@ -144,7 +144,7 @@ export const seeInstructions = (getPokemonFunction) => {
             imageUrl: pika,
             onOpen: () => {
                 // playMusic.pause();
-                setTimeout(pikachu.play(), 1000);
+                setTimeout(()=>{pikachu.play()}, 1000);
                 casinoBgm.play();
             },
             onClose: () => {

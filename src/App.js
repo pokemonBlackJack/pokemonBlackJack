@@ -42,6 +42,10 @@ class App extends Component {
 
   componentDidMount() {
 
+    const buttons = document.querySelectorAll(".playerOptions button");
+    buttons.forEach((button) => {
+      button.disabled = true;
+    })
     //Calling deck of cards API to get a deck key, and then generate random cards.
 
     axios({
@@ -66,17 +70,19 @@ class App extends Component {
 
     seeInstructions(this.getRandomPokemon);
 
-
-    // Calling the method to get the random pokemons when the app is starting
-    // this.getRandomPokemon(2);
-
   }
 
  
 
   drawCard = (numberOfCards, type) => {
 
+    const buttons = document.querySelectorAll(".playerOptions button");
+    buttons.forEach((button) => {
+      button.disabled = true;
+    })
+
     
+
     
     // Getting deck id from the state
 
@@ -147,8 +153,12 @@ class App extends Component {
           [`player${currentPlayer}Total`]: currentPlayerTotal,
           currentPlayer: this.state.currentPlayer + 1
         }, () => {
-
-
+          
+          setTimeout(() => {
+            buttons.forEach((button) => {
+              button.disabled = false;
+            })
+          }, 1500);
           if (this.state.currentPlayer <= this.state.numberOfPlayers) {
             this.drawCard(2, "firstCards");
           } else {
@@ -160,24 +170,26 @@ class App extends Component {
 
       } else {
         if (currentPlayerTotal > 21) {
-          if (currentPlayer === this.state.numberOfPlayers) {
-            this.setState({
-              [`player${currentPlayer}Cards`]: playerCards,
-              [`player${currentPlayer}Total`]: currentPlayerTotal,
+          // if (currentPlayer === this.state.numberOfPlayers) {
+          //   this.setState({
+          //     [`player${currentPlayer}Cards`]: playerCards,
+          //     [`player${currentPlayer}Total`]: currentPlayerTotal,
   
-            }, () => {
-              this.stay();
-              console.log(this.state[`player${currentPlayer}Cards`]);
-              console.log(this.state[`player${currentPlayer}Total`]);
-            })
-          } else {
+          //   }, () => {
+          //     this.stay();
+          //     console.log(this.state[`player${currentPlayer}Cards`]);
+          //     console.log(this.state[`player${currentPlayer}Total`]);
+          //   })
+          // } else {
             this.setState({
               [`player${currentPlayer}Cards`]: playerCards,
               [`player${currentPlayer}Total`]: currentPlayerTotal,
               
             }, () => {
 
-              
+                buttons.forEach((button) => {
+                  button.disabled = false;
+                })
                 this.setState({
                   disabled: true,
                 });
@@ -185,9 +197,15 @@ class App extends Component {
               console.log(this.state[`player${currentPlayer}Cards`]);
               console.log(this.state[`player${currentPlayer}Total`]);
             })
-          }
+          // }
   
         } else {
+
+          setTimeout(() => {
+            buttons.forEach((button) => {
+              button.disabled = false;
+            })
+          }, 1500);
           this.setState({
             [`player${currentPlayer}Cards`]: playerCards,
             [`player${currentPlayer}Total`]: currentPlayerTotal
@@ -233,31 +251,35 @@ class App extends Component {
   appear = new Audio(openPokeballSound);
   
   pokemonAppear = () => {
+    // Select the pokemon images
     const pokemonImages = document.querySelectorAll(".playerPokemonDiv");
-    // const shadows = document.querySelectorAll(".imageShadow");
+    // For each pokemon image create a pokeball image and start animation
     pokemonImages.forEach((pokemon, i) => {
       const times = i + 1;
       const pokeballImg = document.createElement("img");
       pokeballImg.src = pokeball;
+      // Adding the class to th pokeball image that triggers the animation of the pokeball being throw
       pokeballImg.classList.add("pokeball")
+      // show a text indicating the pokemon that is being called
       setTimeout(() => {
         const textParagraph = document.createElement("p");
         textParagraph.innerText = `Player ${times} is sending ${this.state.randomPokemons[i].firstPokemon} out!`;
         textParagraph.classList.add("pokemonText");
         document.querySelectorAll(".playerPokemonContainer")[i].appendChild(textParagraph);
         setTimeout(() => {
+          // Adding the pokeball to the container so the animations starts
           document.querySelectorAll(".playerPokemonContainer")[i].appendChild(pokeballImg);
           setTimeout(() => {
+            // Creating a white div that creates the illusion of the light of the pokeball opening
             const whiteDiv = document.createElement("div");
             whiteDiv.classList.add("whiteDiv");
             document.querySelector("body").appendChild(whiteDiv)
             this.appear.play();
             setTimeout(() => {
+              // Removing the elements when the white light is hidding everything and making the pokemon "appear"
               pokeballImg.remove();
               textParagraph.remove();
-              document.querySelectorAll(".healthBar")[i].style.display = "block";
               pokemon.style.display = "flex";
-              // shadows[i].style.display = "block";
             }, 300 * times);
             setTimeout(() => {
               let sound = soundToUse(`./${this.state.randomPokemons[i].firstPokemonId}.ogg`);
@@ -295,7 +317,7 @@ class App extends Component {
         })
 
         setTimeout(() => {
-          alert(this.drawCard, "Nobody",this.reset)
+          alert("Nobody",this.reset)
         }, 1000)
         
 
@@ -305,30 +327,30 @@ class App extends Component {
           this.setState({
             player1Score: this.state.player1Score + 1,
             round: this.state.round + 1
-          }, () => { this.checkWinner("player1") });
-          console.log("Player 1 won!");
+          }, () => { this.checkWinner("Player1") });
           
-        }, 1000);
+          
+        }, 2000);
       } else if (player2Total > player3Total) {
         this.attack(2)
         setTimeout(() => {
           this.setState({
             player2Score: this.state.player2Score + 1,
             round: this.state.round + 1
-          }, () => { this.checkWinner("player2") });
-          console.log("Player 2 won!");
+          }, () => { this.checkWinner("Player2") });
+          
 
-        }, 1000);
+        }, 2000);
       } else if (this.state.numberOfPlayers === 3) {
         this.attack(3)
         setTimeout(() => {
           this.setState({
             player3Score: this.state.player3Score + 1,
             round: this.state.round + 1
-          }, () => { this.checkWinner("player3") });
-          console.log("Player 3 won!");
+          }, () => { this.checkWinner("Player3") });
+          
 
-        }, 1000);
+        }, 2000);
       }
 
     } else {
@@ -371,23 +393,23 @@ class App extends Component {
       this.setState({
         winner: 1
       })
-      console.log("Player 1 won!");
+      
     } else if (player2TotalScore === 2) {
       this.setState({
         winner: 2
       })
-      console.log("Player 2 won!");
+      
     } else if (player3TotalScore === 2) {
       this.setState({
         winner: 3
       })
-      console.log("Player 3 won!");
+     
     } else {
       this.setState({
         showAll: true
       })
       setTimeout(() => {
-        alert(this.drawCard, player, this.reset);
+        alert(player, this.reset);
         // playMusic.pause();
         casinoBgm.pause();
         levelUpSound.play();
@@ -444,40 +466,16 @@ class App extends Component {
         showAll: false,
         loading: true,
         disabled: false,
-        cleanBoard: false
+        cleanBoard: false,
       },()=>{
         this.getRandomPokemon(2);
       })
   }
 
-  // evolutionAnimation = (player) => {
-  //   const pokemonImage = document.querySelector(".swal2-image");
-  //   let counter = 1;
-  //   let image = 1;
 
-  //   const interval = setInterval(() => {
-  //     let source = "";
-  //     counter++;
-  //     if (image === 1) {
-  //       source = this.state.randomPokemons[player].firstPokemonImg;
-  //       image = 2;
-  //     } else {
-  //       source = this.state.randomPokemons[player].evolutionPokemonImg;
-  //       image = 1;
-  //     }
-  //     pokemonImage.src = source;
-  //   }, 500 - (15 * counter));
-
-  //   setTimeout(() => {
-  //     clearInterval(interval);
-  //   }, 13500);
-  // }
 
   getRandomPokemon = (numberOfPlayers) => {
-    // const loading = showLoading(this.drawCard);
-    // if(!this.state.loading){
-    //   const loading = showLoading(this.drawCard);
-    // }
+    
 
     this.setState({
       loading:true
@@ -602,17 +600,18 @@ class App extends Component {
         {/* Importing the Header Component */}
         <Header />
         {this.state.loading && <Loading />}
-		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards}  />
+		<PokemonPlayer getPokemon = {this.state.randomPokemons} player1Score={this.state.player1Score} player2Score={this.state.player2Score} player3Score={this.state.player3Score} cleanBoard={this.state.cleanBoard} player1Cards={this.state.player1Cards} player2Cards={this.state.player2Cards} player3Cards={this.state.player3Cards} currentPlayer={this.state.currentPlayer} showAll={this.state.showAll} hideCards={this.state.hideCards} winner={this.state.winner}  />
 
         
         {this.state.winner
           &&
           (
+            
             setTimeout(() => {
               
-              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame);
+              evolutionAlert((this.state.randomPokemons[this.state.winner - 1].firstPokemon), (this.state.randomPokemons[this.state.winner - 1].firstPokemonImg), (this.state.randomPokemons[this.state.winner - 1].firstPokemonId), (this.state.randomPokemons[this.state.winner - 1].evolution), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonImg), (this.state.randomPokemons[this.state.winner - 1].evolutionPokemonId), this.resetGame, this.state.winner);
               
-            }, 1000))
+            }, 2000))
           
         
         }
@@ -628,7 +627,6 @@ class App extends Component {
 			
 
           <div>
-            {/* <PlayerContainer cards={this.state.player1Cards} player="Player 1" score={this.state.player1Score} flipable={(this.state.currentPlayer === 1 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
 
             <div className="playerOptions">
               <button disabled={this.state.disabled} onClick={() => { this.drawCard(1, "") }}>Draw a card</button>
@@ -636,9 +634,6 @@ class App extends Component {
               <button onClick={this.stay}>STAY</button>
 
             </div>
-
-
-            {/* <PlayerContainer cards={this.state.player2Cards} player="Player 2" score={this.state.player2Score} flipable={(this.state.currentPlayer === 2 && !this.state.hideCards) || this.state.showAll ? true : false} cleanBoard={this.state.cleanBoard} /> */}
 
           </div>
         </div>

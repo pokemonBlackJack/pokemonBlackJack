@@ -416,7 +416,6 @@ span{
   height: 20px;
   border-radius: 20px;
   margin: 30px auto 0;
-  display: none;
   transition: all 0.5s;
   overflow: hidden;
   position: relative;
@@ -457,12 +456,26 @@ span{
   position: absolute;
 }
 
+.playerPokemonContainer .faint, .playerPokemonContainer:first-child .faint {
+  animation: faint forwards 1 1s linear;
+}
+
 .playerPokemonContainer:first-child .attacking, .playerPokemonContainer .attacking {
   animation: attack linear both 1 1s;
 }
 
 .playerPokemonContainer .damaged, .playerPokemonContainer:first-child .damaged {
   animation: hit linear 1 1s;
+}
+
+@keyframes faint {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0);
+  }
 }
 
 @keyframes shake {
