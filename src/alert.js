@@ -115,7 +115,7 @@ const alert = (winner, reset) => {
             reset();
             casinoBgm.play();
         },
-        title: `Congrats ${winner}!`,
+        title: `${winner === "Nobody" ? "Its a tie!" : `Congrats ${ winner}!`}`,
         text: `${winner} wins this round!`,
         background: `rgba( 255, 255, 255, 0.9)`,        
         showConfirmButton: true,

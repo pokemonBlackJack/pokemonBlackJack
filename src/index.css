@@ -195,7 +195,7 @@ font-family: 'Carter One', cursive;
 /* Loading Screen Styling */
 
 .loadingScreen{
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
@@ -214,7 +214,7 @@ font-family: 'Carter One', cursive;
 }
 
 .ashGif{
-	width: 55%;
+	width: 45%;
 	border: 8px solid #edfeff;
 	border-radius: 20px;
 }
@@ -226,10 +226,12 @@ font-family: 'Carter One', cursive;
 .player{
 	position: absolute;
 	top: 15%;
-	left: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow: 2px 2px black;
 	font-weight: 800;
 	color: #edfeff;
-	font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 
 .pokemonPlayer{
@@ -542,7 +544,7 @@ font-family: 'Carter One', cursive;
 }
 
 
-.playerPokemonContainer .faint, .playerPokemonContainer:first-child .faint {
+.playerPokemonContainer .faint, .playerPokemonContainer .facingRight.faint {
   animation: faint forwards 1 1s linear;
 }
 
@@ -728,6 +730,7 @@ font-family: 'Carter One', cursive;
     transform: translate(0,-20px);
   }
 }
+
 
 @keyframes shadow {
   from {
