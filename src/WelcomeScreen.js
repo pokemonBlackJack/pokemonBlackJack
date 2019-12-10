@@ -4,15 +4,10 @@ import pika from "./assets/pikachuGif.gif"
 import pikachuSound from './sounds/cries/25.ogg';
 import { casinoBgm } from './alert';
 
-<<<<<<< HEAD
 class WelcomeScreen extends Component {
 	pikachu = new Audio(pikachuSound);
-=======
- class WelcomeScreen extends Component {
-
 
 	// Function to close the instruction screen/welcome window once the user selects number of players
->>>>>>> master
 	closeInstruction = (getPokemonFunction, playerCount) => {
 		if(getPokemonFunction){
 			getPokemonFunction(playerCount)
