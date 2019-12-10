@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import pika from './assets/pika.png'
 import ashGif from './assets/ash.gif'
+import WelcomeScreen from './WelcomeScreen.js'
 
 import pikachuSound from './sounds/cries/25.ogg';
 import instructionBgm from './sounds/instructionBgm.ogg';
@@ -104,6 +105,8 @@ export const evolutionAlert = (pre, preImg, preId, post, postImg, postId, resetG
 
 
 const alert = (winner, reset) => {
+	
+
     MySwal.fire({
         // onOpen: () => {
         //     // playMusic.pause();

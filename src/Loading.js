@@ -6,8 +6,8 @@ import ashGif from './assets/ash.gif'
 	render() {
 		return (
 			<div className="loadingScreen">
-				  <h2>Hang tight while the trainers go and catch the Pokemon for your battle!</h2> 
-				  <img src={ashGif} alt=""/> 
+				  <h3>Hang tight while the trainers catch the Pokemon for your battle!</h3> 
+				  <img className ="ashGif"src={ashGif} alt=""/> 
 				  
 			</div>
 		);

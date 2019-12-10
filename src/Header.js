@@ -7,8 +7,6 @@ import { seeInstructions } from "./alert"
 
 class Header extends Component {
 	
-
-
 	
 	// 
 	render() {
@@ -17,7 +15,7 @@ class Header extends Component {
 			<div className="headerComponent">
 				
 				{/* <img className="pokemonball" src={pokemonball} alt=""/> */}
-				<h1 className="positionRelative">Pokemon BlackJack! <span>&trade;</span></h1>
+				<h2 className="positionRelative">Pokemon BlackJack! <span>&trade;</span></h2>
 				<img src={pokeball} alt=""/>
 				<FontAwesomeIcon onClick={()=>{seeInstructions()}}className = "infoCircle positionAbsolute" icon={faInfoCircle} />
 				 
