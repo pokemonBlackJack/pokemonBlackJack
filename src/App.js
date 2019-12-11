@@ -49,30 +49,11 @@ class App extends Component {
     })
 
     this.getNewDeck();
-    //Calling deck of cards API to get a deck key, and then generate random cards.
-
-    // axios({
-    //   method: 'GET',
-    //   url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
-    //   dataResponse: 'json',
-    //   params: {
-    //     deck_count: 1
-    //   }
-
-
-    // }).then((data) => {
-    //   this.setState({
-    //     deckId: data.data.deck_id
-    //   })
-    // });
-
+    
     casinoBgm.addEventListener("ended", () => {
       casinoBgm.currentTime = 0;
       casinoBgm.play();
     })
-
-    // seeInstructions(this.getRandomPokemon);
-
 
   }
 
@@ -152,7 +133,7 @@ class App extends Component {
         currentPlayerTotal = arrayOfValues.reduce((a, b) => a + b, 0);
       }
 
-      // If the player has a total value higher than 21 then change the turn to the next player
+      // If its the first draw then draw 2 cards for each player
       if (type === "firstCards") {
         this.setState({
           [`player${this.state.currentPlayer}Cards`]: playerCards,
@@ -174,6 +155,7 @@ class App extends Component {
           }
         })
       } else {
+        // If the player has a total value higher than 21 then disable the draw a card button
         if (currentPlayerTotal > 21) {
           if (numberOfPlayers === 2 || currentPlayer === 1) {
             this.setState({
@@ -188,6 +170,7 @@ class App extends Component {
               });
             })
           } else {
+            // If its the cpu turn then stay
             this.stay();
           }
         } else {
@@ -204,6 +187,9 @@ class App extends Component {
             [`player${currentPlayer}Cards`]: playerCards,
             [`player${currentPlayer}Total`]: currentPlayerTotal
           }, () => {
+              
+              // If playing against the cpu then logic to make the cpu make a choice when playing 
+
               if (this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total
                   && 
                   this.state.player1Total <= 21
@@ -380,6 +366,8 @@ class App extends Component {
       hideCards: false,
     }, () => {
         
+        // If playing against the cpu then logic to make the cpu make a choice when playing 
+        
       if (this.state[`player${this.state.currentPlayer}Total`] !== 21
         &&
         this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total
@@ -388,22 +376,22 @@ class App extends Component {
         &&
         this.state.numberOfPlayers === 3) {
 
-        if (this.state[`player${this.state.currentPlayer}Total`] !== 21 && this.state[`player${this.state.currentPlayer}Total`] <= this.state.player1Total && this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
+        
             
-          setTimeout(() => {
-            this.drawCard(1);
-          }, 2000)
+        setTimeout(() => {
+          this.drawCard(1);
+        }, 2000)
               
             
-        } else if (this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
-          setTimeout(() => {
-            this.stay();
-              
-          }, 2000);
-        }
+      } else if (this.state.currentPlayer !== 1 && this.state.numberOfPlayers === 3) {
+        setTimeout(() => {
+          this.stay();
+            
+        }, 2000);
+      }
       
-      } 
-    })
+    }) 
+    
   }  
 
   // Method to check if there is a game winner

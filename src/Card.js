@@ -1,7 +1,7 @@
 import React from 'react';
 import pokemonCardBack from './assets/pokemon-card-back.png';
 
-// Just waiting for the prop to go through after we mapped it.
+// Component that creates all of the cards.
 const Card = ({ cardFront, flipable, cleanBoard, altTag }) => {
   return (
     <div className={`card-container`}>
