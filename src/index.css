@@ -24,6 +24,10 @@ body {
 	overflow-x: hidden;
 }
 
+.wrapper {
+	width: 100%;
+}
+
 button:disabled {
 	opacity: 0.5;
 }
@@ -97,10 +101,11 @@ span{
 	z-index: 5;
 	display: flex;
 	flex-direction: column;
-	align-items: center;	
+	align-items: center;
+	justify-content: center;	
 }
 
-.welcomeScreen h1{	
+h1 {	
 	font-family: 'Carter One', cursive;
 	font-size: 2.5rem;
 	font-weight: lighter;
@@ -706,10 +711,229 @@ span{
 	}
 }
 
+@media (max-width: 1080px) {
+	.healthBar {
+		height: 15px;
+		margin-top: 15px;
+	}
+
+	.pokemonPlayer {
+		padding: 45px 0;
+	}
+
+	.playerPokemonContainer {
+		min-height: 295px;
+	}
+
+	.headerComponent h2 {
+		margin: 20px;
+	}
+
+	.player p {
+		margin: 0 auto;
+	}
+}
+
 @media (max-width:760px){
+	.contentContainer li{
+		font-size: 0.8rem;
+	}
+
+	.card-container {
+		min-height: 30px;
+	}
+}
+
+
+@media (max-width: 770px) and (min-height: 550px) {	
+	/* Welcome Screen */
+	.welcomeScreen {
+		overflow: hidden;
+	}
 	
-		.contentContainer li{
-			font-size: 0.8rem;
-		}
+	body,
+	p,
+	p.positionAbsolute,
+	.swal2-container .swal2-html-container {
+		font-size: 80%;
+	}
+
+	.player p {
+		font-size: 50%;
+		margin-top: 0;
+	}
+
+	.playerPokemonContainer {
+		flex-direction: column-reverse;
+	}
+
+	.playerContainer,
+	.playerPokemonDiv {
+		width: 100%;
+	}
+
+	p.positionAbsolute {
+		margin: 0;
+	}
+
+	h1,
+	h2 {
+		margin: 0;
+		padding: 0 5px;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	.swal2-container .swal2-title {
+		font-size: 1.3rem;
+	}
+
+	.swal2-container .swal2-image {
+		margin: 0;
+	}
+
+	.contentContainer {
+		flex-direction: column;
+		padding-bottom: 25px;
+	}
+
+	.contentContainer img {
+		width: 60%;
+	}
+
+	.contentContainer ul {
+		width: 90%;
+		margin: 0;
+		padding-left: 20px;
+	}
+
+	.contentContainer li {
+		font-size: 0.9rem;
+	}
+
+	.playerButtons button {
+		font-size: 0.8rem;
+	}
+
+	/* In game */
+
+	.playerPokemonContainer .pokemonText {
+		width: 80%;
+	}
+
+	.headerComponent {
+		position: relative;
+		min-height: 70px;
+	}
+
+	.headerComponent h2 {
+		align-self: flex-start
+	}
+
+	.headerComponent img,
+	.infoCircle {
+		position: absolute;
+		bottom: 5px;
+		margin-left: 0;
+		width: 25px;
+	}
 	
+	.headerComponent img {
+		left: 5px;
+	}
+
+	.infoCircle {
+		right: 5px;
+		top: initial;
+		font-size: 25px;
+	}
+
+	.pokemonPlayer {
+		padding: 0;
+	}
+
+	.playerPokemonDiv {
+		padding-top: 20px;
+	}
+
+	.playerOptions,
+	.playerButtons {
+		bottom: 5px;
+	}
+
+	.playerPokemonContainer:nth-child(2) .playerContainer {
+		order: 0;
+	}
+
+	.playerContainer {
+		min-height: 40vh;
+	}
+
+	.player p {
+		margin-top: 20px;
+	}
+
+	.playerContainer p {
+		width: 60%;
+		margin: 13px auto;
+	}
+
+	.card-container {
+		min-height: 30px;
+	}
+
+	.playerCards {
+		justify-content: center;
+	}
+
+}
+
+@media (max-width: 500px) {
+	.contentContainer li {
+		font-size: 0.75rem;
+	}
+
+	.playerButtons button {
+		font-size: 0.6rem;
+	}
+
+	h1 {
+		font-size: 1.5rem;
+	}
+}
+
+@media (max-height: 420px) {
+	.pokemonPlayer {
+		padding: 0;
+	}
+
+	.headerComponent h2 {
+		margin: 0;
+	}
+
+	.playerOptions {
+		font-size: 0.8rem;
+		bottom: 5px;
+	}
+
+	.playerPokemonDiv p {
+		margin: 0;
+	}
+}
+
+@media (max-height: 580px) {
+	h1,
+	.headerComponent h2 {
+		margin: 0;
+	}
+
+	.player p {
+		margin-top: 0;
+	}
 }
