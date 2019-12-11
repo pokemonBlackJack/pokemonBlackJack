@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pokemonBlackJack/precache-manifest.82ff4ec1368e278e81882e1194506e28.js"
+  "/pokemonBlackJack/precache-manifest.fdb3f28a040754e0d0c6ef122bb3af38.js"
 );
 
 self.addEventListener('message', (event) => {
