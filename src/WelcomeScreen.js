@@ -13,8 +13,9 @@ class WelcomeScreen extends Component {
 			getPokemonFunction(playerCount);
 			this.props.hideButtons();
 		};
-		
-		}
+		this.pikachu.play();
+		casinoBgm.play();	
+	};
 
 	render() {
 		return (

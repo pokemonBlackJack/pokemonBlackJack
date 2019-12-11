@@ -597,13 +597,20 @@ class App extends Component {
 
   render() {
     return (  
-      <div>
+      <div className="wrapper">
         
         {this.state.loading && <Loading/>}
 		
         {/* Importing the Header Component */}
         <Header showInstructions = {this.seeInstructions}/>
-        {this.state.instruction && <WelcomeScreen playerCount={this.numberOfPlayers} getpokemon={this.getRandomPokemon} showButtons={this.state.showButtons} hideButtons={() => { this.setState({ showButtons: false }) }} closeInstructions={this.seeInstructions}/>}
+        {this.state.instruction 
+          && 
+        <WelcomeScreen 
+          playerCount={this.numberOfPlayers} 
+          getpokemon={this.getRandomPokemon} 
+          showButtons={this.state.showButtons} 
+          hideButtons={() => { this.setState({ showButtons: false }) }} 
+          closeInstructions={this.seeInstructions}/>}
 
         <PokemonPlayer
           getPokemon={this.state.randomPokemons}
