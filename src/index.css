@@ -375,7 +375,7 @@ h1 {
 	transform-style: preserve-3d;
 }
 
-.card-container {
+.cardContainer {
 	min-height: 100px;
 	perspective: 800px;
 	transition: all 1s;
@@ -393,38 +393,38 @@ h1 {
 	animation: deal both ease-out 1 1.5s;
 }
 
-.card-front {
+.cardFront {
 	transform: rotateY(180deg);
 	transition: all 1s;
 }
 
-.card-front.flipable {
+.cardFront.flipable {
 	animation: flipFront 1s both 1 linear;
 }
 
-.card-back.flipable {
+.cardBack.flipable {
 	animation: flipBack 1s both 1 linear;
 }
 
-.card-back.hidden {
+.cardBack.hidden {
 	animation: flipFront 1s both 1 linear;
 }
 
-.card-front.hidden {
+.cardFront.hidden {
 	animation: flipBack 1s both 1 linear;
 }
 
-.card-back,
+.cardBack,
 .back, 
-.card-front {
+.cardFront {
 	position: absolute;
 	backface-visibility: hidden;
 }
 
-.card-back,
+.cardBack,
 .back,
-.card-back img,
-.card-front {
+.cardBack img,
+.cardFront {
 	width: 100%;
 } 
 
@@ -432,7 +432,7 @@ h1 {
 	animation: deal both alternate-reverse ease-out 1 0.8s;
 }
 
-.card-front img {
+.cardFront img {
 	height: 100%;
 	width: 100%;
 } 
@@ -751,7 +751,6 @@ h1 {
 		min-height: 30px;
 	}
 }
-
 
 @media (max-width: 770px) and (min-height: 550px) {	
 	/* Welcome Screen */
