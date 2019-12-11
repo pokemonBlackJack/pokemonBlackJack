@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pokemonBlackJack/static/css/main.88ecce8a.chunk.css",
-    "main.js": "/pokemonBlackJack/static/js/main.39104975.chunk.js",
-    "main.js.map": "/pokemonBlackJack/static/js/main.39104975.chunk.js.map",
+    "main.css": "/pokemonBlackJack/static/css/main.5a2e4bb9.chunk.css",
+    "main.js": "/pokemonBlackJack/static/js/main.c5eb5f5d.chunk.js",
+    "main.js.map": "/pokemonBlackJack/static/js/main.c5eb5f5d.chunk.js.map",
     "runtime-main.js": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js",
     "runtime-main.js.map": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js.map",
     "static/js/2.ed86bf1a.chunk.js": "/pokemonBlackJack/static/js/2.ed86bf1a.chunk.js",
     "static/js/2.ed86bf1a.chunk.js.map": "/pokemonBlackJack/static/js/2.ed86bf1a.chunk.js.map",
     "index.html": "/pokemonBlackJack/index.html",
-    "precache-manifest.fdb3f28a040754e0d0c6ef122bb3af38.js": "/pokemonBlackJack/precache-manifest.fdb3f28a040754e0d0c6ef122bb3af38.js",
+    "precache-manifest.a1e3c58e601fd75cfa01079541fe3b5f.js": "/pokemonBlackJack/precache-manifest.a1e3c58e601fd75cfa01079541fe3b5f.js",
     "service-worker.js": "/pokemonBlackJack/service-worker.js",
-    "static/css/main.88ecce8a.chunk.css.map": "/pokemonBlackJack/static/css/main.88ecce8a.chunk.css.map",
+    "static/css/main.5a2e4bb9.chunk.css.map": "/pokemonBlackJack/static/css/main.5a2e4bb9.chunk.css.map",
     "static/media/1.ogg": "/pokemonBlackJack/static/media/1.29eff88c.ogg",
     "static/media/10.ogg": "/pokemonBlackJack/static/media/10.be4349af.ogg",
     "static/media/100.ogg": "/pokemonBlackJack/static/media/100.b31e4dde.ogg",
@@ -797,7 +797,7 @@
   "entrypoints": [
     "static/js/runtime-main.5b9fef1c.js",
     "static/js/2.ed86bf1a.chunk.js",
-    "static/css/main.88ecce8a.chunk.css",
-    "static/js/main.39104975.chunk.js"
+    "static/css/main.5a2e4bb9.chunk.css",
+    "static/js/main.c5eb5f5d.chunk.js"
   ]
 }
