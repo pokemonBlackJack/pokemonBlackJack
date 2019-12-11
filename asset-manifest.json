@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pokemonBlackJack/static/css/main.5a2e4bb9.chunk.css",
-    "main.js": "/pokemonBlackJack/static/js/main.c5eb5f5d.chunk.js",
-    "main.js.map": "/pokemonBlackJack/static/js/main.c5eb5f5d.chunk.js.map",
+    "main.css": "/pokemonBlackJack/static/css/main.eb0fe720.chunk.css",
+    "main.js": "/pokemonBlackJack/static/js/main.b4311624.chunk.js",
+    "main.js.map": "/pokemonBlackJack/static/js/main.b4311624.chunk.js.map",
     "runtime-main.js": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js",
     "runtime-main.js.map": "/pokemonBlackJack/static/js/runtime-main.5b9fef1c.js.map",
-    "static/js/2.ed86bf1a.chunk.js": "/pokemonBlackJack/static/js/2.ed86bf1a.chunk.js",
-    "static/js/2.ed86bf1a.chunk.js.map": "/pokemonBlackJack/static/js/2.ed86bf1a.chunk.js.map",
+    "static/js/2.69c6c28e.chunk.js": "/pokemonBlackJack/static/js/2.69c6c28e.chunk.js",
+    "static/js/2.69c6c28e.chunk.js.map": "/pokemonBlackJack/static/js/2.69c6c28e.chunk.js.map",
     "index.html": "/pokemonBlackJack/index.html",
-    "precache-manifest.a1e3c58e601fd75cfa01079541fe3b5f.js": "/pokemonBlackJack/precache-manifest.a1e3c58e601fd75cfa01079541fe3b5f.js",
+    "precache-manifest.7df371ef9af77a6529e8526da175ce13.js": "/pokemonBlackJack/precache-manifest.7df371ef9af77a6529e8526da175ce13.js",
     "service-worker.js": "/pokemonBlackJack/service-worker.js",
-    "static/css/main.5a2e4bb9.chunk.css.map": "/pokemonBlackJack/static/css/main.5a2e4bb9.chunk.css.map",
+    "static/css/main.eb0fe720.chunk.css.map": "/pokemonBlackJack/static/css/main.eb0fe720.chunk.css.map",
     "static/media/1.ogg": "/pokemonBlackJack/static/media/1.29eff88c.ogg",
     "static/media/10.ogg": "/pokemonBlackJack/static/media/10.be4349af.ogg",
     "static/media/100.ogg": "/pokemonBlackJack/static/media/100.b31e4dde.ogg",
@@ -796,8 +796,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5b9fef1c.js",
-    "static/js/2.ed86bf1a.chunk.js",
-    "static/css/main.5a2e4bb9.chunk.css",
-    "static/js/main.c5eb5f5d.chunk.js"
+    "static/js/2.69c6c28e.chunk.js",
+    "static/css/main.eb0fe720.chunk.css",
+    "static/js/main.b4311624.chunk.js"
   ]
 }
