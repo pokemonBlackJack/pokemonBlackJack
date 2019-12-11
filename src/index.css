@@ -176,6 +176,10 @@ h1 {
 	right: 0;
 	left: 0;
 	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background-color: rgb(20, 43, 104);
     background-image: linear-gradient(120deg, rgb(20, 43, 104, 0.5) 50%, rgba(45, 67, 126, 0.5) 50%);
 	text-align: center;
@@ -881,7 +885,7 @@ h1 {
 	}
 
 	.playerContainer p {
-		width: 60%;
+		width: 65%;
 		margin: 13px auto;
 	}
 
