@@ -25,6 +25,8 @@ body {
 }
 
 .wrapper {
+	max-width: 1500px;
+	margin: 0 auto;
 	width: 100%;
 }
 
@@ -206,12 +208,12 @@ h1 {
 .player{
 	position: absolute;
 	top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-shadow: 2px 2px black;
+	left: 50%;
+	transform: translateX(-50%);
+	text-shadow: 2px 2px black;
 	font-weight: 800;
 	color: #edfeff;
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 .pokemonPlayer{
