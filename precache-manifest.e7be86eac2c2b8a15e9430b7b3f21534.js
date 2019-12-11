@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6091bd5efdd5b4bb80f0be939f9baa7c",
+    "revision": "d03210497e360f43d127509818b6062c",
     "url": "/pokemonBlackJack/index.html"
   },
   {
-    "revision": "ecea2626c4c6c16bf7e4",
-    "url": "/pokemonBlackJack/static/css/main.eb0fe720.chunk.css"
+    "revision": "3ea75cfbcd89709f53fd",
+    "url": "/pokemonBlackJack/static/css/main.1e370082.chunk.css"
   },
   {
-    "revision": "03b961e1f9d284f7e1b1",
-    "url": "/pokemonBlackJack/static/js/2.69c6c28e.chunk.js"
+    "revision": "7b6ba20e06d6fd62da47",
+    "url": "/pokemonBlackJack/static/js/2.ed86bf1a.chunk.js"
   },
   {
-    "revision": "ecea2626c4c6c16bf7e4",
-    "url": "/pokemonBlackJack/static/js/main.b4311624.chunk.js"
+    "revision": "3ea75cfbcd89709f53fd",
+    "url": "/pokemonBlackJack/static/js/main.cd40ba29.chunk.js"
   },
   {
     "revision": "69851800e09357c2dd36",
