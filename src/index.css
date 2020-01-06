@@ -52,6 +52,19 @@ button:disabled {
 	align-items: center;	
 }
 
+.headerComponent button {
+	position: absolute;
+	right: 100px;
+	background-color: transparent;
+	border: none;
+}
+
+.headerComponent button:hover svg, button:focus svg{
+	color: #ffff00;
+	background-color: #142b68;
+	border-radius: 50%;
+}
+
 .headerComponent img {
 	width: 50px;
 	margin-left: 30px;
@@ -84,11 +97,7 @@ span{
 	font-size: 1rem;
 }
 
-.infoCircle:hover{
-	color: #ffff00;
-	background-color: #142b68;
-	border-radius: 50%;
-}
+
 /* End of Header Styling */
 
 /* Start of Instructions Screen Styling */
@@ -839,6 +848,8 @@ h1 {
 		position: relative;
 		min-height: 70px;
 	}
+
+	
 
 	.headerComponent h2 {
 		align-self: flex-start
