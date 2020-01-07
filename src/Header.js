@@ -13,9 +13,11 @@ class Header extends Component {
 			<div className="headerComponent">
 				
 				<h2 className="positionRelative">Pokemon BlackJack! <span>&trade;</span></h2>
-				<img src={pokeball} alt="Pokeball"/>
-				<FontAwesomeIcon onClick={ () => this.props.showInstructions()}
-				className = "infoCircle positionAbsolute" icon={faInfoCircle} />
+				<img src={pokeball} alt="Pokeball" />
+				<button onClick={() => this.props.showInstructions()} className="" >
+					<FontAwesomeIcon 
+					className = "infoCircle" icon={faInfoCircle}/>
+				</button>
 				 
 			</div>
 		);
