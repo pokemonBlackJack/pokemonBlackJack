@@ -1,4 +1,11 @@
 # Pokémon Blackjack
+## Juno College Project 6 - React Mob Programming Project
+
+![Project Screenshot](./screenshot/screen_poke.png)
+
+## Live Link
+https://pokemonblackjack.github.io/pokemonBlackJack/
+
 
 ## Project Scope
 
